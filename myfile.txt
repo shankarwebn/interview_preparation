@@ -1,0 +1,80 @@
+---------------------------------------------------------String Programs---------------------------------------------------
+1 Reverse the string.
+2 Check string is palindrome.
+3 Count number of vowels and consonants.
+4 Find first non-repeating character.
+5 Permutations of string (all permutations).
+6 Two string anagrams.
+7 Find longest substring without repeating.
+8 Convert a string case to title case.
+9 Check string rotation another.
+10 Count occurrence of each character.
+11 Remove duplicate from string.
+12 Check if string contains all unique characters.
+13 Find frequency of all characters.
+14 Reverse words.
+15 Valid parenthesis.
+16 Check substring is present in given string.
+17 Words frequency in string.
+18 Ways to delete specific character.
+19 Convert snake to Pascal case.
+20 Find the least character.
+21 How to copy string.
+22 Replace all occurrences of substring.
+23 String rotation.
+24 Replace multiple words with key.
+25 Remove ith character in string.
+26 Longest substring without repeating char.
+27 Convert string to integer.
+28 Find most frequent character.
+29 Remove all white spaces.
+30 Check if string is valid shuffle of two strings.
+31 Find longest common prefix.
+32 Find shortest words in string.
+33 Check if string only contains digit.
+34 Count array of 0, 1, 2 (without sort).
+35 Find first repeated character.
+
+
+---------------------------------------------------------Array Programs---------------------------------------------------
+1 Second largest number.
+2 Rotate an array by K.
+3 Remove and Find duplicates.
+4 Reverse an array.
+5 Move all zeroes to end.
+6 Split the Array and move first part to end.
+6 Check if given array is monotonic.
+7 Frequency of all array elements.
+8 Find unique number.
+9 Flate Array.
+10 Missing numbers.
+11 Common elements between two arrays.
+12 Alternate positive and negative.
+13 Move all negatives to end.
+14 Check if given array is sorted.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
