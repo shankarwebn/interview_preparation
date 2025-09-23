@@ -1,0 +1,53 @@
+1. How to install Django.
+ans - pip install Django.
+
+2. How to check version.
+ans - python -m django --version.
+
+3. What is pip freeze.
+ans - pip freeze is a command used in Python to list all the installed packages in the current environment along with their versions.
+
+4. How to create django project.
+and - django-admin startproject myproject.
+
+5. How to create a application.
+ans - python manage.py startapp app.
+
+6. How to start server.
+ans - python manage.py runserver.
+
+7. What is migration.
+ans - In Django, migrations are a system for managing changes to your database schema in a version-controlled and systematic way.
+
+8. Commond for create migrations.
+ans - python manage.py makemigrations
+
+9. To Run migrations 
+ans - python manage.py migrate.
+
+10. How to show all migrations.
+ans - python manage.py showmigrations.
+
+11. How to show specific app migratios.
+ans - python manage.py showmigrations myapp.
+
+12.  How to createsupperuser
+ans - python manage.py createsuperuser.
+
+13. How to filter item in model in djanog.
+ans - Users.objects.filter(id=1).
+
+14. How to get specific item.
+ans - Users.objects.get(id=1).
+
+15. How to delet item.
+ans - Users.objects.filter(id=1).delete().
+
+15. How to Update item.
+ans - id = Users.objects.get(id=1).
+     id.name = "sankar"
+     id.save()
+
+16. How to insert.
+ans - data = User(name="shankar)
+      data.save()
