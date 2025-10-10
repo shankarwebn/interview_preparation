@@ -1,0 +1,80 @@
+1: Second larget number.
+
+num = [10, 20, 4, 45, 99]
+
+large = num[0]
+second = 0
+
+for i in range(1,len(num)):
+    if large < num[i]:
+        second = large
+        large  = num[i]
+        
+        
+print(second)
+
+2: Array Rotation
+
+Left
+a = [1,2,3,4,5]
+
+a[:2] = a[:2][::-1]
+a[2:] = a[2:][::-1]
+a[:] = a[::-1]
+
+print(a)
+
+Right
+
+a = [1,2,3,4,5]
+
+a[:] = a[::-1]
+a[:2] = a[:2][::-1]
+a[2:] = a[2:][::-1]
+
+print(a)
+
+3: Remove duplicates.
+
+num = [1, 2, 2, 3, 4, 4, 5]
+arr = list(set(num))
+print(arr)
+
+
+num = [1, 2, 2, 3, 4, 4, 5]
+arr = []
+
+for ele in num:
+    if ele not in arr:
+        arr.append(ele)
+
+print(arr)        
+    
+4: Find Duplicates
+
+nums = [1, 2, 2, 3, 4, 4, 5]
+duplicates = []
+for n in nums:
+    if nums.count(n) > 1 and n not in duplicates:
+        duplicates.append(n)
+print(duplicates)
+
+
+nums = [1, 2, 2, 3, 4, 4, 5]
+dup = {}
+
+for ele in nums:
+    dup[ele] = dup.get(ele,0)+1
+    
+for key,value in dup.items():
+    if value > 1:
+        print(key)
+
+
+5: Reverse Array.
+nums = [1, 2, 3, 4, 5]
+
+print(a[::-1])        
+        
+
+
