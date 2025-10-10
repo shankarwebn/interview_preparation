@@ -1,0 +1,14 @@
+class Car:
+    # Constructor
+    def __init__(self, brand, color):
+        self.brand = brand
+        self.color = color
+
+    # Method
+    def start(self):
+        print(f"{self.color} {self.brand} car is starting...")
+
+# Creating object
+my_car = Car("Tesla", "Red")
+my_car.start()
+

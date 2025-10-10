@@ -1,0 +1,299 @@
+1: Method overriding.
+
+class Payment
+    def pay(payment)
+        puts "Processing a payment of $#{amount}"
+    end    
+end
+
+class CreditCardPayment < Payment
+    def pay(payment)
+        puts "Processing credit card payment of #{payment}"
+    end    
+end
+
+
+class CashPayment < Payment
+    def pay(payment)
+        puts "Processing paid By cash of #{payment}"
+    end    
+end
+
+pay = CreditCardPayment.new
+pay = CashPayment.new
+pay.pay(12)
+
+
+2: Overriding initialize Constructor.
+
+class Person
+  def initialize(name)
+    @name = name
+    puts "Person initialized with name: #{@name}"
+  end
+end
+
+class Student < Person
+  def initialize(name, grade)
+    super(name)   # pass name to parent constructor
+    @grade = grade
+    puts "Student initialized with grade: #{@grade}"
+  end
+end
+
+Student.new("Shankar", "A")
+# Output:
+# Person initialized with name: Shankar
+# Student initialized with grade: A
+
+3: Class variable  
+
+class Emp
+    @@class_variable = "ABC"
+
+
+    def self.company_namename=(name)
+        @@class_variable = name
+    end    
+
+    def self.display_company_name
+        puts @@class_variable
+    end 
+    
+    def cmp_name
+        puts @@class_variable
+    end    
+
+end    
+
+emp1 = Emp.new
+emp2 = Emp.new
+
+emp1.cmp_name
+emp2.cmp_name
+
+
+Emp.company_namename = "Google"
+
+
+emp1.cmp_name
+emp2.cmp_name
+
+instance variable
+
+class Greeting
+  def set_name(name)
+    @name = name
+  end
+
+  def display_greeting
+    puts "Hello, #{@name}!"  # Output: Hello, Ruby!
+  end
+end
+
+greeting_instance = Greeting.new
+greeting_instance.set_name("Ruby")
+greeting_instance.display_greeting
+
+
+
+4: Getter and Setter
+class BankAccount
+  attr_reader :balance   # sirf read kar sakte ho
+
+  def initialize(amount)
+    @balance = amount
+  end
+
+  def deposit(amount)
+    @balance += amount
+  end
+end
+
+acc = BankAccount.new(1000)
+puts acc.balance    # ✅ 1000
+acc.deposit(500)
+puts acc.balance    # ✅ 1500
+# acc.balance = 2000 ❌ Error – direct write not allowed
+
+
+#######  example
+class Emp
+    
+    def name=(name)
+        @name = name
+    end
+    
+    def get_name
+        puts @name
+    end    
+end    
+
+emp = Emp.new
+emp.name = "sonal"
+
+emp.get_name
+
+
+######  example
+
+class Emp
+    attr_accessor :name  
+end    
+
+emp = Emp.new
+emp.name = "sonal"
+puts emp.name
+
+
+6: Mixins 
+
+class Vehicle
+  def start_engine
+    "Engine started"
+  end
+end
+
+module Electric
+  def charge_battery
+    "Battery charging..."
+  end
+end
+
+class Tesla < Vehicle
+  include Electric
+end
+
+car = Tesla.new
+puts car.start_engine      # from parent class (inheritance)
+puts car.charge_battery    # from module (mixin)
+
+
+
+
+
+7: Encasulation
+
+class BankAccount
+  def initialize(balance)
+    @balance = balance   # private data
+  end
+
+  def deposit(amount)
+    @balance += amount
+  end
+
+  def show_balance
+    puts "Current balance: #{@balance}"
+  end
+end
+
+acc = BankAccount.new(1000)
+acc.deposit(500)
+acc.show_balance     # => Current balance: 1500
+
+# acc.@balance   ❌  Error: direct access not allowed
+
+
+
+
+8: Abstraction
+
+class CoffeeMachine
+  def make_coffee
+    boil_water
+    brew_coffee
+    pour_in_cup
+    puts "☕ Your coffee is ready!"
+  end
+
+  private
+
+  def boil_water
+    puts "Boiling water..."
+  end
+
+  def brew_coffee
+    puts "Brewing coffee..."
+  end
+
+  def pour_in_cup
+    puts "Pouring into cup..."
+  end
+end
+
+machine = CoffeeMachine.new
+machine.make_coffee
+
+
+class Car
+  def start
+    ignite_engine
+    check_systems
+    move_pistons
+    puts "🚗 Car started!"
+  end
+
+  private
+
+  def ignite_engine
+    puts "Igniting engine..."
+  end
+
+  def check_systems
+    puts "Checking systems..."
+  end
+
+  def move_pistons
+    puts "Moving pistons..."
+  end
+end
+
+car = Car.new
+car.start
+
+
+9: Singtalen Method
+
+A singleton method in Ruby is a method that is defined for only one particular object, not for all instances of its class.
+
+
+
+class Animal
+end
+
+dog = Animal.new
+cat = Animal.new
+
+def dog.speak
+  puts "Woof! I am a dog."
+end
+
+dog.speak   # ✅ "Woof! I am a dog."
+cat.speak   # ❌ Error: undefined method `speak`
+
+Yahaan speak method sirf dog object ke liye define hua hai,
+cat object ke paas ye method nahi hai.
+
+
+
+
+class Stu
+  attr_reader :a   # getter method bana diya
+
+  def initialize(value)
+    @a = value
+  end
+
+  # '+' operator overload kar rahe hain
+  def +(obj)
+    @a + obj.a   # getter method ke through access
+  end
+end
+
+a = Stu.new(2)
+b = Stu.new(3)
+
+puts a + b   # Output: 5
+
+

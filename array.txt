@@ -1,0 +1,285 @@
+1: Second larget number.
+
+num = [10, 20, 4, 45, 99]
+
+large = num[0]
+second = 0
+
+for i in range(1,len(num)):
+    if large < num[i]:
+        second = large
+        large  = num[i]
+        
+        
+print(second)
+
+2: Array Rotation
+
+Left
+a = [1,2,3,4,5]
+
+a[:2] = a[:2][::-1]
+a[2:] = a[2:][::-1]
+a[:] = a[::-1]
+
+print(a)
+
+Right
+
+a = [1,2,3,4,5]
+
+a[:] = a[::-1]
+a[:2] = a[:2][::-1]
+a[2:] = a[2:][::-1]
+
+print(a)
+
+3: Remove duplicates.
+
+num = [1, 2, 2, 3, 4, 4, 5]
+arr = list(set(num))
+print(arr)
+
+
+num = [1, 2, 2, 3, 4, 4, 5]
+arr = []
+
+for ele in num:
+    if ele not in arr:
+        arr.append(ele)
+
+print(arr)        
+    
+4: Find Duplicates
+
+nums = [1, 2, 2, 3, 4, 4, 5]
+duplicates = []
+for n in nums:
+    if nums.count(n) > 1 and n not in duplicates:
+        duplicates.append(n)
+print(duplicates)
+
+
+nums = [1, 2, 2, 3, 4, 4, 5]
+dup = {}
+
+for ele in nums:
+    dup[ele] = dup.get(ele,0)+1
+    
+for key,value in dup.items():
+    if value > 1:
+        print(key)
+
+
+5: Reverse Array.
+nums = [1, 2, 3, 4, 5]
+
+print(a[::-1])        
+        
+6: Move all zeroes to end.
+
+
+nums = [0, 1, 0, 3, 12]
+
+left = 0
+
+for right in range(len(nums)):
+    if nums[right] !=0:
+        nums[left], nums[right] = nums[right], nums[left]
+        left+=1
+
+print(nums)        
+
+
+
+7: Split the Array and move first part to end.
+arr = [1, 2, 3, 4, 5, 6]
+pos = 2
+
+arr = arr[pos:] + arr[:pos]
+print(arr)
+
+
+
+
+8: Check if given array is monotonic.
+
+
+arr = [1, 2, 2, 3]
+
+inc = True
+dec = True
+
+for i in range(1, len(arr)):
+    if arr[i] > arr[i - 1]:
+        dec = False
+    elif arr[i] < arr[i - 1]:
+        inc = False
+
+if inc or dec:
+    print("Monotonic")
+else:
+    print("Not Monotonic")
+
+
+
+
+
+9: Frequency of all array elements.
+
+arr = [1, 2, 2, 3, 1, 4, 2]
+dic  = {}
+for ele in arr:
+    dic[ele] = dic.get(ele,0)+1
+
+print(dic)    
+
+
+10: Find unique number.
+
+arr = [1, 2, 2, 3, 1, 4, 2]
+uni = []
+for ele in arr:
+    if arr.count(ele) == 1:
+        uni.append(ele)
+
+
+print(uni)        
+    
+
+11: Flate Array.
+
+
+arr = [1, [2, 3], [4, [5, 6]], 7]
+flat = []
+
+def flatten(lst):
+    for i in lst:
+        if isinstance(i, list):  # agar element list hai
+            flatten(i)            # fir uske andar jao
+        else:
+            flat.append(i)
+
+flatten(arr)
+print(flat)
+
+
+
+def flate(arr):
+    result = []
+    for ele in arr:
+        if isinstance(ele, list):
+            result.extend(flate(ele))   # yahan recursive result add ho raha hai
+        else:
+            result.append(ele)
+    return result
+
+arr = [1, [2, 3], [4, [5, 6]], 7]
+print(flate(arr))
+
+
+
+
+
+
+12: Missing numbers.
+
+arr = [1, 2, 4, 5]
+n = 5
+
+missing = n*(n+1)//2 - sum(arr)
+print(missing)
+
+
+arr = [1, 2, 4, 6, 7]
+n = 7
+missing = []
+
+for i in range(1, n+1):
+    if i not in arr:
+        missing.append(i)
+
+print(missing)
+
+
+13: Common elements between two arrays.
+
+arr1 = [1, 2, 3, 4, 5]
+arr2 = [3, 4, 5, 6, 7]
+
+common = []
+
+for i in arr1:
+    if i in arr2:
+        common.append(i)
+
+print(common)
+
+
+14: Alternate positive and negative.
+
+
+
+
+
+
+
+
+15: Move all negatives to end. 
+
+	
+arr = [1, -2, 3, -4, 5, -6, 7]
+n = len(arr)
+left = 0
+
+for right in range(n):
+    if arr[right] >= 0:
+        arr[left], arr[right] = arr[right], arr[left]
+        left += 1
+
+print(arr)
+
+
+
+16: Check if given array is sorted.
+
+
+
+
+
+
+
+
+17: sort array of 0, 1, 2 (without sort).       
+        
+
+
+
+18: Flate Dictionary
+
+flat = {}
+data = {
+    "name": "Shankar",
+    "details": {
+        "age": 25,
+        "address": {
+            "city": "Delhi",
+            "pincode": 110001
+        }
+    }
+}
+
+def flatten_dict(d, parent_key=''):
+    for key, value in d.items():
+        new_key = f"{parent_key}.{key}" if parent_key else key
+
+        if isinstance(value, dict):  # agar value dict hai
+            flatten_dict(value, new_key)  # recursion
+        else:
+            flat[new_key] = value
+
+
+flatten_dict(data)
+print(flat)
+
+
