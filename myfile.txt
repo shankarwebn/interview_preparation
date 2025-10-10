@@ -24,34 +24,34 @@
 23 String rotation.
 24 Replace multiple words with key.
 25 Remove ith character in string.
-26 Longest substring without repeating char.
-27 Convert string to integer.
-28 Find most frequent character.
-29 Remove all white spaces.
-30 Check if string is valid shuffle of two strings.
-31 Find longest common prefix.
-32 Find shortest words in string.
-33 Check if string only contains digit.
-34 Count array of 0, 1, 2 (without sort).
-35 Find first repeated character.
+26 Convert string to integer.
+27 Find most frequent character.
+28 Remove all white spaces.
+29 Check if string is valid shuffle of two strings.
+30 Find shortest words in string.
+31 Check if string only contains digit.
+32 Count array of 0, 1, 2 (without sort).
+33 Find first repeated character.
 
 
 ---------------------------------------------------------Array Programs---------------------------------------------------
 1 Second largest number.
 2 Rotate an array by K.
-3 Remove and Find duplicates.
-4 Reverse an array.
-5 Move all zeroes to end.
-6 Split the Array and move first part to end.
-6 Check if given array is monotonic.
-7 Frequency of all array elements.
-8 Find unique number.
-9 Flate Array.
-10 Missing numbers.
-11 Common elements between two arrays.
-12 Alternate positive and negative.
-13 Move all negatives to end.
-14 Check if given array is sorted.
+3 Remove duplicates.
+4 Find Duplicate
+5 Reverse an array.
+6 Move all zeroes to end.
+7 Split the Array and move first part to end.
+8 Check if given array is monotonic.
+9 Frequency of all array elements.
+10 Find unique number.
+11 Flate Array.
+12 Missing numbers.
+13 Common elements between two arrays.
+14 Alternate positive and negative.
+15 Move all negatives to end.
+16 Check if given array is sorted.
+17 Count array of 0, 1, 2 (without sort).
 
 
 

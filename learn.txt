@@ -1,0 +1,21 @@
+Python Tutorial.
+python inteview question.
+python programs.
+
+
+Django Tutorial.
+Django Ineterview Questions.
+
+
+Sql Tutorial.
+Sql Interview Query.
+
+
+Aws Tutorial.
+Aws EC2.
+Aws S3.
+CI/CD Pipline.
+
+
+GitHub Tutorial.
+GitHub Interview Question.

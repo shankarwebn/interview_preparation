@@ -1,0 +1,54 @@
+####   encapsulation
+
+class Car:
+  
+    def __init__(self, brand, color):
+        self.brand = brand
+        self.color = color
+
+ 
+    def start(self):
+        print(f"{self.color} {self.brand} car is starting...")
+
+
+my_car = Car("Tesla", "Red")
+my_car.start()
+
+##  Inheritence
+
+
+class Animal:
+    def speak(self):
+        print("Animal speaks")
+
+class Dog(Animal):
+    def speak(self):
+        print("Dog barks")
+
+dog = Dog()
+dog.speak()
+
+
+######  abstration
+class PaymentGateway:
+    def make_payment(self, amount):
+        self.__connect_to_server()
+        self.__process(amount)
+        self.__disconnect()
+        print("✅ Payment successful!")
+
+    # Private methods (hidden from user)
+    def __connect_to_server(self):
+        print("Connecting to payment server...")
+
+    def __process(self, amount):
+        print(f"Processing payment of ₹{amount}...")
+
+    def __disconnect(self):
+        print("Disconnecting from server...")
+
+# User
+payment = PaymentGateway()
+payment.make_payment(500)
+
+

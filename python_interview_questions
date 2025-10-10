@@ -1,0 +1,224 @@
+1: What is the difference between is and == in Python?
+
+in python == check bothe value are same or not
+in the other side is is checking both object refercing to the same memory location.s
+a = [1, 2, 3]
+b = [1, 2, 3]
+
+print(a == b)  # True  (values are equal)
+print(a is b)  # False (different objects in memory)
+
+
+x = [1, 2, 3]
+y = x      # y points to same object as x
+
+print(x == y)  # True (values same)
+print(x is y)  # True (same object in memory)
+
+
+2: What is the difference between / and // in Python?
+Division  = /
+Floor division = //
+a = 7
+b = 2
+
+print(a / b)  # 3.5
+
+a = 7
+b = 2
+
+print(a // b)  # 3
+
+3: What is pass in Python?
+
+The pass statement is a placeholder that does nothing.
+
+4: Decorator
+
+Decorators let you add extra behavior to a function, without changing the function's code. A decorator
+
+
+def add():
+    print("this is the add funtion")
+
+def test(func):
+    def test2():
+        print("Before Function")
+        func()
+        print("After function")
+    return test2 
+
+
+demo = test(add)    
+demo()    
+
+
+
+
+def my_decorator(func):
+    def wrapper():
+        print("Before function call")
+        func()
+        print("After function call")
+    return wrapper
+
+@my_decorator 
+def greet():
+    print("Hello, Shankar!")
+
+greet()  # wrapper() execute hota hai
+
+5: Explain the concept of Python closures.
+
+A closure is a function inside another function that remembers the variables from the outer function — even after the outer function has finished executing.
+
+def outer_function(msg):
+    def inner_function():
+        print("Message:", msg)
+    return inner_function
+
+my_func = outer_function("Hello Shankar!")
+my_func()
+
+6: What is docstring in Python?
+A docstring in Python is a special string literal used to document a module, class, function, or method.
+
+def greet(name):
+    """This function greets the person passed as an argument."""
+    return f"Hello, {name}!"
+
+print(greet("Gukesh"))
+
+# Accessing the docstring
+print(greet.__doc__)
+
+
+7: Difference between function and method.
+
+Function — Definition
+
+A function is a block of reusable code that performs a specific task.
+It is not tied to any object or class and can be called directly by its name.
+
+Method — Definition
+
+A method is a function that belongs to a class.
+It always takes self as the first argument and works on the object’s data.
+
+8: What are Iterators in Python?
+
+
+
+
+9: What are Generators in Python?
+
+
+
+10: What is a zip function?
+
+
+
+11: What are Pickling and Unpickling?
+
+
+
+12: What are unit tests in Python?
+
+
+13: Python Global Interpreter Lock (GIL)?
+
+
+14: What are Function Annotations in Python?
+
+
+15: What are Exception Groups in Python?
+
+
+16: What is Walrus Operator?
+
+
+17: What is Object-Oriented Programming (OOP) in Python?
+
+
+18: What is the __init__ method in Python?
+
+
+19: What are the key features of OOP?
+
+20: What is the difference between instance variables and class variables?
+
+21: What is inheritance in Python?
+
+
+22: What is method overloading in Python?
+
+
+23: What is method overriding in Python?
+
+
+24: how memory managed in python.
+
+
+25: What is polymorphism in Python?
+
+
+26: What is encapsulation, and how does Python achieve it?
+
+
+27: What are unit tests in Python?
+
+28: what is pickling and unpicling.
+
+
+
+29: help and dir
+
+help = docstring jesa hai.
+dir = ye sabhi methods ko show krta hai.
+
+lst = [1, 2, 3]
+print(dir(lst))
+
+
+30: what is exception handling.
+
+
+31: setter and getter use to access and update private attrinute of class.
+class Person:
+    def __init__(self, name):
+        self.__name = name
+
+    # Getter
+    @property
+    def name(self):
+        return self.__name
+
+    # Setter
+    @name.setter
+    def name(self, value):
+        self.__name = value
+
+p = Person("Shankar")
+print(p.name)    # getter
+p.name = "John"  # setter
+print(p.name)
+
+
+
+class Student:
+    def __init__(self,name):
+        self.__name = name
+        
+    def setter(self,name):
+        self.__name = name
+        
+    def getter(self):
+        return self.__name
+        
+
+p = Student("shankar")
+print(p.getter())
+p.setter("shakassds")
+print(p.getter())
+
+
