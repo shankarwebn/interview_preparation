@@ -1,0 +1,160 @@
+BASIC NUMBER PROGRAMS (1–15)
+
+num = int(input("Enter number "))
+
+if num % 2 == 0:
+    print("Even number")
+else:
+    print("odd number")    
+Even / Odd number
+
+2: Positive / Negative / Zero
+
+num = int(input("Enter number "))
+
+if num > 0:
+    print("Positive")
+else:
+    print("Negative")
+        
+
+3: Largest of three numbers
+
+one = int(input("Enter first number "))
+
+second = int(input("Enter second number "))
+
+three = int(input("Enter three number "))
+
+if one > second and three:
+    print("one is greater")
+
+elif second > one and second > three:
+    print("Second is greater")
+    
+elif three > one and three > second:
+    print("Third is greater")
+    
+
+
+Cube of a number
+
+Check divisible by 5 & 11
+
+Check leap year
+
+4: Count digits in a number
+
+num = int(input("Enter the number "))
+
+c = 0
+
+while(num>0):
+    num = num//10
+    c+=1
+
+print(c)    
+
+5: Sum of digits
+
+num = int(input("Enter the number "))
+
+c = 0
+
+while(num>0):
+    num = num%10
+    c+=num
+    num = num//10
+
+print(c)    
+
+
+6: Reverse a number
+num = int(input("Enter the number "))
+
+rev = 0
+
+while(num>0):
+    d = num%10
+    rev = rev * 10 + d
+    num = num//10
+
+print(rev) 
+
+   
+Palindrome number
+
+Prime number check
+
+Print prime numbers in range
+
+Factorial of a number
+
+Fibonacci series
+
+Power of number (without ** )
+
+Armstrong number
+
+Strong number
+
+Perfect number
+
+Sum of first N natural number
+
+🔢 ADVANCED / INTERVIEW (39–50)
+
+GCD of two numbers
+
+num1 = int(input("Enter the first number: "))
+num2 = int(input("Enter the second number: "))
+
+c = num1 if num1 < num2 else num2
+a = 1
+gcd_list = []
+
+while a <= c:  # <= important
+    if num1 % a == 0 and num2 % a == 0:
+        gcd_list.append(a)
+    a += 1       # increment ab loop ke bahar hai, har step chalega
+
+print("Common divisors:", gcd_list)
+print("GCD:", max(gcd_list))
+
+
+
+LCM of two numbers
+
+num1 = int(input("Enter the first number: "))
+num2 = int(input("Enter the second number: "))
+
+max = num1 if num1 > num2 else num2
+
+while True:
+    if max % num1 == 0 and max % num2 == 0:
+        break
+
+    max+=1
+
+print(max)    
+
+
+Check number is palindrome using function
+
+Check prime using function
+
+Factorial using recursion
+
+Fibonacci using recursion
+
+Count even & odd digits
+
+Sum of prime digits
+
+Find frequency of digits
+
+Print factors of a number
+
+Check number is perfect square
+
+Find missing number in array (1–N)
