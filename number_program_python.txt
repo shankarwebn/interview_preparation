@@ -1,0 +1,201 @@
+1: Check Even number or odd number.
+num = int(input("Enter number "))
+
+if num % 2 == 0:
+    print("Even number")
+else:
+    print("odd number")    
+Even / Odd number
+
+2: Positive / Negative / Zero.
+
+num = int(input("Enter number "))
+
+if num > 0:
+    print("Positive")
+else:
+    print("Negative")
+        
+
+3: Largest of three numbers.
+
+one = int(input("Enter first number "))
+
+second = int(input("Enter second number "))
+
+three = int(input("Enter three number "))
+
+if one > second and three:
+    print("one is greater")
+
+elif second > one and second > three:
+    print("Second is greater")
+    
+elif three > one and three > second:
+    print("Third is greater")
+    
+
+
+4: Count digits in a number.
+
+num = int(input("Enter the number "))
+
+c = 0
+
+while(num>0):
+    num = num//10
+    c+=1
+
+print(c)    
+
+5: Sum of digits.
+
+num = int(input("Enter the number "))
+
+c = 0
+
+while(num>0):
+    num = num%10
+    c+=num
+    num = num//10
+
+print(c)    
+
+
+6: Reverse a number.
+num = int(input("Enter the number "))
+
+rev = 0
+
+while(num>0):
+    d = num%10
+    rev = rev * 10 + d
+    num = num//10
+
+print(rev) 
+
+   
+7: Palindrome number.
+
+num = int(input("Enter the number "))
+tem = num
+rev = 0
+
+while(num>0):
+    d = num%10
+    rev = rev * 10 + d
+    num = num//10
+
+if tem ==rev:
+    print("Palindrome")
+else:
+    print("Not a palindrome")       
+
+
+8: Prime number check.
+
+num = int(input("Enter the number "))
+p = True
+for i in range(2,num):
+    if num % i==0:
+        p = False
+        break
+
+
+if p:
+    print("Prime")
+else:
+    print("Not a Prime")
+    
+             
+9: Print prime numbers in range.
+
+num = int(input("Enter the number "))
+for i in range(2,num):
+    p = True
+    for j in range(2,i):
+        if i % j==0:
+            p = False
+            break
+    if p:
+        print(i)    
+
+
+
+
+10: Fibonacci series.
+
+num = int(input("Enter the number "))
+a = 0
+b = 1
+
+for i in range(num):
+    print(a)
+    c = a+b
+    b = a
+    a = c
+
+
+11: GCD of two numbers.
+
+num1 = int(input("Enter the first number: "))
+num2 = int(input("Enter the second number: "))
+
+c = num1 if num1 < num2 else num2
+a = 1
+gcd_list = []
+
+while a <= c:  # <= important
+    if num1 % a == 0 and num2 % a == 0:
+        gcd_list.append(a)
+    a += 1       # increment ab loop ke bahar hai, har step chalega
+
+print("Common divisors:", gcd_list)
+print("GCD:", max(gcd_list))
+
+
+
+12: LCM of two numbers.
+
+num1 = int(input("Enter the first number: "))
+num2 = int(input("Enter the second number: "))
+
+max = num1 if num1 > num2 else num2
+
+while True:
+    if max % num1 == 0 and max % num2 == 0:
+        break
+
+    max+=1
+
+print(max)    
+
+
+13: Fibonacci using recursion.
+
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+
+n = int(input("Enter number of terms: "))
+
+for i in range(n):
+    print(fibonacci(i), end=" ")
+
+14: Print factors of a number.
+
+num = int(input("Enter a number: "))
+
+15: print("Factors of", num, "are:")
+ex = 12
+jo number 12 ko devide kr de vo factor hai jese 12 ko 2,3,4 devide kr denge
+for i in range(1, num + 1):
+    if num % i == 0:
+        print(i)
+
+
+Factorial using recursion.
