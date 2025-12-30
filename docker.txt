@@ -1,0 +1,20 @@
+Image - A Docker Image is a read-only template that contains the application code, libraries, dependencies, and configuration required to run an application.
+
+Docker - A Docker Container is a running instance of a Docker image that executes an application in isolated environment.
+
+Docker - A Docker Container is a lightweight and portable environment where applications run with their dependencies.
+
+1: docker pull.
+ans - docker pull is used to download a Docker image from Docker Hub (or another registry) to your local.
+
+2: docker run.
+ans: docker run is used to create and start a container from an image.
+
+3: docker ps -a.
+ans - show all containers.
+
+4: Set temperary name.
+ans - Docker run --name tem_name python:tag_name 
+
+
+

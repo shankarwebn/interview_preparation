@@ -1,0 +1,19 @@
+<h2>All Posts</h2>
+
+
+<a href="{% url 'logout_view' %}">
+    <button>Go to logout_view</button>
+</a>
+
+
+<hr>
+
+{% for post in posts %}
+  <h3>{{ post.title }}</h3>
+
+  <small>By: {{ post.user.username }}</small>
+
+  <br>
+
+  <hr>
+{% endfor %} 

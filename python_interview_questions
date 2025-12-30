@@ -37,6 +37,25 @@ The pass statement is a placeholder that does nothing.
 
 Decorators let you add extra behavior to a function, without changing the function's code. A decorator
 
+def login_required(func):
+    def wrapper(user):
+        if not user.get("logged_in"):
+            print("Access Denied ❌")
+            return
+        return func(user)
+    return wrapper
+
+
+@login_required
+def dashboard(user):
+    print("Welcome to dashboard")
+
+
+user1 = {"logged_in": True}
+user2 = {"logged_in": False}
+
+dashboard(user1)
+dashboard(user2)
 
 def add():
     print("this is the add funtion")
@@ -80,6 +99,10 @@ def outer_function(msg):
 my_func = outer_function("Hello Shankar!")
 my_func()
 
+
+
+
+
 6: What is docstring in Python?
 A docstring in Python is a special string literal used to document a module, class, function, or method.
 
@@ -91,6 +114,7 @@ print(greet("Gukesh"))
 
 # Accessing the docstring
 print(greet.__doc__)
+
 
 
 7: Difference between function and method.
@@ -105,12 +129,48 @@ Method — Definition
 A method is a function that belongs to a class.
 It always takes self as the first argument and works on the object’s data.
 
+
+
+
 8: What are Iterators in Python?
 
+An iterator is an object that allows you to traverse through all elements of a collection one by one using the next() function.
 
+
+nums = [10, 20, 30]
+
+it = iter(nums)
+
+print(next(it))
+print(next(it))
+print(next(it))
 
 
 9: What are Generators in Python?
+
+exam: A generator is a function that returns an iterator and generates values one by one using the yield keyword.
+
+use of generatot
+
+def numbers():
+    yield 1
+    yield 2
+    yield 3
+
+gen = numbers()
+
+print(next(gen))
+print(next(gen))
+print(next(gen))
+
+
+def numbers():
+    yield 1
+    yield 2
+    yield 3
+
+for i in numbers():
+    print(i)
 
 
 
@@ -120,7 +180,9 @@ It always takes self as the first argument and works on the object’s data.
 
 11: What are Pickling and Unpickling?
 
+Pickling is the process of converting a Python object into a byte stream so it can be stored in a file or transmitted over a network.
 
+Unpickling is the process of converting a byte stream back into the original Python object.
 
 12: What are unit tests in Python?
 
@@ -222,3 +284,37 @@ p.setter("shakassds")
 print(p.getter())
 
 
+
+32: what is list and dic comprehension.
+
+List comprehension is a short and clean way to create a list using a single line of code.
+
+
+33: What are Python namespaces? Why are they used?
+
+A namespace is a container that holds names (variables, functions, objects) and maps them to their values.
+
+x = 10
+
+34: what is static and class method
+
+
+35: map filter and reduce
+map: 
+nums = [1, 2, 3, 4]
+
+result = list(map(lambda x: x * 2, nums))
+print(result)
+
+filter() selects elements from an iterable for which a given function returns True.
+nums = [1, 2, 3, 4, 5, 6]
+
+result = list(filter(lambda x: x % 2 == 0, nums))
+print(result)
+
+36: Can you concate a tuple how and why.
+Yes, tuples can be concatenated using the + operator, which creates a new tuple since tuples are immutable."
+
+37:What is Duck Typing.
+
+38: what is monkey patching.

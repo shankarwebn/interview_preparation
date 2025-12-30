@@ -1,0 +1,21 @@
+def auth(func):
+    def wrapper():
+        print("Checking authentication")
+        func()
+    return wrapper
+
+@auth
+def login():
+    print("User logged in")
+
+@auth
+def dashboard():
+    print("Dashboard opened")
+
+
+settter getrer
+itrator and generator
+
+class method 
+statci method	
+

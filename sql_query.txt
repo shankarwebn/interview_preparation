@@ -1,0 +1,238 @@
+1: Nth highest salary.
+
+	SELECT * from ( SELECT salary , DENSE_RANK() OVER (ORDER BY salary DESC)
+	as emm_rank from emp)t  WHERE emm_rank = 2;
+
+2: Max salary for each Department;
+
+
+	SELECT department,
+	       MAX(salary) OVER (PARTITION BY department) AS max_salary_in_dep
+	FROM emp1;
+
+	ex: 
+	SELECT *
+	FROM (
+	    SELECT *,
+		   MAX(salary) OVER (PARTITION BY department) AS max_salary
+	    FROM emp1
+	) t
+	WHERE salary = max_salary;
+
+	ex: 
+	SELECT department, salary , MAX(salary) AS max_salary
+	FROM emp1
+	GROUP BY department;
+
+	ex:
+	SELECT *
+	FROM emp e
+	WHERE salary = (
+	    SELECT MAX(salary)
+	    FROM emp
+	    WHERE dep = e.dep
+	);
+	
+	SELECT *
+	FROM (
+	    SELECT name, salary, department,
+		   DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) as rnk
+	    FROM employees
+	) t
+	WHERE rnk <= 3;
+
+	SELECT * ,DENSE_RANK() OVER (PARTITION BY dep ORDER BY salary DESC) as rank_num
+	FROM emp;
+
+
+3: write a sql query to find cutomer who places order more than one.
+
+	ex:
+
+	SELECT customer_id, name
+	FROM customer
+	WHERE customer_id IN (
+	    SELECT customer_id
+	    FROM orders
+	    GROUP BY customer_id
+	    HAVING COUNT(*) > 1
+	);
+
+
+	ex:
+
+	SELECT customer_id, COUNT(order_id) AS total_orders
+	FROM orders
+	GROUP BY customer_id
+	HAVING COUNT(order_id) > 1;
+
+	ex:
+
+	SELECT c.customer_id, c.name, sum(amount) AS total_orders
+	FROM customer c
+	JOIN orders o 
+	ON c.customer_id = o.customer_id
+	GROUP BY c.customer_id, c.name
+	HAVING COUNT(o.order_id) > 1;
+
+4:  Write a sql query customer who not place order.
+
+		
+	SELECT *
+	FROM customer
+	WHERE customer_id NOT IN (
+	    SELECT customer_id
+	    FROM orders
+	);
+
+	SELECT *
+	FROM customer c
+	WHERE NOT EXISTS (
+	    SELECT customer_id
+	    FROM orders o
+	    WHERE o.customer_id = c.customer_id
+	);
+
+5: Write a sql query to find employees who has managerial position;
+
+select e.name from emplo as e join emplo as p ON e.employee_id = p.manager_id;
+
+
+
+
+
+6: Duplicate data
+
+	SELECT *
+	FROM emp1
+	WHERE salary IN (
+	    SELECT salary
+	    FROM emp1
+	    GROUP BY salary
+	    HAVING COUNT(*) > 1
+	);
+	sql_query.txt
+
+	SELECT col1, col2, COUNT(*)	
+	FROM table_name
+	GROUP BY col1, col2
+	HAVING COUNT(*) > 1;
+	
+	SELECT *, COUNT(*)
+	FROM orders
+	GROUP BY order_id, amount
+	HAVING COUNT(*) > 1;
+
+
+SELECT salary FROM emp1 GROUP BY salary HAVING COUNT(salary) > 1;
+
+
+sql_query.txtsql_query.txt
+7: find employees who has no manager	
+
+	SELECT emp_id, emp_name, salary
+	FROM employeessql_query.txt
+	WHERE manager_id IS NULL;
+sql_query.txtsql_query.txt
+8: How to create table copied structue and data.
+sql_query.txt
+CREATE TABLE EMP as (select * from employees);
+
+
+
+
+9: Delete Duplicate data.
+sql_query.txt
+WITH cte AS (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY emp_id, emp_name ORDER BY department) AS rn
+    FROM employees_dup
+)
+DELETE FROM employees_dup
+WHERE emp_id IN (SELECT emp_id FROM cte WHERE sql_query.txtrn > 1);
+
+10: Find employees hired in the last 3 months.
+
+SELECT * 
+FROM employees
+WHERE hire_date >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH);
+
+
+11: Find employees whose name contains 'Shankar'
+
+SELECT * 
+FROM employees
+WHERE INSTR(name, 'Shankar') > 0;
+
+
+
+12: Concatenate first and last name;
+
+	SELECT CONCAT(first_name, ' ', last_name) AS full_name
+	FROM employees;
+
+
+13: Find employees whose salary is above average.
+
+	SELECT * 
+	FROM employees
+	WHERE salary > (SELECT AVG(salary) FROM employees);
+
+
+
+14: Top 5 Highest Salary.
+	
+SELECT emp_id, emp_name, salary
+FROM (
+    SELECT *, DENSE_RANK() OVER (ORDER BY salary DESC) AS rn
+    FROM employees
+) AS t
+WHERE rn <= 5;
+
+
+
+Find Top 3 Salaries Per Department
+
+
+	SELECT *
+	FROM (
+	    SELECT salary, department,
+		   DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) as rnk
+	    FROM employees
+	) t
+	WHERE rnk <= 3;
+	
+SELECT *
+FROM (
+    SELECT name, salary, department,
+           DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) as rnk
+    FROM employees
+) t
+WHERE rnk <= 3;
+
+
+how to find alter rescord
+
+15: How to find first record.
+
+SELECT * FROM emp1
+ORDER BY salary ASC
+LIMIT 1;
+
+16: How to find last record.
+
+SELECT * FROM emp1
+ORDER BY salary DESC
+LIMIT 1;
+
+
+unique without distict
+
+what is the sql q used to find the department wise count of emp sorted by department count in asc
+
+
+how to change data type of coulmn
+
+unique primary key
+
+what is degree what is attributerecod and fields
