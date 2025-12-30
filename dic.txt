@@ -1,0 +1,103 @@
+1: Word frequency count.
+
+s = "python is easy python is powerful"
+dic = {}
+
+for i in s.split():
+    dic[i] = dic.get(i,0)+1
+
+print(dic)    
+
+2: Dictionary ko key ke base par sort karna.
+
+d = {"b": 2, "a": 5, "c": 1}
+
+result = dict(sorted(d.items()))
+print(result)
+
+3: Dictionary ko value ke base par sort karna.
+
+
+d = {"a": 5, "b": 2, "c": 1}
+
+result = dict(sorted(d.items(), key=lambda x: x[1]))
+print(result)
+
+4: Max value wali key find karna.
+
+d = {"a": 10, "b": 30, "c": 20}
+
+max_key = max(d, key=d.get)
+print(max_key)
+
+
+5: Two lists se dictionary banana.
+
+k = ["name", "age", "city"]
+v = ["Ram", 25, "Delhi"]
+
+print(dict(zip(k,v)))
+
+
+6: Remove duplicate values.
+
+d = {"a": 1, "b": 2, "c": 1, "d": 2}
+
+result = {}
+for k, v in d.items():
+    if v not in result.values():
+        result[k] = v
+
+print(result)
+
+7: Two dictionaries compare karna.
+
+d1 = {"a": 1, "b": 2}
+d2 = {"b": 2, "a": 1}
+
+print(d1 == d2)   # True
+
+
+8: Two lists.
+
+Two lists → dictionary (index based)
+
+keys = ["a", "b", "c"]
+values = [10, 20, 30]
+
+d = {keys[i]: values[i] for i in range(len(keys))}
+print(d)
+
+9: Flate Dictionary.
+
+flat = {}
+data = {
+    "name": "Shankar",
+    "details": {
+        "age": 25,
+        "address": {
+            "city": "Delhi",
+            "pincode": 110001
+        }
+    }
+}
+
+def flatten_dict(d, parent_key=''):
+    for key, value in d.items():
+        new_key = f"{parent_key}.{key}" if parent_key else key
+
+        if isinstance(value, dict):  # agar value dict hai
+            flatten_dict(value, new_key)  # recursion
+        else:
+            flat[new_key] = value
+
+
+flatten_dict(data)
+print(flat)
+
+
+
+
+
+
+
