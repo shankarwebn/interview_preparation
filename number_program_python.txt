@@ -1,0 +1,81 @@
+BASIC NUMBER PROGRAMS (1–15)
+
+Even / Odd number
+
+Positive / Negative / Zero
+
+Largest of two numbers
+
+Largest of three numbers
+
+Smallest of three numbers
+
+Swap two numbers (with temp)
+
+Swap two numbers (without temp)
+
+Sum of two numbers
+
+Square of a number
+
+Cube of a number
+
+Check divisible by 5 & 11
+
+Check leap year
+
+Count digits in a number
+
+Sum of digits
+
+Product of digits
+
+🔢 LOOP & LOGIC BASED (16–30)
+
+Reverse a number
+
+Palindrome number
+
+Prime number check
+
+Print prime numbers in range
+
+Factorial of a number
+
+Fibonacci series
+
+Power of number (without ** )
+
+Armstrong number
+
+Strong number
+
+Perfect number
+
+Sum of first N natural number
+
+🔢 ADVANCED / INTERVIEW (39–50)
+
+GCD of two numbers
+
+LCM of two numbers
+
+Check number is palindrome using function
+
+Check prime using function
+
+Factorial using recursion
+
+Fibonacci using recursion
+
+Count even & odd digits
+
+Sum of prime digits
+
+Find frequency of digits
+
+Print factors of a number
+
+Check number is perfect square
+
+Find missing number in array (1–N)
