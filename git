@@ -1,0 +1,72 @@
+git revert and reste
+
+fork kya hota hai?
+
+What is the functionality of git ls-tree?
+
+git reflog log
+
+git branch and reposetory
+
+git pull and fetch 
+
+git clone and remote
+
+rebase and merge
+
+git and git hub
+
+diff and status
+
+how to fix brokern commit
+
+use of stagging arrea or indexing
+
+git rep hosting fun
+
+what is VCS
+
+git config
+
+git stash and git pop
+
+git annotaed commond
+
+git revert and git reset
+
+how to revert bad commit pushed
+
+diff HEAD and working tree and index in git
+
+how squash commit
+
+git reset --soft HEAD~3
+git commit -m "combined commit"
+
+how deleted brnach recover
+
+how to see comit history
+
+list to see branch
+
+merge 2 branch
+
+how to abort conflict
+
+how to get remote branch that git is tracking
+
+how to fetch remote repo changes
+
+rename files
+
+what is commond to git ignore
+
+how to remove tracked files
+
+how to rollback last commit changes
+
+How to revert a bad commit which is already pushed?
+
+What is the difference between git reset --hard and git clean -fd?
+What are the functionalities of git reset --mixed and git merge --abort?
+how to check whether a branch has already been merged into the master

@@ -1,0 +1,14 @@
+<h2>Signup</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  {% if form.errors %}
+    <div style="color:red;">
+      {{ form.errors }}
+    </div>
+  {% endif %}
+
+  <button type="submit">Signup</button>
+</form>
