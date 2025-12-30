@@ -255,7 +255,7 @@ print(arr)
 
 
 
-18: Flate Dictionary
+18: Flate Dictionary.
 
 flat = {}
 data = {
@@ -281,5 +281,18 @@ def flatten_dict(d, parent_key=''):
 
 flatten_dict(data)
 print(flat)
+
+
+arr = [4, 6, 2, 2, 6, 4, 4, 4]
+dic = {}
+result = []
+for ele in arr:
+    dic[ele] = dic.get(ele,0)+1
+    
+for key,value in dic.items():
+    result.extend([key]* value)
+    
+ 
+print(sorted(result,reverse=True)   )
 
 

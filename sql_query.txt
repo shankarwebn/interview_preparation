@@ -1,0 +1,79 @@
+1: Nth highest salary.
+
+SELECT * from ( SELECT salary , DENSE_RANK() OVER (ORDER BY salary DESC)
+as emm_rank from emp)t  WHERE emm_rank = 2;
+
+2: Max salary for each Department;
+
+
+SELECT id, name, dep, salary,
+       MAX(salary) OVER (PARTITION BY dep) AS max_salary_in_dep
+FROM emp;
+
+ex: 
+SELECT *
+FROM (
+    SELECT *,
+           MAX(salary) OVER (PARTITION BY dep) AS max_salary
+    FROM emp
+) t
+WHERE salary = max_salary;
+
+ex: 
+SELECT dep, MAX(salary) AS max_salary
+FROM emp
+GROUP BY dep;
+
+ex:
+SELECT *
+FROM emp e
+WHERE salary = (
+    SELECT MAX(salary)
+    FROM emp
+    WHERE dep = e.dep
+);
+
+3: Rank for each department salary
+
+SELECT *
+       DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) as rank_num
+FROM employees;
+
+
+4: write a sql query to find cutomer who places order more than one.
+
+ex:
+
+SELECT customer_id, name
+FROM customer
+WHERE customer_id IN (
+    SELECT customer_id
+    FROM orders
+    GROUP BY customer_id
+    HAVING COUNT(*) > 1
+);
+
+
+ex:
+
+SELECT customer_id, COUNT(order_id) AS total_orders
+FROM orders
+GROUP BY customer_id
+HAVING COUNT(order_id) > 1;
+
+ex:
+
+SELECT c.customer_id, c.name, COUNT(o.order_id) AS total_orders
+FROM customer c
+JOIN orders o 
+ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.name
+HAVING COUNT(o.order_id) > 1;
+
+
+5: Write a sql query to find employees who has managerial position;
+
+ex:
+
+select e.name from emplo as e join emplo as p ON e.employee_id = p.manager_id;
+

@@ -29,6 +29,32 @@ dog = Dog()
 dog.speak()
 
 
+####### Polymorphism ######.
+
+class Animal:
+    def sound(self):
+        print("Animal sound")
+
+class Dog(Animal):
+    def sound(self):
+        print("Bark")
+
+d = Dog()
+d.sound()
+
+
+class Animal:
+    def sound(self):
+        print("Animal sound")
+
+class Dog(Animal):
+    def sound(self):
+        super.sound() # to call method of parent classs
+        print("Bark")
+
+d = Dog()
+d.sound()
+
 ######  abstration
 class PaymentGateway:
     def make_payment(self, amount):

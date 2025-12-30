@@ -1,0 +1,531 @@
+1: Longest common prefix.
+
+strs = ["flower", "flow", "flight"]
+
+if not strs:
+    print("")
+else:
+    prefix = strs[0]
+
+    for word in strs[1:]:
+        while not word.startswith(prefix):
+            prefix = prefix[:-1]
+            if not prefix:
+                break
+
+    print(prefix)
+    
+    
+2: Reverse the string.
+
+puts reversed
+# Output: "olleh"
+
+
+s = "shankar"
+print(s[::-1])
+
+reversed_text = ""
+for char in text:
+    reversed_text = char + reversed_text
+print(reversed_text)  # Output: nohtyP
+
+text = "Python is fun ast active"
+
+vowels = 0
+consonants = 0
+
+
+
+3: Check string is palindrome.
+
+a = "aba"
+
+rev = a[::-1]
+
+if a == rev:
+    print("palindrome")
+else:
+    print("Not Palindrome")
+
+
+
+4: Count number of vowels and consonants.
+vowel_chars = "aeiouAEIOU"
+
+for char in text:
+    if char.isalpha(): 
+        if char in vowel_chars:
+            vowels += 1
+        else:
+            consonants += 1
+
+print("Number of vowels:", vowels)
+print("Number of consonants:", consonants)
+
+5: Find first non-repeating character.
+
+s = "swiss"
+
+for char in s:
+    if s.count(char) == 1:
+        print(char)  # Output: w
+        break
+        
+        
+s = "swiss"
+char_count = {}
+
+for char in s:
+    char_count[char] = char_count.get(char,0)+1
+    
+        
+
+print(char_count)
+
+6: Permutations of string (all permutations).
+
+
+
+
+
+
+
+
+
+
+7: Two string anagrams.
+
+def are_anagrams(str1, str2):
+    # Remove spaces and convert to lowercase
+    str1 = str1.replace(" ", "").lower()
+    str2 = str2.replace(" ", "").lower()
+    
+    # Compare sorted strings
+    return sorted(str1) == sorted(str2)
+
+# Example usage
+s1 = "listen"
+s2 = "silent"
+
+if are_anagrams(s1, s2):
+    print("Anagrams")
+else:
+    print("Not Anagrams")
+    
+    
+    s1 = "listen"
+s2 = "silent"
+
+# Remove spaces and convert to lowercase
+s1 = s1.replace(" ", "").lower()
+s2 = s2.replace(" ", "").lower()
+
+# Agar length alag hai → not anagram
+if len(s1) != len(s2):
+    print("Not Anagrams")
+else:
+    count = {}
+    
+    # Count characters of first string
+    for char in s1:
+        count[char] = count.get(char, 0) + 1
+        
+    # Subtract count using second string
+    is_anagram = True
+    for char in s2:
+        if char not in count or count[char] == 0:
+            is_anagram = False
+            break
+        count[char] -= 1
+        
+    print("Anagrams" if is_anagram else "Not Anagrams")
+
+
+8: Find longest substring without repeating.
+
+
+
+
+
+
+
+
+
+
+
+
+
+9: Convert a string case to title case.
+
+text = "hello world from python"
+title_text = text.title()
+print(title_text)
+
+str = "hello world from ruby"
+
+# Title case
+title_case = str.split.map(&:capitalize).join(' ')
+
+puts title_case
+# Output: "Hello World From Ruby"
+
+
+10: One String is rotation of another
+
+s1 = "abcd"
+s2 = "cdab"
+s = s1+s1
+
+if s2 in s:
+    print("Yes")
+else:
+    print("Not")
+
+
+
+11: Count occurrence of each character.
+
+s = "swiss"
+
+dic ={}
+
+for i in s:
+    dic[i] = dic.get(i,0)+1
+
+print(dic)  
+
+12: Remove duplicate from string.
+
+s = "programming"
+result = ""
+
+for char in s:
+    if char not in result:
+        result += char
+
+print(result)
+ 
+  
+13: Check if string contains all unique characters.
+
+s = "python"
+
+unique = True
+for char in s:
+    if s.count(char) > 1:
+        unique = False
+        break
+
+print("All characters are unique" if unique else "Characters are not unique")
+
+14: Find frequency of all characters.
+
+
+
+
+
+
+
+15: Reverse words.
+
+str = "Programming is Fun"
+rev = str.split()
+rev.reverse()
+print(" ".join(rev))
+
+
+str = "Programming is Fun"
+rev = str.split()[::-1]
+print(" ".join(rev))
+
+16: valid paranthesis:
+
+a = "((()))"
+
+stack  = []
+
+for ch in a:
+    if ch in "({[":
+        stack.append(ch)
+    elif ch == ')' and stack[-1] == '(' and stack:
+        stack.pop()
+    elif stack[-1] == '{' and ch == '}' and stack:
+        stack.pop()
+    elif stack[-1] == '[' and ch == ']' and stack:
+        stack.pop()
+    else:
+        print("invalid")
+        break
+
+
+if not stack:
+    print("valid")
+else:
+    print("Invalid")
+
+17: Check substring is present in given string.
+
+
+
+
+
+
+
+
+
+18: Words frequency in string.
+text = "python is great and python is easy"
+
+words = text.split()
+
+dic = {}
+
+for char in words:
+    dic[char] = dic.get(char,0)+1
+    
+
+print(dic)    
+
+19: ways to delete specific character:
+
+new_text = text.replace("p", "")
+print(new_text)
+
+
+20: Convert snake to Pascal case.
+
+text = "hello_world_example"
+pascal = text.replace("_", " ")
+t = pascal.title().replace(" ", "")
+print(t)
+
+output = HelloWorldExample
+
+21: Find least character:	
+text = "banana"
+least_char = text[0]
+for ch in text:
+    if ch < least_char:
+        least_char = ch
+
+print(least_char)
+Least occurring character: b
+
+22: How to coping string:
+
+original = "Hello, Python!"
+
+copy_str = original
+print(copy_str)
+
+
+
+23: Replace all occurrences of substring.
+
+
+
+
+
+24: String rotation.
+Left Rotation
+
+a = [1,2,3,4,5]
+
+a[:2] = a[:2][::-1]
+
+a[2:] = a[2:][::-1]
+
+a[:] = a[::-1]
+
+Right Rotation
+
+a = [1,2,3,4,5] 
+a[:] = a[::-1] 
+a[:2] = a[:2][::-1]
+a[2:] = a[2:][::-1]
+
+print(a)
+
+
+Left Rotation
+
+def reverse(a,i,j):
+    while(i<j):
+        a[i],a[j] = a[j],a[i]
+        i+=1
+        j-=1
+
+
+a = [1,2,3,4,5]
+d = 2
+j = len(a) - 1
+reverse(a,0,d-1)
+reverse(a,d,j)
+reverse(a,0,j)
+
+
+print(a)
+
+
+Right Rotation
+
+def reverse(a,i,j):
+    while(i<j):
+        a[i],a[j] = a[j],a[i]
+        i+=1
+        j-=1
+
+
+a = [1,2,3,4,5]
+d = 2
+j = len(a) - 1
+reverse(a,0,j)
+reverse(a,0,d-1)
+reverse(a,d,j)
+print(a)
+        
+        
+25: Replace multiple words with key.
+
+
+
+
+
+
+
+
+
+
+26: Remove ith character in string.
+
+s = "hello"
+i = 2  # remove 3rd character (index 2)
+
+new_s = s[:i] + s[i+1:]
+print(new_s)
+
+
+27: Longest substring without repeating char.
+
+
+
+
+
+
+
+
+
+
+
+
+28: Convert string to integer.
+s = "12345"
+num = int(s)
+print(num)       # Output: 12345
+print(type(num)) # Output: <class 'int'>
+        
+
+29: most frequent character:
+ s = "hello world"
+
+# Step 1: Frequency dictionary banaye
+freq = {}
+for ch in s:
+    freq[ch] = freq.get(ch, 0) + 1
+
+
+most_common_char = None
+max_count = 0
+
+for ch, count in freq.items():
+    if count > max_count:
+        max_count = count
+        most_common_char = ch
+
+print("Most frequent character:", most_common_char)
+print("Frequency:", max_count)
+
+  
+s = "hello world"
+freq = {}
+
+for ch in s:
+    freq[ch] = freq.get(ch, 0) + 1
+
+# Find character with max frequency
+most_common_char = max(freq, key=freq.get)
+count = freq[most_common_char]
+
+print("Most frequent character:", most_common_char)
+print("Frequency:", count)
+
+
+30: a = "aaabbbcccc"
+
+result = ""
+for i in a:
+    chr = a.count(i)
+    if i not in  result:
+        result = result+ f" {i}:{chr}"
+
+
+
+print(result)
+
+31: 
+s = "a2b2t3"
+re = ""
+char = ''
+for str in s:
+    if str.isalpha():
+        char = str
+    else:
+        re = re + char* int(str)
+
+print(re)
+
+32: Reverse each word of String.
+
+a = "Python is easy"
+
+str = a.split()
+
+st = []
+for s in str:
+    st.append(s[::-1])
+
+print(" ".join(st))
+
+33: Print hello without loop.
+
+
+count = 1
+def printer(name):
+    global count
+    if count<=10:
+        print(f"{name} = {count}")
+        count+=1
+        printer(name)
+
+
+name = "shankar"
+printer(name)
+
+def say_hello(n):
+    if n == 0:
+        return
+    print("hello")
+    say_hello(n-1)
+
+say_hello(10)
+
+
+        
+
+
+
+
+
+
+        
