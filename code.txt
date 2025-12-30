@@ -460,7 +460,29 @@ print("Most frequent character:", most_common_char)
 print("Frequency:", count)
 
 
+30: a = "aaabbbcccc"
 
+result = ""
+for i in a:
+    chr = a.count(i)
+    if i not in  result:
+        result = result+ f" {i}:{chr}"
+
+
+
+print(result)
+
+31: s = "a2b3"
+
+result = ""
+
+for i in range(0, len(s), 2):
+    result += s[i] * int(s[i+1])
+
+print(result)
+
+32: Anagram Check (Without sort)
+33: Palindrome (Without reverse)
 
 
 

@@ -1,0 +1,211 @@
+1–20 : Basic Level (Foundation Strong Karo)
+
+Reverse a string without slicing
+
+Reverse a number without converting to string
+
+Check if number is palindrome
+
+Check if string is palindrome
+
+Find largest element in list
+
+Find second largest without sort()
+
+Count vowels in string
+
+Count frequency of each character
+
+Remove duplicates without set()
+
+Check if two strings are anagrams
+
+Find factorial (loop)
+
+Find factorial (recursion)
+
+Generate Fibonacci series
+
+Find missing number in 1 to N
+
+Swap two numbers without third variable
+
+Find GCD of two numbers
+
+Find LCM of two numbers
+
+Count words in sentence
+
+Capitalize first letter of each word
+
+Check if number is prime
+
+🔹 21–40 : List & String Logic
+
+Move all zeros to end
+
+Rotate list left by k positions
+
+Rotate list right by k positions
+
+Find common elements in two lists
+
+Find intersection without set()
+
+Find union without set()
+
+Find first non-repeating character
+
+Find duplicate elements in list
+
+Find all pairs with given sum
+
+Sort list without using sort()
+
+Bubble sort implementation
+
+Selection sort implementation
+
+Insertion sort implementation
+
+Merge two sorted lists
+
+Find longest word in sentence
+
+Remove all spaces from string
+
+Count uppercase and lowercase letters
+
+Replace specific word in string
+
+Check balanced parentheses
+
+Compress string (aaabb → a3b2)
+
+🔹 41–60 : Dictionary & Set Based
+
+Count frequency of elements in list
+
+Invert a dictionary
+
+Sort dictionary by value (without sorted())
+
+Merge two dictionaries
+
+Find key with maximum value
+
+Group elements by frequency
+
+Find majority element (> n/2 times)
+
+Group anagrams
+
+Create dictionary from two lists
+
+Find duplicate values in dictionary
+
+Check if two dictionaries are equal
+
+Remove key from dictionary
+
+Nested dictionary access
+
+Flatten nested dictionary
+
+Count word frequency in paragraph
+
+Find highest occurring character
+
+Create custom Counter class
+
+Implement Ordered Dictionary logic
+
+Check if list is subset of another
+
+Remove empty values from dictionary
+
+🔹 61–75 : Matrix & Pattern Based
+
+Print matrix in spiral order
+
+Rotate matrix 90 degrees
+
+Check if matrix is symmetric
+
+Transpose matrix
+
+Zigzag matrix print
+
+Find diagonal sum
+
+Count islands in grid
+
+Check path from top-left to bottom-right
+
+Print pyramid pattern
+
+Print inverted pyramid
+
+Print diamond pattern
+
+Print Floyd’s triangle
+
+Print Pascal’s triangle
+
+Print hollow square pattern
+
+Print number pattern
+
+🔹 76–90 : Recursion & Backtracking
+
+Generate all subsets of list
+
+Generate permutations
+
+Generate combinations
+
+Solve Tower of Hanoi
+
+N-Queens problem (logic)
+
+Word search in grid
+
+Subset sum equals target
+
+Palindrome partitioning
+
+Generate parentheses combinations
+
+Maze solving problem
+
+Power function using recursion
+
+Binary search (recursive)
+
+Quick sort implementation
+
+Merge sort implementation
+
+Count ways to climb stairs
+
+🔹 91–100 : Strong Interview Level
+
+Two Sum problem
+
+Three Sum problem
+
+Kadane’s Algorithm (max subarray sum)
+
+Longest substring without repeating characters
+
+Longest palindromic substring
+
+Detect cycle in linked list (logic)
+
+Implement Stack class
+
+Implement Queue class
+
+Implement LRU Cache (basic logic)
+
+Design a simple URL shortener logic
