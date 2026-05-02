@@ -16,5 +16,5 @@ ans - show all containers.
 4: Set temperary name.
 ans - Docker run --name tem_name python:tag_name 
 
-
+Docker info
 
