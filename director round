@@ -1,0 +1,155 @@
+1: Why should we hire you.
+ans: You should hire me because I have strong experience in building scalable backend applications using Python and Django. I have worked on REST APIs, authentication systems, and database optimization using PostgreSQL.
+
+In my previous work, I have developed features like API integrations, role-based access control, and performance improvements using techniques like query optimization and caching. I also understand deployment basics using tools like EC2, Nginx, and Gunicorn.
+
+
+I bring a combination of strong backend fundamentals and a problem-solving mindset. I have worked on building scalable APIs, optimizing queries, and handling production-like scenarios. I understand the complete development flow—from writing clean code to deployment and debugging. Along with technical skills, I am proactive, quick to learn, and comfortable taking ownership of tasks, which makes me a good fit for a fast-paced, service-based environment.
+
+
+2: why do you want to join this company.
+
+I want to join this company because it is a growing service-based organization that works on diverse real-world projects. This will give me the opportunity to enhance my backend development skills, especially in Python and Django, while working on scalable applications. I am particularly interested in learning from experienced team members and contributing to meaningful client projects.
+
+I want to join your company because it offers exposure to real client projects and a good learning environment. I believe it will help me grow my technical skills while contributing effectively to the team.”
+
+3: what do you know about this company.
+
+ans: BridgeFix Technology is an Indore-based IT services and consulting company that was founded in 2021. It primarily provides web and mobile application development services using technologies such as Python, Django, Node.js, and React. In addition to this, the company also offers engineering and manpower solutions. It is a service-based company that builds custom software solutions for global clients.
+
+4: what are your strenghts and weaknessess.
+
+My key strengths are strong backend fundamentals in Python and Django, problem-solving ability, and a willingness to learn quickly. I am comfortable building REST APIs, working with databases, and debugging issues. I also focus on writing clean and maintainable code.
+
+
+One of my weaknesses is that I sometimes spend extra time perfecting my code, which can affect speed. However, I am improving by focusing more on deadlines and prioritizing tasks effectively.
+
+5: what motivates you at work.
+
+I am motivated by learning, solving problems, and delivering quality work that adds value to the team.
+
+6: what is your biggest achievement till date.
+
+One of my biggest achievements so far is successfully building and optimizing backend APIs for a real-world project. I worked on improving database queries and reducing response time, which significantly enhanced the performance of the application. This experience helped me understand real production challenges like debugging, optimization, and deployment.
+
+My biggest achievement is building a backend system using Python and Django where I handled APIs, database operations, and performance optimization.
+
+7: how do you handle work pressure.
+
+I handle work pressure by prioritizing tasks, staying organized, and focusing on completing one task at a time while maintaining clear communication with my team.
+
+8: have you worked as leadership position.
+
+9: What is your role and day to day responsblities.
+
+My role is a backend developer, where I am responsible for building and maintaining server-side logic and APIs. On a day-to-day basis, I work on developing RESTful APIs, writing and optimizing database queries, fixing bugs, and integrating third-party services. I also collaborate with frontend developers to ensure smooth data flow and participate in code reviews and deployments.
+
+I work as a backend developer, where I build APIs, manage database operations, fix bugs, and support deployment activities.
+
+10: why do you believe that you are good fit for this position.
+
+I believe I am a good fit for this position because my skills and experience align well with the role. I have a strong foundation in backend development using Python and Django, along with hands-on experience in building APIs, working with databases, and debugging issues. I am also a quick learner and adaptable, which helps me work effectively in a fast-paced, service-based environment.
+
+
+I have the required backend skills, practical experience with APIs and databases, and I am a quick learner, which makes me a good fit for this role.
+
+
+11: can you explain your gap in your resume.
+
+12: what is you salary expectation.
+
+13: why are you looking for job change.
+
+I am looking for a job change to get better growth opportunities and work on more challenging projects. I want to enhance my skills, especially in backend development, and gain exposure to different types of real-world problems.
+
+14: what are your long term goals.
+
+In the long term, I aim to become a strong backend engineer with expertise in designing scalable and high-performance systems. I want to work on complex projects, improve my problem-solving abilities, and eventually take ownership of larger modules or projects. I also see myself mentoring junior developers and contributing to team growth.”
+
+15: Do you have any question.
+
+16: How do you optimize slow website.
+
+First, I would identify the bottleneck using tools like Chrome DevTools and Lighthouse. Then I would optimize the backend by improving database queries, adding indexing, and using caching. On the frontend, I would compress images, minify CSS/JS, and implement lazy loading. I would also use a CDN for static content and enable compression like Gzip on the server. If needed, I would further improve performance by using async processing and background jobs
+
+17: Where you see yourself after 5 year.
+
+In the next five years, I see myself as a skilled and experienced backend developer, working on scalable and high-performance systems. I want to deepen my expertise in Python and Django, take ownership of important modules, and contribute significantly to the success of the team.
+
+
+18: Tell me about your failure.
+
+Once I underestimated a task and missed the deadline. I learned to plan better, break tasks into smaller steps, and communicate early, which has improved my performance.
+
+19: How do you design a scalable system?
+
+I use caching, load balancing, optimized queries, and background jobs.
+
+
+20: What is your biggest challenge?
+
+“Handling production issues under pressure, but I learned to stay calm and follow a structured approach.”
+
+21: How to optimize API.
+To optimize APIs, I focus on multiple areas. First, I optimize database queries using indexing and techniques like select_related and prefetch_related to avoid N+1 problem. Then I use caching mechanisms like Redis to reduce database load. I also implement pagination and filtering to avoid sending large datasets. Additionally, I reduce payload size, use async processing for heavy tasks, and ensure proper server-level optimizations like load balancing and compression.
+
+Eager loading to avoid N+1 queries
+Pagination for large datasets
+Caching using Redis for frequently accessed data
+Background jobs for heavy processing
+Indexing important database columns
+
+22: Deployment & Environment Management
+
+I ensure separate environments like development, staging, and production.
+Before deployment:
+
+Code is tested in staging
+Environment variables are securely managed
+Database migrations are handled carefully
+
+23: DB Query Optimization
+
+How do you optimize slow queries?
+
+
+“I analyze queries using logs and tools like EXPLAIN.
+Then I:
+
+Add indexes where needed
+Avoid unnecessary joins
+Use select only required fields
+Cache repeated queries
+
+
+
+
+
+
+
+
+
+One of the key projects I worked on was TradeRun, which is a buyer-seller marketplace platform for construction and industrial products.
+
+The goal of the system was to connect verified sellers with buyers and enable fast, reliable product delivery within a short time frame.
+
+From a backend perspective, I was responsible for designing and developing RESTful APIs using Django. The system included features like category-based product browsing, search functionality, cart management, and order processing.
+
+For payments, we integrated Stripe, ensuring secure and smooth transactions. I handled API integration and error handling for payment Redis caching is used to store frequently accessed data in memory to reduce database load and improve API performance.failures.
+
+To handle payment confirmations and order tracking efficiently, we implemented a webhook-based system. Whenever a payment was completed or an order status changed, Stripe (and other services) sent webhook events to our backend.
+
+On receiving these events, we validated the request and updated the order status in real time. This helped us avoid constant polling and ensured that users received instant updates about their orders.
+
+One of the critical parts was real-time order tracking and inventory management. I worked on ensuring that stock levels were updated immediately after order placement to avoid inconsistencies, especially in concurrent scenarios.
+
+From a system design perspective, I focused on writing optimized database queries and ensuring APIs were efficient and scalable.
+
+We also deployed the application on AWS EC2 and used S3 for file storage.
+
+Overall, this project helped improve my understanding of building scalable backend systems, handling real-world challenges like concurrency, and integrating third-party services.
+
+
+
+
+Redis caching is used to store frequently accessed data in memory to reduce database load and improve API performance.
