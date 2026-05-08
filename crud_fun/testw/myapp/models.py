@@ -14,7 +14,8 @@ class User(AbstractUser):
 
 class Product(models.Model):
     title = models.CharField(max_length=100)
-    price = models.IntegerField()
+    age = models.IntegerField(default=0)
+    image = models.ImageField(upload_to='products/')
 
     def __str__(self):
         return self.title

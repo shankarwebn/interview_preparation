@@ -143,6 +143,13 @@ CREATE TABLE EMP as (select * from employees);
 
 9: Delete Duplicate data.
 
+DELETE FROM users
+WHERE id NOT IN (
+    SELECT MIN(id)
+    FROM users
+    GROUP BY email
+);
+
 WITH cte AS (
     SELECT *,
            ROW_NUMBER() OVER (PARTITION BY name ORDER BY id) AS rn

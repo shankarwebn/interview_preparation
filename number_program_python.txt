@@ -53,14 +53,12 @@ print(c)
 num = int(input("Enter the number "))
 
 c = 0
-
 while(num>0):
-    num = num%10
-    c+=num
+    rev = num%10
+    c+=rev
     num = num//10
 
-print(c)    
-
+print(c)
 
 6: Reverse a number.
 num = int(input("Enter the number "))

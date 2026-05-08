@@ -15,6 +15,22 @@ d = {"b": 2, "a": 5, "c": 1}
 result = dict(sorted(d.items()))
 print(result)
 
+d = {"b": 2, "a": 5, "c": 1}
+
+items = list(d.items())
+
+for i in range(len(items)):
+    for j in range(i + 1, len(items)):
+        
+        # compare keys
+        if items[i][0] > items[j][0]:
+            items[i], items[j] = items[j], items[i]
+
+sorted_dict = dict(items)
+
+print(sorted_dict)
+
+
 3: Dictionary ko value ke base par sort karna.
 
 
@@ -22,6 +38,23 @@ d = {"a": 5, "b": 2, "c": 1}
 
 result = dict(sorted(d.items(), key=lambda x: x[1]))
 print(result)
+
+
+d = {"b": 2, "a": 5, "c": 1}
+
+items = list(d.items())
+
+for i in range(len(items)):
+    for j in range(i + 1, len(items)):
+        
+        # compare keys
+        if items[i][1] > items[j][1]:
+            items[i], items[j] = items[j], items[i]
+
+sorted_dict = dict(items)
+
+print(sorted_dict)
+
 
 4: Max value wali key find karna.
 

@@ -1,6 +1,6 @@
 1: Second larget number.
 
-num = [-10, -20, -3, -50, -7]
+	num = [-10, -20, -3, -50, -7]
 
 large = second = float('-inf')
 
@@ -169,7 +169,7 @@ def flate(arr):
     result = []
     for ele in arr:
         if isinstance(ele, list):
-            result.extend(flate(ele))   # yahan recursive result add ho raha hai
+            result.extend(flate(ele)) 
         else:
             result.append(ele)
     return result
