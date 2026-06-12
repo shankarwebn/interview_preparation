@@ -1,0 +1,54 @@
+1: Longest common prefix.
+
+strs = ["flower", "flow", "flight"]
+
+prefix = strs[0]
+
+strs[1..].each do |word|
+  while !word.start_with?(prefix)
+    prefix = prefix[0...-1]
+
+    break if prefix.empty?
+  end
+end
+
+puts prefix
+
+2: Reverse the string.
+
+a = "shankar"
+
+rev = ""
+
+(0...a.length).each do |i|
+  rev = a[i] + rev 
+end
+
+puts rev
+
+3: Check string is palindrome.
+
+a = "aba"
+
+rev = ""
+
+(0...a.length).each do |i|
+  rev = a[i] + rev 
+end
+
+
+if a == rev
+  puts "Palindrome"
+else
+  puts "Not a Palindrome"
+end
+
+
+str = "shankar"
+
+str.each_char do |ch|
+  puts ch
+end
+
+
+

@@ -587,5 +587,27 @@ print(result)
 
 
 
+36: Remove Extra space.
+a = input("Enter String: ")
+
+st = ""
+i = 0
+space_found = True  # starting me True taaki leading spaces na aaye
+
+while i < len(a):
+    if a[i] != " ":   
+        st += a[i]
+        space_found = False
+    else:
+        if not space_found:
+            st += " "
+            space_found = True
+     
+
+    i += 1
+
+
+
+print(st)
 
         
