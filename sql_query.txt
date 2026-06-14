@@ -14,7 +14,7 @@
 	SELECT *
 	FROM (
 	    SELECT *,
-		   MAX(salary) OVER (PARTITION BY d	epartment) AS max_salary
+		   MAX(salary) OVER (PARTITION BY department) AS max_salary
 	    FROM emp1
 	) t
 	WHERE salary = max_salary;
@@ -111,7 +111,7 @@ select e.name from emplo as e join emplo as p ON e.employee_id = p.manager_id;
 	    GROUP BY salary
 	    HAVING COUNT(*) > 1
 	);
-	sql_query.txt
+	
 
 	SELECT col1, col2, COUNT(*)	
 	FROM table_name
@@ -127,15 +127,15 @@ select e.name from emplo as e join emplo as p ON e.employee_id = p.manager_id;
 SELECT salary FROM emp1 GROUP BY salary HAVING COUNT(salary) > 1;
 
 
-sql_query.txtsql_query.txt
+
 7: find employees who has no manager	
 
 	SELECT emp_id, emp_name, salary
-	FROM employeessql_query.txt
+	FROM employeess
 	WHERE manager_id IS NULL;
-sql_query.txtsql_query.txt
+
 8: How to create table copied structue and data.
-sql_query.txt
+
 CREATE TABLE EMP as (select * from employees);
 
 
@@ -152,7 +152,7 @@ WHERE id NOT IN (
 
 WITH cte AS (
     SELECT *,
-           ROW_NUMBER() OVER (PARTITION BY name ORDER BY id) AS rn
+           ROW_NUMBER() OVER (PARTITION BY department ORDER BY id) AS rn
     FROM employees
 )
 
