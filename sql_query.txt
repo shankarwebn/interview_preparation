@@ -153,10 +153,10 @@ WHERE id NOT IN (
 WITH cte AS (
     SELECT *,
            ROW_NUMBER() OVER (PARTITION BY department ORDER BY id) AS rn
-    FROM employees
+    FROM emp_1
 )
 
-DELETE FROM employees
+DELETE FROM emp_1
 WHERE id IN (
     SELECT id FROM cte WHERE rn > 1
 );
