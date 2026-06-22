@@ -1,0 +1,154 @@
+1: Salary above average.
+
+SELECT *
+FROM employees
+WHERE salary > (SELECT AVG(salary) FROM employees);
+
+
+from django.db.models import Avg
+
+avg_salary = Employee.objects.aggregate(
+    avg_sal=Avg('salary')
+)['avg_sal']
+
+Employee.objects.filter(
+    salary__gt=avg_salary
+
+)
+
+
+2: Customers having more than 1 order.
+
+SELECT customer_id
+FROM orders
+GROUP BY customer_id
+HAVING COUNT(*) > 1;
+
+from django.db.models import Count
+
+Customer.objects.annotate(
+    total_orders=Count('orders')
+).filter(
+    total_orders__gt=1
+)
+
+3: Department wise employee count.
+
+SELECT department,
+       COUNT(*) AS total_emp
+FROM employees
+GROUP BY department
+ORDER BY total_emp ASC;
+
+
+from django.db.models import Count
+
+Employee.objects.values(
+    'department'
+).annotate(
+    total_emp=Count('id')
+).order_by('total_emp')
+
+
+4: Duplicate salaries.
+
+SELECT salary
+FROM employees
+GROUP BY salary
+HAVING COUNT(*) > 1;
+
+
+from django.db.models import Count
+
+Employee.objects.values(
+    'salary'
+).annotate(
+    cnt=Count('id')
+).filter(
+    cnt__gt=1
+)
+
+5: Employees without manager
+
+SELECT *
+FROM employees
+WHERE manager_id IS NULL;
+
+Employee.objects.filter(
+    manager__isnull=True
+)
+
+6: Employees hired in last 3 months.
+
+SELECT *
+FROM employees
+WHERE hire_date >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH);
+
+from datetime import timedelta
+from django.utils import timezone
+
+three_months_ago = timezone.now().date() - timedelta(days=90)
+
+Employee.objects.filter(
+    hire_date__gte=three_months_ago
+)
+
+7: Name contains "Shankar"
+
+SELECT *
+FROM employees
+WHERE name LIKE '%Shankar%';
+
+Employee.objects.filter(
+    name__icontains='Shankar'
+)
+
+
+8: SELECT c.*,
+       COUNT(o.id) AS total_orders
+FROM customers c
+LEFT JOIN orders o
+ON c.id = o.customer_id
+GROUP BY c.id
+HAVING COUNT(o.id) > 1;
+
+
+from django.db.models import Count
+
+customers = Customer.objects.annotate(
+    total_orders=Count('orders')
+).filter(
+    total_orders__gt=1
+)
+
+
+9: For order ID 1, list the names of the products ordered and their quantities.
+
+SELECT
+    p.product_name,
+    oi.quantity
+FROM order_items oi
+JOIN products p
+    ON oi.product_id = p.id
+WHERE oi.order_id = 1;
+
+
+OrderItem.objects.filter(
+    order_id=1
+).values(
+    'product__product_name',
+    'quantity'
+)
+
+10: Find all customers who have not yet placed an order.
+
+SELECT c.*
+FROM customers c
+LEFT JOIN orders o
+    ON c.id = o.customer_id
+WHERE o.id IS NULL;
+
+
+Customer.objects.filter(
+    orders__isnull=True
+)

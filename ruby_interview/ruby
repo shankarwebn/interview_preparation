@@ -1,0 +1,346 @@
+1: block.
+
+def geet
+   yeild 
+end
+
+geet {puts "shankar"}
+
+2: Proc.
+
+p = Proc.new { |a, b| puts "#{a} #{b}" }
+
+p.call(10)
+
+3: Lambda.
+
+l = lambda { |a, b| puts "#{a} #{b}" }
+
+l.call(10, 20)
+
+square = ->(x) { x * x }
+
+puts square.call(5)
+
+4: Module:
+
+module Test
+  def show
+    puts "Module"
+  end
+end
+include and instance metho bna deta h object bnake call hota hai.
+class User
+  include Test
+end
+
+
+class Admin
+  extend Test
+end
+
+extend instance method ko class method bna deta hai
+
+class Manager
+  prepend Test
+
+  def show
+    puts "Class"
+  end
+end
+
+Module ko first priority deta hai include jesa hi hai.
+
+6: Mixin.
+
+Mixin is a way to share reusable behavior among multiple classes using modules without inheritance.
+
+module Flyable
+  def fly
+    puts "I can fly"
+  end
+end
+
+class Bird
+  include Flyable
+end
+
+class Plane
+  include Flyable
+end
+
+
+
+7: Exception Handling.
+
+begin
+  10/0
+rescue ZeroDivisionError
+  puts "Error"
+end
+
+8: Monkey Patching kya hai?
+
+Monkey Patching ka matlab hai kisi existing class ya method ko runtime par modify karna ya override karna, bina original source code ko change kiye.
+
+class String
+  def greeting
+    "Hello #{self}"
+  end
+end
+
+puts "Shankar".greeting
+# Hello Shankar
+
+
+class String
+  def upcase
+    "Monkey Patched!"
+  end
+end
+
+puts "hello".upcase
+
+9: setter and getter.
+class User
+  def name
+    @name
+  end
+
+  def name=(value)
+    @name = value
+  end
+end
+
+user = User.new
+user.name = "Shankar"
+puts user.name
+
+class User
+  attr_reader :name
+
+  def initialize
+    @name = "Shankar"
+  end
+end
+
+user = User.new
+puts user.name
+
+
+Setter only
+
+class User
+  attr_writer :name
+end
+
+user = User.new
+user.name = "Shankar"
+
+
+both setter and getter
+
+class User
+  attr_accessor :name
+end
+
+user = User.new
+user.name = "Shankar"
+
+
+10: String and Symbol. 
+
+name = "Shankar"
+Mutable (change ho sakti hai)
+Har baar naya object banta hai
+
+puts "ruby".object_id
+puts "ruby".object_id
+
+Different object IDs mil sakte hain.
+
+Symbol
+
+name = :shankar
+
+Immutable (change nahi ho sakta)
+Same symbol ka ek hi object memory me rehta hai
+
+puts :ruby.object_id
+puts :ruby.object_id
+
+Dono same object_id denge.
+
+user = {
+  name: "Shankar",
+  age: 25
+}
+
+11: Load and Require.
+
+
+1. require
+
+File ko sirf ek baar load karta hai.
+
+require './test'User.left_joins(:orders)
+    .where(orders: { id: nil })
+require './test'
+
+File ko har baar reload karta hai.
+
+load './test.rb'
+load './test.rb'
+
+12: Closure kya hota hai Ruby me?
+
+Closure ek aisa block/proc/lambda hota hai jo apne surrounding scope ke variables ko yaad rakhta hai, even jab original method execute ho chuki ho.
+
+
+x = 10
+
+p = Proc.new { puts x }
+
+x = 20
+
+p.call
+
+
+
+
+
+
+
+
+
+
+User.left_joins(:orders)
+    .where(orders: { id: nil })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+how to create job in sidekiq
+
+User.left_joins(:orders)
+    .where(orders: { id: nil })
+    
+    
+ordered_user_ids = Order.pluck(:user_id)
+
+User.where.not(id: ordered_user_ids)    
+
+puts user.name
+Interview me important topicsUser.left_joins(:orders)
+    .where(orders: { id: nil })
+Duck typing
+send
+public_send
+define_method
+method_missing
+respond_to?
+class_eval
+instance_eval
+singleton methods
+included, extended
+Dynamic method creation
+select, reject, and grep
+numbers.map { |num| num * 2 }
+How do you remove nil values in array using ruby?
+# Names all uppercase
+names.collect { |name| name.upcase }
+
+# Split numbers based on even or odd
+numbers.partition { |num| num.even? }
+Agar Ruby/Rails interview ki preparation kar rahe ho, to send, define_method, method_missing, class_eval, include/extend/prepend sabse zyada puchhe jate hain.
+
+
+What is the difference between the Object methods clone and dup?
+
+
+Datadog
+
+Datadog sirf Rails nahi, pura infrastructure monitor karta hai.
+
+Monitor:
+
+Rails App
+Puma
+Nginx
+Redis
+Postgres
+Docker
+AWS
+
+
+
+
+
+
+
+1. New Relic
+
+New Relic ek APM (Application Performance Monitoring) tool hai.
+
+Ye batata hai:
+
+Kaunsa API slow hai
+Kaunsi SQL query slow hai
+Memory usage kitni hai
+Error kaha aa rahi hai
+Throughput (requests/minute)
+
+gem 'newrelic_rpm'
+
+
+
+SELECT *
+FROM customer
+LEFT JOIN orders
+ON customer.customer_id = orders.customer_id;
+
+
+
+
+
+. Bullet
+
+Rails interviews me bahut important.
+
+Bullet detect karta hai:
+
+N+1 Queries
+
+Example:
+
+@users = User.all
+
+@users.each do |user|
+  puts user.posts.count
+end
+
+gem 'bullet'
+
+
+callback
+
+Callbacks are methods that get executed automatically at specific stages of an ActiveRecord object's lifecycle, such as before validation, before save, after create, or before destroy. They are used to perform tasks like data normalization, token generation, sending emails, and maintaining related records.
