@@ -152,3 +152,26 @@ WHERE o.id IS NULL;
 Customer.objects.filter(
     orders__isnull=True
 )
+
+11: Retrieve the names of the top 10 users who have made the most
+orders, along with the count of their orders.
+
+SELECT users.*,
+       COUNT(orders.id) AS total_orders
+FROM users
+LEFT JOIN orders
+ON users.id = orders.user_id
+GROUP BY users.id
+ORDER BY total_orders DESC
+LIMIT 10;
+
+
+
+
+User.objects.values(
+    'name'
+).annotate(
+    total_orders=Count('orders')
+).order_by(
+    '-total_orders'
+)[:10]
