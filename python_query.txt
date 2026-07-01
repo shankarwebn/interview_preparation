@@ -166,8 +166,6 @@ ORDER BY total_orders DESC
 LIMIT 10;
 
 
-
-
 User.objects.values(
     'name'
 ).annotate(
@@ -175,3 +173,21 @@ User.objects.values(
 ).order_by(
     '-total_orders'
 )[:10]
+
+
+12: For order ID 1, list the names of the products ordered and their quantities.
+
+SELECT
+    p.name AS product_name,
+    oi.quantity
+FROM order_items oi
+JOIN products p
+ON oi.product_id = p.id
+WHERE oi.order_id = 1;
+
+
+items = OrderItem.objects.filter(order_id=1).select_related('product')
+
+for item in items:
+    print(item.product.name, item.quantity)
+

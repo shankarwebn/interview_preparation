@@ -235,6 +235,19 @@ SELECT * FROM emp1
 ORDER BY salary DESC
 LIMIT 1;
 
+17: For order ID 1, list the names of the products ordered and their quantities.
+
+SELECT
+    p.name AS product_name,
+    oi.quantity
+FROM order_items oi
+JOIN products p
+ON oi.product_id = p.id
+WHERE oi.order_id = 1;
+
+
+
+
 
 unique without distict
 

@@ -183,6 +183,25 @@ User.left_joins(:orders)
     .limit(10)
 
 
+
+12: For order ID 1, list the names of the products ordered and their quantities.
+
+SELECT
+    p.name AS product_name,
+    oi.quantity
+FROM order_items oi
+JOIN products p
+ON oi.product_id = p.id
+WHERE oi.order_id = 1;
+
+
+order = Order.find(1)
+
+order.order_items.each do |item|
+  puts "#{item.product.name} - #{item.quantity}"
+end
+
+
         
 Django → Rails Quick Mapping
 Django	Rails
