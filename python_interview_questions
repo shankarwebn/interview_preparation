@@ -87,6 +87,34 @@ def greet():
 
 greet()  # wrapper() execute hota hai
 
+
+def add(func):
+    def test2(a, b):
+        s = func(a, b)
+        return s + 1
+    return test2
+
+
+def test(a, b):
+    return a + b
+
+
+wa = add(test)      # Pass the function, don't call it
+print(wa(2, 3))
+
+def add(func):
+    def test2(a, b):
+        s = func(a, b)
+        return s + 1
+    return test2
+
+
+@add
+def test(a, b):
+    return a + b
+
+print(test(2, 3))
+
 5: Explain the concept of Python closures.
 
 A closure is a function inside another function that remembers the variables from the outer function — even after the outer function has finished executing.
