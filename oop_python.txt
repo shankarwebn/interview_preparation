@@ -122,4 +122,30 @@ b = Addition(2)
 print(ob +  b)
 
 
+class Student:
+
+    school = "ABC School"
+
+    @classmethod
+    def change_school(cls, name):
+        cls.school = name
+
+Student.change_school("XYZ School")
+
+print(Student.school)
+
+
+
+
+
+class Math:
+
+    @staticmethod
+    def add(a, b):
+        return a + b
+
+print(Math.add(10, 20))
+
+
+
 
