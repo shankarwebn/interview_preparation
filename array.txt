@@ -1,6 +1,6 @@
 1: Second larget number.
 
-	num = [-10, -20, -3, -50, -7]
+num = [-10, -20, -3, -50, -7]
 
 large = second = float('-inf')
 
