@@ -220,13 +220,51 @@ Unpickling is the process of converting a byte stream back into the original Pyt
 
 14: What are Function Annotations in Python?
 
+ans: Ye type checking automatically nahi karte, sirf batate hain ki kis type ka data expected hai. Tools (VS Code, PyCharm, mypy) aur developers ke liye helpful hote hain.
+
+def add(a: int, b: int) -> int:
+    return a + b
+
+print(add(10, 20))
 
 15: What are Exception Groups in Python?
 
+ans: Exception Groups Python 3.11 me introduce hue. Inka use ek saath multiple exceptions ko raise aur handle karne ke liye hota hai.
 
+Pehle Python me ek time par sirf ek exception handle hoti thi. Agar multiple errors aaye, to pehli exception hi dikhti thi.
+
+
+try:
+    raise ExceptionGroup(
+        "Multiple Errors",
+        [
+            ValueError("Invalid Value"),
+            TypeError("Wrong Type")
+        ]
+    )
+except* ValueError as e:
+    print("ValueError:", e)
+
+except* TypeError as e:
+    print("TypeError:", e)
+    
+    
 16: What is Walrus Operator?
 
+ans: Walrus Operator (:=) Python 3.8 me introduce hua tha.
+Iska use ek hi expression me variable ko assign karne aur usi waqt use karne ke liye hota hai.
 
+without walrus
+
+name = input("Enter your name: ")
+if name:
+    print("Hello", name)
+
+
+if (name := input("Enter your name: ")):
+    print("Hello", name)    
+
+    
 17: What is Object-Oriented Programming (OOP) in Python?
 
 
@@ -241,15 +279,67 @@ Unpickling is the process of converting a byte stream back into the original Pyt
 
 
 22: What is method overloading in Python?
+ans: Method Overloading ka matlab hai same method name ke saath different number ya different types of parameters wale multiple methods banana.
 
+
+Python directly method overloading support nahi karta.
+Agar same class me same naam ke do methods banaoge, to last wala method pehle wale ko overwrite kar dega.
 
 23: What is method overriding in Python?
+ans: Method Overriding tab hoti hai jab child class parent class ke method ko same name aur same parameters ke saath dubara define karti hai.
+
+Jab child object se method call hota hai, to child class ka method execute hota hai.
+
+class Animal:
+    def sound(self):
+        print("Animal makes sound")
+
+class Dog(Animal):
+    def sound(self):
+        print("Dog barks")
+
+obj = Dog()
+obj.sound()
+
+
+class Animal:
+    def sound(self):
+        print("Animal makes sound")
+
+class Dog(Animal):
+    def sound(self):
+        super().sound()
+        print("Dog barks")
+
+obj = Dog()
+obj.sound()
 
 
 24: how memory managed in python.
 
 
 25: What is polymorphism in Python?
+
+class Animal:
+    def sound(self):
+        print("Animal makes sound")
+
+
+class Dog(Animal):
+    def sound(self):
+        print("Dog barks")
+
+
+class Cat(Animal):
+    def sound(self):
+        print("Cat meows")
+
+
+dog = Dog()
+cat = Cat()
+
+dog.sound()
+cat.sound()
 
 
 26: What is encapsulation, and how does Python achieve it?
@@ -274,24 +364,22 @@ print(dir(lst))
 
 
 31: setter and getter use to access and update private attrinute of class.
-class Person:
+
+class Student:
     def __init__(self, name):
-        self.__name = name
+        self.student_name = name
 
-    # Getter
     @property
-    def name(self):
-        return self.__name
+    def test(self):
+        return self.student_name
 
-    # Setter
-    @name.setter
-    def name(self, value):
-        self.__name = value
+    @test.setter
+    def test(self, value):
+        self.student_name = value
 
-p = Person("Shankar")
-print(p.name)    # getter
-p.name = "John"  # setter
-print(p.name)
+
+obj = Student("Shankar")
+print(obj.test)
 
 
 

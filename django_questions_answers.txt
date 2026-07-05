@@ -53,7 +53,7 @@ ans - data = User(name="shankar)
       data.save()
       
       
-      filter()
+filter()
 exclude()
 get()
 order_by()
