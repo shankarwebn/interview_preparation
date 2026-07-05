@@ -52,7 +52,7 @@
 	SELECT customer_id, name
 	FROM customer
 	WHERE customer_id IN (
-	    SELECT customer_id
+	    SELECT customer_idv 
 	    FROM orders
 	    GROUP BY customer_id
 	    HAVING COUNT(*) > 1
@@ -97,11 +97,19 @@
 
 select e.name from emplo as e join emplo as p ON e.employee_id = p.manager_id;
 
+6: Write a sql query to find employees who has managerial position;
+
+SELECT e.name
+FROM emplo AS e
+LEFT JOIN emplo AS p
+ON e.employee_id = p.manager_id
+WHERE p.employee_id IS NULL;
 
 
 
 
-6: Duplicate data
+
+7: Duplicate data
 
 	SELECT *
 	FROM emp1
@@ -128,20 +136,20 @@ SELECT salary FROM emp1 GROUP BY salary HAVING COUNT(salary) > 1;
 
 
 
-7: find employees who has no manager	
+8: find employees who has no manager	
 
 	SELECT emp_id, emp_name, salary
 	FROM employeess
 	WHERE manager_id IS NULL;
 
-8: How to create table copied structue and data.
+9: How to create table copied structue and data.
 
 CREATE TABLE EMP as (select * from employees);
 
 
 
 
-9: Delete Duplicate data.
+10: Delete Duplicate data.
 
 DELETE FROM users
 WHERE id NOT IN (
@@ -161,14 +169,14 @@ WHERE id IN (
     SELECT id FROM cte WHERE rn > 1
 );
 
-10: Find employees hired in the last 3 months.
+11: Find employees hired in the last 3 months.
 
 SELECT * 
 FROM employees
 WHERE hire_date >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH);
 
 
-11: Find employees whose name contains 'Shankar'
+12: Find employees whose name contains 'Shankar'
 
 SELECT * 
 FROM employees
@@ -176,13 +184,13 @@ WHERE INSTR(name, 'Shankar') > 0;
 
 
 
-12: Concatenate first and last name;
+13: Concatenate first and last name;
 
 	SELECT CONCAT(first_name, ' ', last_name) AS full_name
 	FROM employees;
 
 
-13: Find employees whose salary is above average.
+14: Find employees whose salary is above average.
 
 	SELECT * 
 	FROM employees
@@ -190,7 +198,7 @@ WHERE INSTR(name, 'Shankar') > 0;
 
 
 
-14: Top 5 Highest Salary.
+15: Top 5 Highest Salary.
 	
 SELECT emp_id, emp_name, salary
 FROM (

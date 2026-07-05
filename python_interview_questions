@@ -377,7 +377,7 @@ class Student:
     def test(self, value):
         self.student_name = value
 
-
+	
 obj = Student("Shankar")
 print(obj.test)
 
