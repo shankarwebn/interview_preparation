@@ -1,4 +1,293 @@
-1: Salary above average.
+1: Nth highest salary.
+
+SELECT * from ( SELECT salary , DENSE_RANK() OVER (ORDER BY salary DESC)
+as emm_rank from emp)t  WHERE emm_rank = 2;
+
+
+
+from django.db.models import F, Window
+from django.db.models.functions import DenseRank
+
+employees = (
+    Employee.objects
+    .annotate(
+        emp_rank=Window(
+            expression=DenseRank(),
+            order_by=F('salary').desc()
+        )
+    )
+    .filter(emp_rank=2)
+)
+
+
+2: Max salary for each Department.
+
+SELECT department,
+       MAX(salary) AS max_salary
+FROM employees
+GROUP BY department;
+
+
+from django.db.models import Max
+
+Employee.objects.values('department').annotate(
+    max_salary=Max('salary')
+)
+
+
+from django.db.models import F, Max, Window
+
+employees = (
+    Employee.objects
+    .annotate(
+        max_salary=Window(
+            expression=Max('salary'),
+            partition_by=[F('department')]
+        )
+    )
+    .filter(salary=F('max_salary'))
+)
+
+
+3: Customers having more than 1 order.
+
+SELECT customer_id
+FROM orders
+GROUP BY customer_id
+HAVING COUNT(*) > 1;
+
+from django.db.models import Count
+
+Customer.objects.annotate(
+    total_orders=Count('orders')
+).filter(
+    total_orders__gt=1
+)
+
+
+4: Find all customers who have not yet placed an order.
+
+SELECT c.*
+FROM customers c
+LEFT JOIN orders o
+    ON c.id = o.customer_id
+WHERE o.id IS NULL;
+
+
+Customer.objects.filter(
+    orders__isnull=True
+)
+
+
+5: Write a sql query to find employees who has managerial position;
+
+Employee.objects.filter(
+    subordinates__isnull=False
+).distinct()
+
+
+
+6: Write a sql query to find employees who has no managerial position;
+
+SELECT e.name
+FROM emplo AS e
+LEFT JOIN emplo AS p
+ON e.employee_id = p.manager_id
+WHERE p.employee_id IS NULL;
+
+
+SELECT *
+FROM employees
+WHERE manager_id IS NULL;
+
+
+7: Duplicate salaries.
+
+Duplicate data
+
+SELECT *
+FROM emp1
+WHERE salary IN (
+SELECT salary
+FROM emp1
+GROUP BY salary
+HAVING COUNT(*) > 1);
+
+
+SELECT col1, col2, COUNT(*)	
+FROM table_name
+GROUP BY col1, col2
+HAVING COUNT(*) > 1;
+
+
+	
+SELECT *, COUNT(*)
+FROM orders
+GROUP BY order_id, amount
+HAVING COUNT(*) > 1;
+
+
+SELECT salary
+FROM employees
+GROUP BY salary
+HAVING COUNT(*) > 1;
+
+
+SELECT *
+FROM (
+    SELECT *,
+           ROW_NUMBER() OVER(
+               PARTITION BY name, department
+               ORDER BY id
+           ) AS rn
+    FROM employees
+) t
+WHERE rn > 1;
+
+
+
+from django.db.models import Count
+
+Employee.objects.values(
+    'salary'
+).annotate(
+    cnt=Count('id')
+).filter(
+    cnt__gt=1
+)
+
+from django.db.models import F, Window
+from django.db.models.functions import RowNumber
+
+Employee.objects.annotate(
+    rn=Window(
+        expression=RowNumber(),
+        partition_by=[F("name"), F("department")],
+        order_by=F("id").asc()
+    )
+).filter(
+    rn__gt=1
+)
+
+
+
+
+SELECT *
+FROM employees
+WHERE id NOT IN (
+    SELECT MIN(id)
+    FROM employees
+    GROUP BY name, department
+);
+
+from django.db.models import Count, Min
+
+duplicates = (
+    Employee.objects
+    .values("name", "department")
+    .annotate(
+        min_id=Min("id"),
+        total=Count("id")
+    )
+    .filter(total__gt=1)
+)
+
+for dup in duplicates:
+    Employee.objects.filter(
+        name=dup["name"],
+        department=dup["department"]
+    ).exclude(
+        id=dup["min_id"]
+    )
+
+
+
+
+8: DELETe duplicate data.
+
+DELETE FROM Employee
+WHERE id NOT IN (
+    SELECT min_id
+    FROM (
+        SELECT MIN(id) AS min_id
+        FROM Employee
+        GROUP BY name, department
+    ) t
+);
+
+
+
+from django.db.models import Count, Min
+
+duplicates = (
+    Employee.objects
+    .values('name', 'department')
+    .annotate(
+        min_id=Min('id'),
+        total=Count('id')
+    )
+    .filter(total__gt=1)
+)
+
+for dup in duplicates:
+    Employee.objects.filter(
+        name=dup['name'],
+        department=dup['department']
+    ).exclude(
+        id=dup['min_id']
+    ).delete()
+    
+    
+    
+    
+from django.db.models import F, Window
+from django.db.models.functions import RowNumber
+
+duplicates = (
+    Employee.objects
+    .annotate(
+        rn=Window(
+            expression=RowNumber(),
+            partition_by=[F("department")],
+            order_by=F("id").asc(),
+        )
+    )
+    .filter(rn__gt=1)
+)
+
+duplicates.delete() 
+
+
+
+9:  Employees hired in last 3 months.
+
+SELECT *
+FROM employees
+WHERE hire_date >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH);
+
+from datetime import timedelta
+from django.utils import timezone
+
+three_months_ago = timezone.now().date() - timedelta(days=90)
+
+Employee.objects.filter(
+    hire_date__gte=three_months_ago
+)
+
+
+
+10: Name contains "Shankar"
+
+SELECT *
+FROM employees
+WHERE name LIKE '%Shankar%';
+
+Employee.objects.filter(
+    name__icontains='Shankar'
+)
+
+
+11: Salary above average.
 
 SELECT *
 FROM employees
@@ -17,22 +306,66 @@ Employee.objects.filter(
 )
 
 
-2: Customers having more than 1 order.
+12: Top 5 Highest Salary.
+	
+SELECT emp_id, emp_name, salary
+FROM (
+    SELECT *, DENSE_RANK() OVER (ORDER BY salary DESC) AS rn
+    FROM employees
+) AS t
+WHERE rn <= 5;
 
-SELECT customer_id
-FROM orders
-GROUP BY customer_id
-HAVING COUNT(*) > 1;
 
-from django.db.models import Count
 
-Customer.objects.annotate(
-    total_orders=Count('orders')
-).filter(
-    total_orders__gt=1
+from django.db.models import F, Window
+from django.db.models.functions import DenseRank
+
+employees = (
+    Employee.objects
+    .annotate(
+        rn=Window(
+            expression=DenseRank(),
+            order_by=F("salary").desc()
+        )
+    )
+    .filter(rn__lte=5)
+    .values("emp_id", "emp_name", "salary")
 )
 
-3: Department wise employee count.
+
+
+
+13:  Find Top 3 Salaries Per Department
+
+
+SELECT *
+FROM (
+SELECT salary, department,
+   DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) as rnk
+FROM employees
+) t
+WHERE rnk <= 3;
+	
+	
+employees = (
+    Employee.objects
+    .annotate(
+        rnk=Window(
+            expression=DenseRank(),
+            partition_by=[F("department")],
+            order_by=F("salary").desc(),
+        )
+    )
+    .filter(rnk__lte=3)
+    .values("id", "name", "department", "salary", "rnk")
+)
+
+
+
+
+
+
+Department wise employee count.
 
 SELECT department,
        COUNT(*) AS total_emp
@@ -50,76 +383,13 @@ Employee.objects.values(
 ).order_by('total_emp')
 
 
-4: Duplicate salaries.
-
-SELECT salary
-FROM employees
-GROUP BY salary
-HAVING COUNT(*) > 1;
 
 
-from django.db.models import Count
-
-Employee.objects.values(
-    'salary'
-).annotate(
-    cnt=Count('id')
-).filter(
-    cnt__gt=1
-)
-
-5: Employees without manager
-
-SELECT *
-FROM employees
-WHERE manager_id IS NULL;
-
-Employee.objects.filter(
-    manager__isnull=True
-)
-
-6: Employees hired in last 3 months.
-
-SELECT *
-FROM employees
-WHERE hire_date >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH);
-
-from datetime import timedelta
-from django.utils import timezone
-
-three_months_ago = timezone.now().date() - timedelta(days=90)
-
-Employee.objects.filter(
-    hire_date__gte=three_months_ago
-)
-
-7: Name contains "Shankar"
-
-SELECT *
-FROM employees
-WHERE name LIKE '%Shankar%';
-
-Employee.objects.filter(
-    name__icontains='Shankar'
-)
 
 
-8: SELECT c.*,
-       COUNT(o.id) AS total_orders
-FROM customers c
-LEFT JOIN orders o
-ON c.id = o.customer_id
-GROUP BY c.id
-HAVING COUNT(o.id) > 1;
 
 
-from django.db.models import Count
 
-customers = Customer.objects.annotate(
-    total_orders=Count('orders')
-).filter(
-    total_orders__gt=1
-)
 
 
 9: For order ID 1, list the names of the products ordered and their quantities.
@@ -140,18 +410,7 @@ OrderItem.objects.filter(
     'quantity'
 )
 
-10: Find all customers who have not yet placed an order.
 
-SELECT c.*
-FROM customers c
-LEFT JOIN orders o
-    ON c.id = o.customer_id
-WHERE o.id IS NULL;
-
-
-Customer.objects.filter(
-    orders__isnull=True
-)
 
 11: Retrieve the names of the top 10 users who have made the most
 orders, along with the count of their orders.
@@ -194,112 +453,7 @@ for item in items:
 
 
 
-13: Nth highest salary.
-
-SELECT * from ( SELECT salary , DENSE_RANK() OVER (ORDER BY salary DESC)
-as emm_rank from emp)t  WHERE emm_rank = 2;
 
 
 
-from django.db.models import F, Window
-from django.db.models.functions import DenseRank
 
-employees = (
-    Employee.objects
-    .annotate(
-        emp_rank=Window(
-            expression=DenseRank(),
-            order_by=F('salary').desc()
-        )
-    )
-    .filter(emp_rank=2)
-)
-
-14: Max salary for each Department;
-
-SELECT department,
-       MAX(salary) AS max_salary
-FROM employees
-GROUP BY department;
-
-
-from django.db.models import Max
-
-Employee.objects.values('department').annotate(
-    max_salary=Max('salary')
-)
-
-
-from django.db.models import F, Max, Window
-
-employees = (
-    Employee.objects
-    .annotate(
-        max_salary=Window(
-            expression=Max('salary'),
-            partition_by=[F('department')]
-        )
-    )
-    .filter(salary=F('max_salary'))
-)
-
-15: Write a sql query to find employees who has managerial position;
-
-Employee.objects.filter(
-    subordinates__isnull=False
-).distinct()
-
-
-16: DELETe duplicate data.
-
-DELETE FROM Employee
-WHERE id NOT IN (
-    SELECT min_id
-    FROM (
-        SELECT MIN(id) AS min_id
-        FROM Employee
-        GROUP BY name, department
-    ) t
-);
-
-
-
-from django.db.models import Count, Min
-
-duplicates = (
-    Employee.objects
-    .values('name', 'department')
-    .annotate(
-        min_id=Min('id'),
-        total=Count('id')
-    )
-    .filter(total__gt=1)
-)
-
-for dup in duplicates:
-    Employee.objects.filter(
-        name=dup['name'],
-        department=dup['department']
-    ).exclude(
-        id=dup['min_id']
-    ).delete()
-    
-    
-    
-    
-    from django.db.models import F, Window
-from django.db.models.functions import RowNumber
-
-duplicates = (
-    Employee.objects
-    .annotate(
-        rn=Window(
-            expression=RowNumber(),
-            partition_by=[F("department")],
-            order_by=F("id").asc(),
-        )
-    )
-    .filter(rn__gt=1)
-)
-
-duplicates.delete() 
