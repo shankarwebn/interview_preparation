@@ -45,7 +45,26 @@
 	FROM emp;
 
 
-3: write a sql query to find cutomer who places order more than one.
+3: Department wise employee count.
+
+SELECT department,
+       COUNT(*) AS total_emp
+FROM employees
+GROUP BY department
+ORDER BY total_emp ASC;
+
+
+from django.db.models import Count
+
+Employee.objects.values(
+    'department'
+).annotate(
+    total_emp=Count('id')
+).order_by('total_emp')
+
+
+
+4: write a sql query to find cutomer who places order more than one.
 
 	ex:
 
@@ -75,7 +94,7 @@
 	GROUP BY c.customer_id, c.name
 	HAVING COUNT(o.order_id) > 1;
 
-4:  Write a sql query customer who not place order.
+5:  Write a sql query customer who not place order.
 
 		
 	SELECT *
@@ -93,11 +112,11 @@
 	    WHERE o.customer_id = c.customer_id
 	);
 
-5: Write a sql query to find employees who has managerial position;
+6: Write a sql query to find employees who has managerial position;
 
 select e.name from emplo as e join emplo as p ON e.employee_id = p.manager_id;
 
-6: Write a sql query to find employees who has no managerial position;
+7: Write a sql query to find employees who has no managerial position;
 
 SELECT e.name
 FROM emplo AS e
@@ -109,7 +128,7 @@ WHERE p.employee_id IS NULL;
 
 
 
-7: Duplicate data
+8: Duplicate data
 
 	SELECT *
 	FROM emp1
@@ -135,7 +154,7 @@ WHERE p.employee_id IS NULL;
 SELECT salary FROM emp1 GROUP BY salary HAVING COUNT(salary) > 1;
 
 
-8: Delete Duplicate data.
+9: Delete Duplicate data.
 
 Delete Duplicate data.
 
@@ -158,20 +177,20 @@ WHERE id IN (
 );
 
 
-9: How to create table copied structue and data.
+10: How to create table copied structue and data.
 
 CREATE TABLE EMP as (select * from employees);
 
 
 
-10: Find employees hired in the last 3 months.
+11: Find employees hired in the last 3 months.
 
 SELECT * 
 FROM employees
 WHERE hire_date >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH);
 
 
-11: Find employees whose name contains 'Shankar'
+12: Find employees whose name contains 'Shankar'
 
 SELECT * 
 FROM employees
@@ -179,13 +198,13 @@ WHERE INSTR(name, 'Shankar') > 0;
 
 
 
-12: Concatenate first and last name;
+13: Concatenate first and last name;
 
 	SELECT CONCAT(first_name, ' ', last_name) AS full_name
 	FROM employees;
 
 
-13: Find employees whose salary is above average.
+14: Find employees whose salary is above average.
 
 	SELECT * 
 	FROM employees
@@ -193,7 +212,7 @@ WHERE INSTR(name, 'Shankar') > 0;
 
 
 
-14: Top 5 Highest Salary.
+15: Top 5 Highest Salary.
 	
 SELECT emp_id, emp_name, salary
 FROM (
@@ -226,19 +245,19 @@ WHERE rnk <= 3;
 
 how to find alter rescord
 
-15: How to find first record.
+16: How to find first record.
 
 SELECT * FROM emp1
 ORDER BY salary ASC
 LIMIT 1;
 
-16: How to find last record.
+17: How to find last record.
 
 SELECT * FROM emp1
 ORDER BY salary DESC
 LIMIT 1;
 
-17: For order ID 1, list the names of the products ordered and their quantities.
+18: For order ID 1, list the names of the products ordered and their quantities.
 
 SELECT
     p.name AS product_name,

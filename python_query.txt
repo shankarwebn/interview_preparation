@@ -41,7 +41,7 @@ employees = (
     Employee.objects
     .annotate(
         max_salary=Window(
-            expression=Max('salary'),
+            expression=Max('salary')
             partition_by=[F('department')]
         )
     )
@@ -49,7 +49,25 @@ employees = (
 )
 
 
-3: Customers having more than 1 order.
+
+3: Department wise employee count.
+
+SELECT department,
+       COUNT(*) AS total_emp
+FROM employees
+GROUP BY department
+ORDER BY total_emp ASC;
+
+
+from django.db.models import Count
+
+Employee.objects.values(
+    'department'
+).annotate(
+    total_emp=Count('id')
+).order_by('total_emp')
+
+4: Customers having more than 1 order.
 
 SELECT customer_id
 FROM orders
@@ -65,7 +83,7 @@ Customer.objects.annotate(
 )
 
 
-4: Find all customers who have not yet placed an order.
+5: Find all customers who have not yet placed an order.
 
 SELECT c.*
 FROM customers c
@@ -79,7 +97,7 @@ Customer.objects.filter(
 )
 
 
-5: Write a sql query to find employees who has managerial position;
+6: Write a sql query to find employees who has managerial position;
 
 Employee.objects.filter(
     subordinates__isnull=False
@@ -87,7 +105,7 @@ Employee.objects.filter(
 
 
 
-6: Write a sql query to find employees who has no managerial position;
+7: Write a sql query to find employees who has no managerial position;
 
 SELECT e.name
 FROM emplo AS e
@@ -100,8 +118,11 @@ SELECT *
 FROM employees
 WHERE manager_id IS NULL;
 
+Employee.objects.filter(
+    manager__isnull=True
+)
 
-7: Duplicate salaries.
+8: Duplicate salaries.
 
 Duplicate data
 
@@ -203,7 +224,19 @@ for dup in duplicates:
 
 
 
-8: DELETe duplicate data.
+9: DELETe duplicate data.
+
+WITH cte AS (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY department ORDER BY id) AS rn
+    FROM emp_1
+)
+
+DELETE FROM emp_1
+WHERE id IN (
+    SELECT id FROM cte WHERE rn > 1
+);
+
 
 DELETE FROM Employee
 WHERE id NOT IN (
@@ -259,7 +292,7 @@ duplicates.delete()
 
 
 
-9:  Employees hired in last 3 months.
+10:  Employees hired in last 3 months.
 
 SELECT *
 FROM employees
@@ -276,7 +309,7 @@ Employee.objects.filter(
 
 
 
-10: Name contains "Shankar"
+11: Name contains "Shankar"
 
 SELECT *
 FROM employees
@@ -287,7 +320,7 @@ Employee.objects.filter(
 )
 
 
-11: Salary above average.
+12: Salary above average.
 
 SELECT *
 FROM employees
@@ -306,7 +339,7 @@ Employee.objects.filter(
 )
 
 
-12: Top 5 Highest Salary.
+13: Top 5 Highest Salary.
 	
 SELECT emp_id, emp_name, salary
 FROM (
@@ -335,7 +368,7 @@ employees = (
 
 
 
-13:  Find Top 3 Salaries Per Department
+14:  Find Top 3 Salaries Per Department
 
 
 SELECT *
@@ -364,35 +397,7 @@ employees = (
 
 
 
-
-Department wise employee count.
-
-SELECT department,
-       COUNT(*) AS total_emp
-FROM employees
-GROUP BY department
-ORDER BY total_emp ASC;
-
-
-from django.db.models import Count
-
-Employee.objects.values(
-    'department'
-).annotate(
-    total_emp=Count('id')
-).order_by('total_emp')
-
-
-
-
-
-
-
-
-
-
-
-9: For order ID 1, list the names of the products ordered and their quantities.
+15: For order ID 1, list the names of the products ordered and their quantities.
 
 SELECT
     p.product_name,
@@ -412,7 +417,7 @@ OrderItem.objects.filter(
 
 
 
-11: Retrieve the names of the top 10 users who have made the most
+16: Retrieve the names of the top 10 users who have made the most
 orders, along with the count of their orders.
 
 
@@ -435,7 +440,7 @@ User.objects.values(
 )[:10]
 
 
-12: For order ID 1, list the names of the products ordered and their quantities.
+17z                                      d: For order ID 1, list the names of the products ordered and their quantities.
 
 SELECT
     p.name AS product_name,
