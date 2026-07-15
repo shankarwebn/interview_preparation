@@ -440,7 +440,7 @@ User.objects.values(
 )[:10]
 
 
-17z                                      d: For order ID 1, list the names of the products ordered and their quantities.
+17: For order ID 1, list the names of the products ordered and their quantities.
 
 SELECT
     p.name AS product_name,
