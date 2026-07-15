@@ -134,15 +134,39 @@ OrderItem
 
 10: Customers who have not placed any order.
 
-SELECT c.*
-FROM customers c
-LEFT JOIN orders o
-ON c.id=o.customer_id
-WHERE o.id IS NULL;
 
 
 Customer.left_joins(:orders)
         .where(orders: { id: nil })
+
+
+SELECT *
+FROM customers
+WHERE id NOT IN (
+    SELECT customer_id FROM orders
+);
+
+LEFT JOIN
+
+A LEFT JOIN returns:
+
+All rows from the left table (customers)
+Matching rows from the right table (orders)
+If there is no match, the order columns become NULL.
+
+After the join, the temporary result looks like this:
+
+c.id	c.name	o.id	o.customer_id
+1	Shankar	101	1
+2	Rahul	NULL	NULL
+3	Amit	102	3
+3	Amit	103	3
+4	Neha	NULL	NULL
+5	Priya	104	5
+
+
+
+
 
 11: Top 10 users by orders.
 
@@ -251,3 +275,13 @@ Employee.where.not(
               .minimum(:id)
               .values
 ).delete_all
+
+
+
+SELECT customers.*
+FROM customers
+LEFT OUTER JOIN orders
+ON customers.id = orders.customer_id
+WHERE orders.id IS NULL;
+
+Customer.where.not(id: Order.select(:customer_id))
