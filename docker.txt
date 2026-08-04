@@ -11,10 +11,13 @@ ans - docker pull is used to download a Docker image from Docker Hub (or another
 ans: docker run is used to create and start a container from an image.
 
 3: docker ps -a.
+ans - show all runing and stop containers.
+
+4: docker ps.
 ans - show all containers.
 
-4: Set temperary name.
+5: Set temperary name.
 ans - Docker run --name tem_name python:tag_name 
 
-Docker info
+
 
