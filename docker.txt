@@ -11,13 +11,285 @@ ans - docker pull is used to download a Docker image from Docker Hub (or another
 ans: docker run is used to create and start a container from an image.
 
 3: docker ps -a.
-ans - show all runing and stop containers.
+ans - show all running and stop containers.
 
 4: docker ps.
 ans - show all containers.
 
 5: Set temperary name.
 ans - Docker run --name tem_name python:tag_name 
+
+6: what is docker layers.
+
+7: Docker start.
+ans - docker start to run existing container
+
+docker start
+
+docker start starts an existing stopped container.
+
+It does not create a new container.
+
+Syntax
+docker start CONTAINER_NAME
+
+8: Docker run.
+ans - docker run creates a new container and starts it.
+
+docker run nginx
+
+What happens?
+
+Checks if the nginx image exists.
+Downloads it if needed.
+Creates a new container.
+Starts the container.
+
+9: Docker exec and bash commond.
+ans - docker exec is used to execute a command inside an already running container. It does not create a new container or restart an existing one. It simply runs the specified command in the running container.
+
+Great question! The bash in this command:
+
+docker exec -it my-nginx bash
+
+is the command that Docker runs inside the container.
+
+Let's break it down:
+
+docker exec -it my-nginx bash
+│      │   │         │
+│      │   │         └── Run the Bash shell
+│      │   └──────────── Container name
+│      └──────────────── Interactive terminal
+└─────────────────────── Execute a command
+What is bash?
+
+Bash (Bourne Again SHell) is a Linux command-line shell.
+
+It allows you to interact with the operating system by typing commands.
+
+For example, after running:
+
+docker exec -it my-nginx bash
+
+you'll see something like:
+
+root@8a3b2f1c:/#
+
+Now you're inside the container and can type Linux commands such as:
+
+10: what is docker create.
+ans - docker create is used to create a container from an image, but it does not start the container.
+
+This is the main difference:
+
+docker create → Create only
+docker run → Create + Start
+docker start → Start an existing container
+
+docker create [OPTIONS] IMAGE
+docker create --name my-nginx nginx
+
+
+What happens?
+
+When you run:
+
+docker create --name my-nginx nginx
+
+Docker:
+
+✅ Finds the nginx image (downloads it if needed).
+✅ Creates a new container.
+❌ Does not start the container.
+
+11: What is a Dockerfile?
+ans - A Dockerfile is a text file that contains instructions for building a Docker image.
+
+FROM python:3.12
+
+WORKDIR /app
+
+COPY . .
+
+RUN pip install -r requirements.txt
+
+CMD ["python","app.py"]
+
+12: What is Docker build commond.
+
+Great question. docker build is used when you want to create your own Docker image.
+
+You use it when the existing images (like python, nginx, ubuntu) are not enough and you want an image that contains your application.
+
+Why do we use docker build?
+
+Suppose you have a Django project.
+
+my-django-app/
+│
+├── Dockerfile
+├── requirements.txt
+├── manage.py
+├── myproject/
+└── app/
+
+A Dockerfile contains instructions for creating an image.
+
+Example:
+
+FROM python:3.12
+
+WORKDIR /app
+
+COPY . .
+
+RUN pip install -r requirements.txt
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+Now build the image:
+
+docker build -t django-app.
+
+After building
+
+Run a container from your image:
+
+docker run -p 8000:8000 django-app
+
+13: What is docker build --no-cache -t myapp .?
+ans - if you have created an image and then you have changed in one file all will remain in cache and docker will only rebuild with the new change file
+but if we used --no-cache it will rebuild from scratch.
+
+when we use  --no-cahe means rebuld from scratch.
+What is cache?
+
+Cache means Docker remembers the result of previous build steps.
+Imagine you're building a house.
+
+Without --no-cache
+Already built the walls? ✅
+Already built the roof? ✅
+Only repaint the wall. 🎨
+
+Fast.
+
+With --no-cache
+Destroy everything. ❌
+Build the walls again.
+Build the roof again.
+Paint again.
+
+Slow, but everything is fresh.
+
+
+ans - No problem. Let's understand it with a real Django example.
+
+Suppose your project looks like this:
+
+django-project/
+│
+├── Dockerfile
+├── requirements.txt
+├── manage.py
+└── myproject/
+
+Your Dockerfile:
+
+FROM python:3.12
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
+COPY . .
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+First build
+
+Run:
+
+docker build -t myapp .
+
+Docker executes every instruction.
+
+Step 1: FROM python:3.12       ✅
+Step 2: WORKDIR /app           ✅
+Step 3: COPY requirements.txt  ✅
+Step 4: RUN pip install...     ✅
+Step 5: COPY . .               ✅
+Step 6: CMD                    ✅
+
+Suppose it takes 2 minutes because it installs Django and other packages.
+
+Second build
+
+Now you only change one file:
+
+views.py
+
+Run again:
+
+docker build -t myapp .
+
+Docker thinks:
+
+"I have already done Steps 1–4 before, and nothing changed there. I'll reuse them."
+
+Output (simplified):
+
+Step 1: Using cache ✅
+Step 2: Using cache ✅
+Step 3: Using cache ✅
+Step 4: Using cache ✅
+Step 5: Rebuild (because your code changed)
+Step 6: Done
+
+This finishes much faster (maybe 10 seconds).
+
+What is cache?
+
+Cache means Docker remembers the result of previous build steps.
+
+Think of it like this:
+
+The first time you cook rice, it takes 20 minutes.
+If the rice is already cooked, you don't cook it again—you just use it.
+
+Docker does the same with build steps.
+
+What does --no-cache do?
+
+Now run:
+
+docker build --no-cache -t myapp .
+
+Docker says:
+
+"Ignore everything you remembered. Build everything again."
+
+So it executes:
+
+Step 1: FROM python:3.12
+Step 2: WORKDIR /app
+Step 3: COPY requirements.txt
+Step 4: RUN pip install...
+Step 5: COPY . .
+Step 6: CMD
+
+Even if nothing changed, it rebuilds every step.
+
+14: docker inspect, logs, info
+
+Purpose: Shows detailed information about a Docker object (container, image, network, volume) in JSON format.
+
+Think of it as:
+
+"Tell me everything about this container."
+
 
 
 
