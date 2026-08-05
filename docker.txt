@@ -284,12 +284,172 @@ Even if nothing changed, it rebuilds every step.
 
 14: docker inspect, logs, info
 
-Purpose: Shows detailed information about a Docker object (container, image, network, volume) in JSON format.
+docker inspect
+What does it do?
 
-Think of it as:
+docker inspect displays detailed information about a Docker object.
 
-"Tell me everything about this container."
+It can inspect:
+
+✅ Container
+✅ Image
+✅ Network
+✅ Volume
+
+The output is in JSON format.
+
+Why do we use docker inspect?
+
+Imagine your Django app cannot connect to PostgreSQL.
+
+You can inspect the container to check:
+
+Which image is running?
+Which environment variables are set?
+Which ports are exposed?
+Which volumes are mounted?
+Which network is it connected to?
+
+info - docker info is a command that displays information about the Docker Engine running on your machine.
+
+It does not show information about a specific container. Instead, it tells you about the entire Docker environment.
+
+15: Docker Volumes.
+Why Do We Need Volumes?
+
+Imagine you have a PostgreSQL container.
+
+docker run --name postgres postgres
+
+Inside the container:
+
+Database
+Users
+Orders
+Products
+
+Now remove the container:
+
+docker rm -f postgres
+
+Everything is gone.
+
+Why?
+
+Because the data was stored inside the container's writable layer, which is deleted along with the container.
+
+docker volume create my-volume
 
 
+Let's break down this command piece by piece.
+
+docker run -v django-data:/app django-app
+
+Part 1: docker run
+docker run
+This means:
+
+Create a new container and start it.
+
+Docker now needs an image to create the container.
+
+Part 2: -v
+-v
+
+-v stands for volume.
+
+It tells Docker:
+
+"Connect a persistent storage (volume) to this container."
+
+Part 3: django-data
+django-data
+
+This is the volume name.
+
+If it doesn't exist, Docker automatically creates it.
+
+You can verify it:
+
+docker volume ls
+
+Output:
+
+DRIVER    VOLUME NAME
+local     django-data
+Part 4: /app
+/app
+
+This is the folder inside the container.
+
+Remember your Dockerfile?
+
+WORKDIR /app
+
+Docker automatically created /app and copied your project there.
+
+Inside the container:
+
+/app
+├── manage.py
+├── requirements.txt
+├── myproject/
+└── blog/
+Part 5: django-app
+django-app
+
+This is the image name.
+
+Docker creates a container from this image.
+
+What happens internally?
+
+Imagine you run:
+
+docker run -v django-data:/app django-app
+
+Docker performs these steps:
+
+Step 1
+
+Creates a new container from the image.
+
+Image
+django-app
+      │
+      ▼
+Container
+Step 2
+
+Looks for the volume:
+
+django-data
+
+If it doesn't exist:
+
+Docker creates it automatically.
+Step 3
+
+Attaches the volume to:
+
+/app
+
+Inside the container.
+
+The final picture is:
+
+                 Docker Volume
+                django-data
+                     ▲
+                     │
+                     │
+Container            │
+┌─────────────────────────────┐
+│ /app                        │
+│  ├── manage.py              │
+│  ├── db.sqlite3             │
+│  ├── myproject/             │
+│  └── blog/                  │
+└─────────────────────────────┘
 
 
