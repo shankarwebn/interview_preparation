@@ -344,3 +344,91 @@ gem 'bullet'
 callback
 
 Callbacks are methods that get executed automatically at specific stages of an ActiveRecord object's lifecycle, such as before validation, before save, after create, or before destroy. They are used to perform tasks like data normalization, token generation, sending emails, and maintaining related records.
+
+
+
+What are the disadvantages of polymorphic associations?
+
+* Why is a foreign key difficult to implement with a polymorphic association?
+
+* How can authentication be implemented between a React frontend and a Rails backend?
+
+* How does JWT authentication flow work with React and Rails?
+
+* Which credentials are used in the JWT authentication flow?
+
+* If the user sends something else in the authentication header, what happens?
+
+* How do we implement logout when using JWT authentication?
+
+* Where is the access token removed during logout?
+
+* If we remove the access token from React but the JWT is still valid on Rails, how do we actually log out the user?
+
+* What is database connection pooling?
+
+* If we have 20 connections in the connection pool, what does that mean?
+
+* How do we decide the number of database connections?
+
+* Why don't we use 5,000 database connections?
+
+* How do we handle 1 lakh database connections?
+
+* What is a load balancer, and how does increasing the number of load balancers help?
+
+* If the problem is specifically handling 1 lakh database connections, how should we solve it?
+
+* What is database replication?
+
+* If a Sidekiq job fails, what happens to it?
+
+* If Sidekiq is down and then comes back up, what happens to the job?
+
+* What happens if the job was already inside a Sidekiq worker and not in Redis?
+
+* How do we safely remove a column from a database table containing 5 million records?
+
+* How do we make sure the column is no longer being used before removing it?
+
+* What is GIL in Ruby?
+
+* When can another Ruby thread execute if one thread is holding the GIL?
+
+* Does a database query lock the GIL?
+
+* What are the disadvantages of GIL?
+
+* Design an API that needs to return 1 million records. How would you handle it?
+
+* What is cursor pagination?
+
+* What ID is used behind the scenes in cursor pagination?
+
+* Given n and k, how do you find the kth permutation without using predefined permutation methods?
+
+* Provide the full Ruby code with input for the kth permutation problem.
+
+* Provide the code using the given example inputs.
+
+* Provide the kth permutation code without using downto.
+
+* Explain the kth permutation code.
+
+* What is the idea behind the kth permutation algorithm?
+
+* What is k in the kth permutation problem?
+
+* Explain the kth permutation code as an interview answer.
+
+* Explain the whole kth permutation concept.
+
+* Explain the while loop logic in the kth permutation code.
+
+* Explain the while loop in a paragraph that can be read directly in an interview.
+
+* Why do we use remaining - 1 in the kth permutation algorithm?
+
+* What is the time and space complexity of the kth permutation code?
+
+
