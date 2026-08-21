@@ -1,0 +1,22 @@
+module A
+  def self.m1
+    puts "Hello M1"
+  end
+
+  def m1
+    puts "duplicate"
+  end
+
+  def self.included(base)
+    base.define_singleton_method(:m1) do
+      A.m1
+    end
+  end
+end
+
+class B
+  include A
+end
+
+B.new.m1
+B.m1
