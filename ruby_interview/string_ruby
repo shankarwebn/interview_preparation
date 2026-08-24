@@ -81,6 +81,125 @@ puts "Vowels: #{vowels}"
 puts "Consonants: #{consonants}"
 
 
+5: Find first non-repeating character.
+
+a = "shankaar"
+a.each_char do |i|
+    if a.count(i) == 1
+        puts i
+        break
+    end
+end
+
+6: Permutations of string (all permutations).
+
+
+
+
+
+7: Check angrams.
+ 
+str1 = "listen"
+str2 = "silent"
+
+if str1.length != str2.length
+  puts "Not Anagram"
+  exit
+end
+
+count1 = {}
+count2 = {}
+
+str1.each_char do |char|
+  if count1[char]
+    count1[char] += 1
+  else
+    count1[char] = 1
+  end
+end
+
+str2.each_char do |char|
+  if count2[char]
+    count2[char] += 1
+  else
+    count2[char] = 1
+  end
+end
+
+is_anagram = true
+
+count1.each do |char, count|
+  if count2[char] != count
+    is_anagram = false
+    break
+  end
+end
+
+if is_anagram
+  puts "Anagram"
+else
+  puts "Not Anagram"
+end
+
+
+8: Find longest substring without repeating.
+
+a = "abcabcbb"
+max_len = 0
+longest = ""
+
+(0...a.length).each do |i|
+    temp = ""
+
+    (i...a.length).each do |j|
+        if temp.include?(a[j])
+            break
+        end
+        temp += a[j]
+
+        if temp.length > max_len
+           max_len = temp.length
+           longest = temp
+        end    
+    end
+end
+
+puts longest
+
+
+9: Convert a string case to title case.
+
+str = "hello world from ruby"
+
+title_case = str.split.map { |word| word.capitalize }.join(" ")
+
+puts title_case
+# => Hello World From Ruby
+
+
+10: One String is rotation of another
+
+s1 = "abcd"
+s2 = "cdab"
+s = s1+s1
+
+if s.include?(s1)
+   puts "yes"
+else
+   puts "not"
+end   
+
+11: Count occurrence of each character.
+
+s = "swiss"
+
+count = Hash.new(0)
+
+s.each_char do |char|
+  count[char] += 1
+end
+
+puts count
 
 
 
