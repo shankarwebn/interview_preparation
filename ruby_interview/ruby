@@ -363,20 +363,137 @@ What are the disadvantages of polymorphic associations?
 
 * Where is the access token removed during logout?
 
+ans - In a typical stateless JWT implementation, the access token is removed from the client side during logout—for example, from localStorage, sessionStorage, or application memory. Rails does not normally remove the token because it doesn't maintain a server-side session for that JWT. If the JWT is stored in an HttpOnly cookie, the Rails backend clears or expires the cookie. For immediate token invalidation, we can additionally implement token revocation or a denylist.
+
 * If we remove the access token from React but the JWT is still valid on Rails, how do we actually log out the user?
+
+
+"Removing the JWT from React logs the user out from that client, but it does not invalidate the JWT on the server because JWTs are stateless. If we need immediate server-side logout, we implement token revocation or a denylist. During logout, Rails marks the token's unique identifier as revoked, and every subsequent request checks whether the token has been revoked. If it has, Rails returns 401 Unauthorized."
+
 
 * What is database connection pooling?
 
+ans - Database connection pooling is a technique where an application maintains a pool of reusable database connections instead of creating a new database connection for every request.
+
+production:
+  adapter: postgresql
+  database: myapp
+  pool: 5
+  
+pool: 5 means Rails can maintain up to 5 database connections for that pool.  
+
 * If we have 20 connections in the connection pool, what does that mean?
+ans - If the connection pool is 20, it means a Rails process can maintain up to 20 database connections in its pool. The pool size is generally decided based on the number of application threads, number of processes, and the database's maximum connection limit. We need to make sure the total connections from all Rails processes and other services don't exceed the database capacity.
+
+PostgreSQL max_connections = 100
+
+Puma processes = 4
+Threads per process = 5
+Pool per process = 5
+
+
 
 * How do we decide the number of database connections?
+ans - We decide the database connection pool size mainly based on application concurrency and the database's capacity.
+
+1. Start with Rails/Puma threads
+
+Suppose Puma is configured:
+
+threads 5, 5
+
+That means one Rails process can handle up to 5 threads.
+
+A common starting point is:
+
+pool: 5
+
+So:
+
+1 Rails process
+× 5 threads
+= 5 DB connections
+
+We decide the database connection pool size mainly based on application concurrency and the database's capacity.
+
+1. Start with Rails/Puma threads
+
+Suppose Puma is configured:
+
+threads 5, 5
+
+That means one Rails process can handle up to 5 threads.
+
+A common starting point is:
+
+pool: 5
+
+So:
+
+1 Rails process
+× 5 threads
+= 5 DB connections
 
 * Why don't we use 5,000 database connections?
+ans - Because database connections are expensive resources, and a database cannot efficiently handle thousands of active connections.
+
+For example, if we configure:
+
+pool: 5000
+
+that does not mean our application becomes 1000× faster.
+
+Why not 5,000?
+
+1. Each connection consumes resources
+
+A PostgreSQL connection uses memory and CPU on the database server.
+
+5000 connections
+      ↓
+High memory usage
+      ↓
+More CPU/context switching
+      ↓
+Database becomes slower
+
+2. PostgreSQL has a connection limit
+
+For example:
+
+max_connections = 200
+
+If Rails tries to use 5,000 connections, the database cannot accept them.
+
+3. Most connections would be idle
+
+Suppose your application has only 20 concurrent database operations:
+
+5000 connections
+├── 20 being used
+└── 4980 mostly idle
+
+You're consuming resources without getting useful performance.
+
+4. More connections ≠ more concurrency
+
+The database itself has limited CPU, memory, disk I/O, locks, etc.
+
+If 5,000 queries hit the database simultaneously, they can actually compete for resources and make everything slower.
+
+Better approach
+
+Instead of creating thousands of database connections, we use a reasonable connection pool:
+
+Rails
+
+
 
 * How do we handle 1 lakh database connections?
+ans - If we literally have 100,000 database connections, we don't allow all of them to connect directly to PostgreSQL. We use connection pooling and a pooler such as PgBouncer to multiplex a large number of client connections over a much smaller number of actual database connections. If database capacity is still insufficient, we scale using read replica	s, caching, and database sharding or other distributed database architecture.
 
 * What is a load balancer, and how does increasing the number of load balancers help?
-
+“A load balancer distributes incoming requests across multiple application servers. It improves availability and scalability by preventing a single server from handling all the traffic. When traffic increases, we usually add more application instances behind the load balancer. We don't simply add more load balancers; instead, the load-balancing layer itself is made highly available, while the application layer is horizontally scaled.”
 * If the problem is specifically handling 1 lakh database connections, how should we solve it?
 
 * What is database replication?
