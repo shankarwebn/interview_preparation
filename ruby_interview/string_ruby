@@ -24,6 +24,16 @@ rev = ""
   rev = a[i] + rev 
 end
 
+str = "hello"
+result = ""
+
+str.each_char do |char|
+  result = char + result
+end
+
+puts result
+# => "olleh"
+
 puts rev
 
 3: Check string is palindrome.
@@ -49,6 +59,56 @@ str = "shankar"
 str.each_char do |ch|
   puts ch
 end
+
+
+4: Count number of vowels and consonants.
+vowel_chars = "aeiouAEIOU"
+
+str = "Hello World"
+
+vowels = 0
+consonants = 0
+
+str.each_char do |char|
+  if char.match?(/[aeiouAEIOU]/)
+    vowels += 1
+  elsif char.match?(/[a-zA-Z]/)
+    consonants += 1
+  end
+end
+
+puts "Vowels: #{vowels}"
+puts "Consonants: #{consonants}"
+
+
+
+
+
+
+
+["hello", "world"].join(" ")
+# => "hello world"
+
+
+
+str = "Hello"
+str << " World"
+
+# => "Hello World"
+
+string interpolation
+name = "Shankar"
+
+"Hello #{name}"
+# => "Hello Shankar"
+
+
+| Python          | Ruby                             |
+| --------------- | -------------------------------- |
+| `str.isdigit()` | `str.match?(/\A\d+\z/)`          |
+| `str.isalpha()` | `str.match?(/\A[a-zA-Z]+\z/)`    |
+| `str.isalnum()` | `str.match?(/\A[a-zA-Z0-9]+\z/)` |
+| `str.isspace()` | `str.match?(/\A\s+\z/)`          |
 
 
 

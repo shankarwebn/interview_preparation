@@ -66,18 +66,19 @@ else:
 
 
 
-4: Count number of vowels and consonants.
-vowel_chars = "aeiouAEIOU"
+4: text = "Hello World"
+
+vowels = 0
+consonants = 0
 
 for char in text:
-    if char.isalpha(): 
-        if char in vowel_chars:
-            vowels += 1
-        else:
-            consonants += 1
+    if char in "aeiouAEIOU":
+        vowels += 1
+    elif char.isalpha():
+        consonants += 1
 
-print("Number of vowels:", vowels)
-print("Number of consonants:", consonants)
+print("Vowels:", vowels)
+print("Consonants:", consonants)
 
 5: Find first non-repeating character.
 
