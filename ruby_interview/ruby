@@ -494,19 +494,321 @@ ans - If we literally have 100,000 database connections, we don't allow all of t
 
 * What is a load balancer, and how does increasing the number of load balancers help?
 “A load balancer distributes incoming requests across multiple application servers. It improves availability and scalability by preventing a single server from handling all the traffic. When traffic increases, we usually add more application instances behind the load balancer. We don't simply add more load balancers; instead, the load-balancing layer itself is made highly available, while the application layer is horizontally scaled.”
+
+
 * If the problem is specifically handling 1 lakh database connections, how should we solve it?
+ans - If the problem is literally 100,000 database connections, I would not try to maintain 100,000 direct PostgreSQL connections. I would use connection pooling and a pooler such as PgBouncer to multiplex client connections over a much smaller number of database connections. If the database workload itself is too high, I would use caching, read replicas, and potentially sharding.”
+
+And if interviewer asks “Why not just increase PostgreSQL max_connections to 100,000?”, answer:
+
+“Increasing max_connections doesn't solve the underlying resource problem. Each connection has overhead, so allowing 100,000 direct connections can exhaust memory and increase contention. We need to control concurrency rather than simply increasing the connection limit.”
 
 * What is database replication?
 
+ans - Database replication is the process of maintaining copies of database data on multiple database servers. Typically, the primary database handles writes and replicas handle read traffic. Replication helps improve read scalability and availability. If the primary fails, a replica can potentially be promoted to become the new primary.
+
+What is Database Replication?
+
+Database replication means maintaining copies of the same database data on multiple database servers.
+
+The main purpose is to improve availability, scalability, and read performance.
+
+Simple example
+
+Suppose we have one PostgreSQL database:
+
+              PostgreSQL
+                 ↓
+             Database
+
+With replication:
+
+                 Primary
+                   ↓
+          ┌────────┴────────┐
+          ↓                 ↓
+     Replica 1          Replica 2
+
+The Primary handles writes:
+
+INSERT
+UPDATE
+DELETE
+
+The replicas receive changes from the primary and can usually handle read queries:
+
+SELECT
+Example with Rails
+
+Suppose 10,000 users are using your application.
+
+Without replicas:
+
+              Rails
+                ↓
+           PostgreSQL
+          ↑    ↑    ↑
+        Reads + Writes
+
+The database has to handle everything.
+
+With replication:
+
+                 Rails
+                   ↓
+              PostgreSQL
+              Primary
+             /        \
+            ↓          ↓
+        Replica 1   Replica 2
+          Reads       Reads
+
+Rails can route:
+
+INSERT / UPDATE / DELETE → Primary
+
+SELECT → Replicas
+
+This reduces the read workload on the primary.
+
+What happens when Primary fails?
+
+Depending on the architecture, a replica can be promoted to become the new primary:
+
+Before:
+
+Primary
+   ↓
+Replica
+
+
+Primary fails
+   ↓
+
+Replica → New Primary
+
+This improves high availability.
+
+Types of replication
+
+Two common concepts are:
+
+Synchronous replication
+
+Primary → Replica
+        ↓
+   confirmation
+        ↓
+    Write succeeds
+
+The primary waits for the replica to acknowledge the change.
+
+Asynchronous replication
+
+Primary → Write succeeds
+     ↓
+Replica receives change shortly afterward
+
+There can be a small replication delay.
+
+
 * If a Sidekiq job fails, what happens to it?
+ans - In Sidekiq, if a job fails because an exception is raised, Sidekiq normally does not immediately delete the job. It retries the job according to its retry configuration.
 
 * If Sidekiq is down and then comes back up, what happens to the job?
+ans - If Sidekiq goes down, the important thing is that Sidekiq normally gets jobs from Redis. So the job is not automatically lost just because the Sidekiq process is down.
+
+Sidekiq uses Redis-backed job state/queue mechanisms, and the exact recovery behavior depends on how the job was fetched and the Sidekiq version/configuration. In a properly configured deployment, an interrupted job can become available for processing again rather than simply disappearing.
+
+
+Sidekiq uses Redis as the backing store for its queues. If Sidekiq is down while jobs are waiting in Redis, those jobs remain there and are processed when Sidekiq comes back up. If Sidekiq crashes while processing a job, recovery depends on the fetch/reliability mechanism and configuration, and a job may be processed again. Therefore, Sidekiq jobs should ideally be idempotent so retries or reprocessing don't cause incorrect duplicate effects.
 
 * What happens if the job was already inside a Sidekiq worker and not in Redis?
+ans - “If a Sidekiq worker crashes while a job is being processed, the job can be processed again depending on the fetching and reliability configuration. Therefore, Sidekiq jobs should be designed to be idempotent, because we should not assume that a job will execute exactly once. For critical operations such as payments or balance updates, we use an idempotency key or a database record to prevent duplicate processing.”
+
 
 * How do we safely remove a column from a database table containing 5 million records?
+ans - For a table with 5 million records, we should avoid simply doing a production migration like:
+
+remove_column :users, :old_column
+
+without considering application usage and database locking.
+
+The safest approach is usually an expand → migrate → contract approach.
+
+Step 1: Stop using the column in application code
+
+Suppose we have:
+
+users
+├── id
+├── name
+└── old_column   ← want to remove
+
+First, make sure Rails code no longer reads or writes old_column.
+
+Deploy that change first.
+
+Application
+    ↓
+No longer uses old_column
+Step 2: Remove the column
+
+Then, in a later deployment, remove the database column.
+
+For PostgreSQL, dropping a column is generally much cheaper than rewriting all 5 million rows, because you are removing the column definition rather than updating every record.
+
+But DDL can still acquire locks, so on a busy production table you need to consider the database version, workload, lock duration, and whether the migration might block concurrent queries.
+
+In Rails:
+
+class RemoveOldColumnFromUsers < ActiveRecord::Migration[7.1]
+  def change
+    remove_column :users, :old_column
+  end
+end
+Why not worry about 5 million UPDATEs?
+
+Because you're not deleting 5 million rows.
+
+You're dropping one column from the table:
+
+Before:
+
+5,000,000 rows
++ old_column
+
+After:
+
+5,000,000 rows
+- old_column
+
+The number of rows doesn't mean Rails has to execute:
+
+UPDATE users ...
+
+five million times.
+
+But there's an important production concern
+
+Before removing it, check:
+
+Rails models/scopes
+Controllers/services
+Background jobs
+Reports
+Raw SQL queries
+Other applications/services
+Database views/functions/triggers
+Analytics/ETL processes
+
+Otherwise you could deploy the migration and another part of the system could start failing.
+
+Interview answer
+
+“For a large production table, I would use an expand-and-contract approach. First, I would deploy the application without any dependency on the column. After confirming that nothing uses it, I would remove the column in a separate migration. I would also check dependencies and consider locking and migration behavior because the table is large and heavily used. The important point is not to make an application code change and destructive schema change at the same time.”
+
+One important correction: 5 million rows by itself doesn't make DROP COLUMN equivalent to updating 5 million rows. The bigger production concern is locking and dependencies, not simply the row count.
+
 
 * How do we make sure the column is no longer being used before removing it?
+Production mein sirf ek place check karke sure nahi ho sakte. Humein application code + database + other services sab check karne chahiye.
+
+1. Search the Rails codebase
+
+Suppose column is:
+
+old_column
+
+Search:
+
+rg "old_column" app/ config/ lib/
+
+Or:
+
+grep -R "old_column" app/
+
+Check whether it's used in:
+
+Models
+Controllers
+Services
+Jobs
+Serializers
+Scopes
+Queries
+2. Check raw SQL
+
+Kabhi-kabhi column ActiveRecord ke through nahi, raw SQL se use hota hai:
+
+User.find_by_sql("SELECT id, old_column FROM users")
+
+So search for:
+
+old_column
+users.old_column
+SELECT ... old_column
+3. Check background jobs
+
+Ye particularly important hai.
+
+Suppose Rails code mein column use nahi ho raha, but Sidekiq job mein hai:
+
+class ExportUsersJob
+  def perform
+    User.pluck(:old_column)
+  end
+end
+
+Toh column abhi bhi being used hai.
+
+4. Check other applications/services
+
+Agar multiple services same database use karte hain:
+
+Rails API
+   ↓
+PostgreSQL
+   ↑
+Admin service
+   ↑
+Reporting service
+   ↑
+Data pipeline
+
+Sirf Rails repository search karna enough nahi hai.
+
+5. Use database monitoring/logging
+
+Production mein database query logs/monitoring se dekh sakte hain ki old_column reference karne wali queries abhi aa rahi hain ya nahi.
+
+For PostgreSQL, tools such as pg_stat_statements can help identify frequently executed queries, although it isn't a perfect proof that a column is never used.
+
+6. Best practice: deploy first, remove later
+
+Ye safest approach hai:
+
+Deployment 1
+     ↓
+Application stops using old_column
+     ↓
+Monitor production
+     ↓
+Confirm no usage
+     ↓
+Deployment 2
+     ↓
+Remove old_column
+
+This is called the expand-and-contract / phased migration approach.
+
+Interview answer
+
+“Before removing a column, I would search the entire codebase for references, including models, controllers, services, serializers, background jobs, scopes and raw SQL. I would also check other services that access the same database and use production query monitoring where available. Then I would first deploy a version that no longer uses the column, monitor it for a period, and only in a later deployment remove the column.
+
+
+
+
 
 * What is GIL in Ruby?
 
