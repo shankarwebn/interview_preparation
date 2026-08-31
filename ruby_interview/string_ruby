@@ -203,7 +203,130 @@ puts count
 
 
 
+12: Remove duplicate from string.
 
+s = "programming"
+result = ""
+
+for char in s:
+    if char not in result:
+        result += char
+
+print(result)
+
+
+
+  
+13: Check if string contains all unique characters.
+
+s = "python"
+result  = true
+s.each_char do |i|
+    if s.count(i) > 1
+        result  = false
+        break
+    end
+end
+
+if result
+    puts "all"
+else
+    puts "Not Unique"    
+end
+
+14: Find frequency of all characters.
+
+
+
+
+
+
+
+15: Reverse words.
+
+st = "Programming is Fun"
+
+puts st.split().reverse.join(" ")
+
+
+
+
+16: valid paranthesis.
+a = "((())){]"
+
+stack = []
+
+a.each_char do |i|
+
+  if "({[".include?(i)
+    stack.push(i)
+
+  elsif i == ")" && !stack.empty? && stack[-1] == "("
+    stack.pop
+
+  elsif i == "}" && !stack.empty? && stack[-1] == "{"
+    stack.pop
+
+  elsif i == "]" && !stack.empty? && stack[-1] == "["
+    stack.pop
+
+  else
+    puts "invalid"
+    exit
+  end
+
+end
+
+if stack.empty?
+  puts "valid"
+else
+  puts "invalid"
+end
+
+
+17: Check substring is present in given string.
+
+
+
+
+
+18: Words frequency in string.
+text = "python is great and python is easy"
+
+dic = {}
+
+text.split().each do |i|
+   if dic.include?(i)
+       dic[i]+=1
+   else
+      dic[i] = 1
+   end
+end
+
+print dic
+
+
+
+20: Convert snake to Pascal case.
+
+text = "hello_world_example"
+
+re = text.split('_')
+
+tra = re.map{|w| w.capitalize}
+
+puts tra.join("")
+
+
+21: ind least character.
+text = "bananac"
+
+text.each_char do |i|
+    if text.count(i) == 1
+       print i
+    end
+
+end
 
 ["hello", "world"].join(" ")
 # => "hello world"

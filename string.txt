@@ -243,13 +243,13 @@ print(dic)
 12: Remove duplicate from string.
 
 s = "programming"
-result = ""
+result  = ""
 
-for char in s:
-    if char not in result:
-        result += char
+s.each_char do |i|
+   result +=i
+end
 
-print(result)
+puts result
  
   
 13: Check if string contains all unique characters.
@@ -284,7 +284,7 @@ str = "Programming is Fun"
 rev = str.split()[::-1]
 print(" ".join(rev))
 
-16: valid paranthesis:
+16: valid paranthesis.
 
 a = "((()))"
 
@@ -331,7 +331,7 @@ for char in words:
 
 print(dic)    
 
-19: ways to delete specific character:
+19: ways to delete specific character.
 
 new_text = text.replace("p", "")
 print(new_text)
