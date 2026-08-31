@@ -328,6 +328,90 @@ text.each_char do |i|
 
 end
 
+
+
+22: How to coping string:
+
+original = "Hello, Python!"
+
+copy_str = original
+print(copy_str)
+
+
+
+23: Replace all occurrences of substring.
+
+
+
+
+24: String rotation.
+Left Rotation
+
+a = [1, 2, 3, 4, 5]
+
+def rev(a, start, ends)
+  while start < ends
+    a[start], a[ends] = a[ends], a[start]
+
+    start += 1
+    ends -= 1
+  end
+end
+
+rev(a, 0, 1)
+
+l = a.length
+
+rev(a, 2,l-1)
+
+rev(a, 0, l - 1)
+
+print a
+
+
+
+
+25: Replace multiple words with key.
+
+
+
+
+
+
+
+
+
+
+26: Remove ith character in string.
+
+s = "hello"
+i = 2  # remove 3rd character (index 2)
+
+new_s = s[:i] + s[i+1:]
+print(new_s)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ["hello", "world"].join(" ")
 # => "hello world"
 
