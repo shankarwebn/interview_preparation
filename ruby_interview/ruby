@@ -850,4 +850,448 @@ Interview answer
 
 * What is the time and space complexity of the kth permutation code?
 
+Ruby — Must Prepare
+Ruby kya hai? Ruby ki key features kya hain?
+String, Array, Hash, Symbol mein difference?
+Mutable aur immutable objects kya hote hain?
+Frozen string literal kya hai?
+==, equal?, eql?, === mein difference?
+nil?, empty?, blank?, present? mein difference?
+include? vs member?
+map, each, select, filter, reduce difference?
+each aur map mein difference?
+Proc vs Lambda?
+Block kya hota hai?
+yield kya karta hai?
+public, private, protected methods?
+Class method vs instance method?
+self kya hota hai?
+attr_reader, attr_writer, attr_accessor?
+Module kya hai?
+Module aur class mein difference?
+Mixins kya hote hain?
+include vs extend?
+Method overriding kya hai?
+Method overloading Ruby mein kaise handle hoti hai?
+Duck typing kya hai?
+Monkey patching kya hai?
+Garbage collection Ruby mein kaise kaam karta hai?
 
+
+
+Ye topic abhi hum discuss kar rahe the, isliye definitely prepare karo.
+
+Thread kya hai?
+Ruby mein multiple threads kaise create karte hain?
+GVL/GIL kya hai?
+GVL hone ke baad Ruby threads useful kyun hain?
+Concurrency vs parallelism?
+CPU-bound vs I/O-bound task?
+CRuby mein multiple CPU-intensive threads simultaneously execute hote hain?
+Ractors kya hain?
+Ruby mein true parallelism kaise achieve karoge?
+Thread-safe code kya hota hai?
+Race condition kya hai?
+Mutex kya hota hai?
+
+
+
+2. Ruby Threads / Concurrency
+
+Ye topic abhi hum discuss kar rahe the, isliye definitely prepare karo.
+
+Thread kya hai?
+Ruby mein multiple threads kaise create karte hain?
+GVL/GIL kya hai?
+GVL hone ke baad Ruby threads useful kyun hain?
+Concurrency vs parallelism?
+CPU-bound vs I/O-bound task?
+CRuby mein multiple CPU-intensive threads simultaneously execute hote hain?
+Ractors kya hain?
+Ruby mein true parallelism kaise achieve karoge?
+Thread-safe code kya hota hai?
+Race condition kya hai?
+Mutex kya hota hai?
+
+
+
+3. Rails — Very Important
+Rails Fundamentals
+Rails kya hai?
+MVC architecture explain karo.
+Request Rails application mein kaise flow hoti hai?
+Browser
+   ↓
+Route
+   ↓
+Controller
+   ↓
+Model
+   ↓
+Database
+   ↓
+Controller
+   ↓
+Response
+routes.rb ka role?
+Controller kya karta hai?
+Model kya karta hai?
+View kya karta hai?
+Rails middleware kya hota hai?
+Rails callbacks kya hote hain?
+before_action kya hai?
+around_action kya hai?
+Concern kya hota hai?
+Service Object kya hai?
+Helper method kya hai?
+Strong Parameters kya hain?
+Rails validations kya hain?
+Callbacks aur validations mein difference?
+
+
+
+4. ActiveRecord
+
+years experience ke liye ye bahut important hai.
+
+ActiveRecord kya hai?
+ORM kya hota hai?
+has_many, has_one, belongs_to, has_and_belongs_to_many?
+Association kaise define karte ho?
+dependent: :destroy kya karta hai?
+dependent: :delete_all vs destroy?
+find vs find_by?
+where kya return karta hai?
+first vs take?
+joins vs includes?
+preload vs eager_load?
+N+1 query problem kya hai?
+N+1 ko kaise solve karoge?
+Scope kya hota hai?
+Class method vs scope?
+Transaction kya hota hai?
+save vs save!?
+update vs update!?
+delete vs destroy?
+pluck vs map?
+select vs pluck?
+exists? vs present??
+Database indexing kya hai?
+Composite index kya hota hai?
+Migration kya hai?
+
+5. SQL / PostgreSQL
+
+Tumhare 3-year profile ke liye SQL bhi poocha ja sakta hai.
+
+Questions
+INNER JOIN vs LEFT JOIN?
+GROUP BY kya karta hai?
+WHERE vs HAVING?
+DISTINCT kya hai?
+Index kya hai?
+Index kab use nahi karna chahiye?
+Primary key vs foreign key?
+Normalization kya hai?
+Transaction kya hai?
+ACID properties kya hain?
+Deadlock kya hai?
+Window function kya hai?
+ROW_NUMBER() vs RANK() vs DENSE_RANK()?
+Second highest salary kaise find karoge?
+Duplicate records kaise find karoge?
+Nth highest salary kaise find karoge?
+
+Example:
+
+SELECT *
+FROM employees
+ORDER BY salary DESC
+LIMIT 1 OFFSET 1;
+6. REST API — Very Important
+
+Tum backend developer ho, toh ye section strong hona chahiye.
+
+REST API kya hai?
+REST ke principles?
+GET, POST, PUT, PATCH, DELETE difference?
+PUT vs PATCH?
+HTTP status codes?
+
+Particularly:
+
+200
+201
+204
+400
+401
+403
+404
+422
+500
+Authentication vs Authorization?
+JWT kya hai?
+Access token kya hai?
+Refresh token kya hai?
+API versioning kya hai?
+
+Example:
+
+/api/v1/users
+/api/v2/users
+Pagination kaise implement karoge?
+Filtering?
+Sorting?
+Searching?
+Rate limiting?
+Idempotency kya hai?
+CORS kya hai?
+API security kaise karoge?
+7. Authentication & Authorization
+
+Tumne Doorkeeper / Sorcery / Pundit use kiya hai, toh interviewer specifically pooch sakta hai:
+
+Doorkeeper kya hai?
+OAuth2 kya hai?
+Access token kaise work karta hai?
+Sorcery kya hai?
+Devise vs Sorcery?
+Pundit kya hai?
+Authentication vs authorization?
+Policy kya hoti hai?
+Pundit mein authorization kaise check karte ho?
+User ko sirf uska own data kaise access karne doge?
+8. Background Jobs / Sidekiq
+
+Ye bhi prepare karo:
+
+Background job kya hoti hai?
+Sidekiq kya hai?
+Sidekiq Redis ka use kyun karta hai?
+Sidekiq job kaise create karte ho?
+perform_async kya hai?
+Retry mechanism?
+Failed jobs?
+Sidekiq mein duplicate jobs kaise prevent karoge?
+Job idempotency kya hai?
+Cron/scheduled jobs kaise run karoge?
+Rails request mein heavy task directly kyun nahi karna chahiye?
+
+Example:
+
+class SendEmailJob
+  include Sidekiq::Job
+
+  def perform(user_id)
+    UserMailer.welcome_email(user_id).deliver_now
+  end
+end
+SendEmailJob.perform_async(user.id)
+9. Redis
+Redis kya hai?
+Redis database hai ya cache?
+Redis ka use Rails mein kaha karte ho?
+Sidekiq + Redis relation?
+Cache kya hai?
+Rails.cache kya hai?
+Cache expiration?
+Redis data structures?
+Redis vs PostgreSQL?
+Redis kab use nahi karna chahiye?
+10. Performance / Optimization
+
+3 years experience mein ye questions high chance hain.
+
+Interviewer:
+
+"Your API is taking 5 seconds. How will you debug it?"
+
+Tumhe approach batani chahiye:
+
+Request
+ ↓
+Logs
+ ↓
+Controller
+ ↓
+SQL queries
+ ↓
+N+1?
+ ↓
+Indexes?
+ ↓
+External API?
+ ↓
+Redis/cache?
+ ↓
+Background job?
+
+Questions:
+
+Rails application slow ho gayi, kaise debug karoge?
+N+1 problem?
+Database indexing?
+Query optimization?
+Caching?
+Fragment caching?
+Redis caching?
+Pagination?
+Background jobs?
+Bullet gem?
+includes kab use karoge?
+select/pluck kab use karoge?
+11. Docker
+
+Tumhare resume mein Docker hai, toh prepare:
+
+Docker kya hai?
+Container vs VM?
+Dockerfile kya hai?
+Docker image vs container?
+Docker Compose kya hai?
+docker build?
+docker run?
+docker compose up?
+Docker volumes?
+Docker networking?
+Rails + PostgreSQL ko Docker Compose mein kaise run karoge?
+Docker container restart hone par database data ka kya hoga?
+12. AWS
+
+Tumne AWS mention kiya hai, toh basic architecture explain karna aana chahiye.
+
+EC2 kya hai?
+S3 kya hai?
+RDS kya hai?
+IAM kya hai?
+Security Group?
+Load Balancer?
+EC2 vs Lambda?
+S3 mein Rails Active Storage kaise use karoge?
+Application EC2 par kaise deploy karoge?
+Production Rails application ka architecture explain karo.
+
+Example:
+
+             User
+               ↓
+        Load Balancer
+               ↓
+        EC2 / Rails
+          ↙       ↘
+     PostgreSQL   Redis
+          ↓         ↓
+         RDS     Sidekiq
+                    ↓
+                 Worker
+13. System Design — 3 Years Experience
+
+Basic system design bhi aa sakta hai.
+
+Interviewer bol sakta hai:
+
+"Design a movie booking system."
+
+Tumhe discuss karna chahiye:
+
+Users
+  ↓
+API
+  ↓
+Rails Application
+  ↓
+PostgreSQL
+  ↓
+Redis
+  ↓
+Sidekiq
+  ↓
+Payment Gateway
+
+Questions:
+
+Movie booking system design karo.
+E-commerce API design karo.
+URL shortener design karo.
+Notification system design karo.
+Payment system kaise design karoge?
+Concurrent seat booking kaise prevent karoge?
+Database transaction kaha use karoge?
+Redis kaha use karoge?
+Background jobs kaha use karoge?
+14. Project-Based Questions — Sabse Important
+
+Ye section tumhare liye sabse important hai.
+
+Interviewer tumhare resume/project ko pakad ke questions karega.
+
+For example:
+
+"Tell me about your current/previous project."
+
+Phir:
+
+"What was your role?"
+
+"What architecture did you use?"
+
+"How many APIs did you develop?"
+
+"Which database?"
+
+"Authentication kaise implement kiya?"
+
+"Authorization kaise implement kiya?"
+
+"Background jobs kaha use kiye?"
+
+"Redis kaha use kiya?"
+
+"Docker kaise use kiya?"
+
+"AWS par application kaise deploy ki?"
+
+"What was the most difficult bug you solved?"
+
+"Have you optimized any slow API?"
+
+"Have you handled N+1 queries?"
+
+"How did you handle errors?"
+
+"How did you write tests?"
+
+🔥 Top 20 — Sabse Pehle Ye Prepare Karo
+
+Agar interview kal hai, toh pehle ye 20 karo:
+
+Tell me about yourself.
+Explain your project architecture.
+Explain Rails request lifecycle.
+MVC architecture.
+include vs extend.
+Block / Proc / Lambda.
+GVL and Ruby threads.
+ActiveRecord associations.
+N+1 problem.
+includes vs joins.
+Transactions.
+SQL joins.
+Indexing.
+REST API + HTTP status codes.
+Authentication vs authorization.
+JWT / OAuth2.
+Pundit.
+Sidekiq + Redis.
+Docker.
+AWS architecture and deployment.
+
+Aur ek important cheez: 3 years experience ke interview mein interviewer sirf "definition kya hai?" nahi poochega. Wo aksar poochega:
+
+"You used it in your project. How did you implement it?"
+
+Isliye har topic ke liye definition + real Rails example + project scenario + follow-up question prepare karna best rahega.
+
+Agar tum chaho, 
+main tumhara proper 3-year RoR mock interview le sakta hoon — one question at a time, interviewer ki tarah, aur 
+tumhare answer ko rate karke correct/improve karunga.
