@@ -1653,6 +1653,9 @@ Index kya hai?
 Index kab use nahi karna chahiye?
 Primary key vs foreign key?
 Normalization kya hai?
+
+ans - Normalization is the process of organizing database data into related tables to reduce data redundancy and prevent data inconsistency. Common normal forms are 1NF, 2NF, and 3NF.
+
 Transaction kya hai?
 ACID properties kya hain?
 Deadlock kya hai?
