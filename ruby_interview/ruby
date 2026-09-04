@@ -881,6 +881,9 @@ Garbage collection Ruby mein kaise kaam karta hai?
 
 
 
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
 
 
 2. Ruby Threads / Concurrency
@@ -1151,6 +1154,9 @@ User.upsert_all([
 insert_all is used to bulk insert multiple records efficiently, while upsert_all performs a bulk insert-or-update operation based on a unique constraint. Both bypass ActiveRecord validations and callbacks.
 
 
+-----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
 
 3. ---------------------------------------------------Rails — Very Important--------------------------------------------------------
 Rails Fundamentals
@@ -1206,6 +1212,8 @@ ans -
 Callbacks aur validations mein difference?
 ans
 
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
 
 4. ActiveRecord
 
@@ -1638,12 +1646,11 @@ ans -
 
 
 
+--------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 
 
 5. SQL / PostgreSQL
-
-
-
 Questions
 INNER JOIN vs LEFT JOIN?
 GROUP BY kya karta hai?
@@ -1671,6 +1678,12 @@ SELECT *
 FROM employees
 ORDER BY salary DESC
 LIMIT 1 OFFSET 1;
+
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
+
 6. REST API — Very Important
 
 Tum backend developer ho, toh ye section strong hona chahiye.
@@ -1702,6 +1715,11 @@ Rate limiting?
 Idempotency kya hai?
 CORS kya hai?
 API security kaise karoge?
+
+------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
+
+
 7. Authentication & Authorization
 
 Tumne Doorkeeper / Sorcery / Pundit use kiya hai, toh interviewer specifically pooch sakta hai:
@@ -1716,6 +1734,11 @@ Authentication vs authorization?
 Policy kya hoti hai?
 Pundit mein authorization kaise check karte ho?
 User ko sirf uska own data kaise access karne doge?
+
+----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
+
+
 8. Background Jobs / Sidekiq
 
 Ye bhi prepare karo:
@@ -1742,6 +1765,11 @@ class SendEmailJob
   end
 end
 SendEmailJob.perform_async(user.id)
+
+------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------
+
+
 9. Redis
 Redis kya hai?
 Redis database hai ya cache?
@@ -1753,6 +1781,10 @@ Cache expiration?
 Redis data structures?
 Redis vs PostgreSQL?
 Redis kab use nahi karna chahiye?
+
+-----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+
 10. Performance / Optimization
 
 3 years experience mein ye questions high chance hain.
@@ -1795,6 +1827,10 @@ Background jobs?
 Bullet gem?
 includes kab use karoge?
 select/pluck kab use karoge?
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
 11. Docker
 
 Tumhare resume mein Docker hai, toh prepare:
@@ -1811,6 +1847,10 @@ Docker volumes?
 Docker networking?
 Rails + PostgreSQL ko Docker Compose mein kaise run karoge?
 Docker container restart hone par database data ka kya hoga?
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ 
 12. AWS
 
 Tumne AWS mention kiya hai, toh basic architecture explain karna aana chahiye.
@@ -1839,6 +1879,10 @@ Example:
          RDS     Sidekiq
                     ↓
                  Worker
+                 
+---------------------------------------------------------------------------------------------------------------------------------------
+
+                
 13. System Design — 3 Years Experience
 
 Basic system design bhi aa sakta hai.
@@ -1874,6 +1918,9 @@ Concurrent seat booking kaise prevent karoge?
 Database transaction kaha use karoge?
 Redis kaha use karoge?
 Background jobs kaha use karoge?
+
+
+
 14. Project-Based Questions — Sabse Important
 
 Ye section tumhare liye sabse important hai.
