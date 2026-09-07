@@ -194,6 +194,8 @@ File ko har baar reload karta hai.
 load './test.rb'
 load './test.rb'
 
+
+
 12: Closure kya hota hai Ruby me?
 
 Closure ek aisa block/proc/lambda hota hai jo apne surrounding scope ke variables ko yaad rakhta hai, even jab original method execute ho chuki ho.
