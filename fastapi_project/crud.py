@@ -26,7 +26,7 @@ def update_post(db: Session, post_id: int, post: PostCreate):
     if not db_post:
         return None
 
-    db_post.title = post.title
+    db_post.title = post.title  
     db_post.content = post.content
     db.commit()
     db.refresh(db_post)

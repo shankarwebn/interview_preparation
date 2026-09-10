@@ -1063,7 +1063,7 @@ Movie booking system design karo.
 E-commerce API design karo.
 URL shortener design karo.
 Notification system design karo.
-Payment system kaise design karoge?
+Payment system kaise de	sign karoge?
 Concurrent seat booking kaise prevent karoge?
 Database transaction kaha use karoge?
 Redis kaha use karoge?
@@ -1077,39 +1077,66 @@ Ye section tumhare liye sabse important hai.
 
 Interviewer tumhare resume/project ko pakad ke questions karega.
 
+1: Tell me about your current/previous project.
+
+2: What was your role?
+
+3: What architecture did you use?"
+
+4: How many APIs did you develop?"
+
+5: Which database?"
+
+7: Authentication kaise implement kiya?"
+
+8: Authorization kaise implement kiya?"
+
+Haan. Ye 4 gems same kaam nahi karte. Interview mein ye distinction clear rakhna bahut important hai.
+
+Gem	Main purpose	Simple meaning
+Pundit	Authorization	User ko kya karne ki permission hai?
+Doorkeeper	OAuth2 authentication/authorization	API access ke liye access tokens manage karna
+OmniAuth	Third-party login	Google/GitHub/Facebook se login
+Sorcery	Authentication	Email/password login, sessions, password reset etc.
+
+
+
+
+
+9: Background jobs kaha use kiye?
+
+10: Redis kaha use kiya?
+ans - In my Rails project, I used Redis mainly for **background job processing with Sidekiq**.
+
+When an API needs to perform a time-consuming task, instead of processing it directly during the request, we create a Sidekiq job. Sidekiq uses Redis to store and manage the job queue.
+
 For example:
 
-"Tell me about your current/previous project."
+```ruby
+SendEmailJob.perform_later(user.id)
+```
 
-Phir:
+The flow is:
 
-"What was your role?"
+API → Sidekiq → Redis queue → Sidekiq worker → Job execution.
 
-"What architecture did you use?"
+Redis helps Sidekiq store pending jobs and allows workers to pick them up and process them asynchronously.
 
-"How many APIs did you develop?"
+We can also use Redis for caching frequently accessed data to reduce database queries and improve application performance.
 
-"Which database?"
 
-"Authentication kaise implement kiya?"
 
-"Authorization kaise implement kiya?"
+11: Docker kaise use kiya?
 
-"Background jobs kaha use kiye?"
+12: AWS par application kaise deploy ki?
 
-"Redis kaha use kiya?"
+13: What was the most difficult bug you solved?
 
-"Docker kaise use kiya?"
+14: Have you optimized any slow API?
 
-"AWS par application kaise deploy ki?"
+15: Have you handled N+1 queries?
 
-"What was the most difficult bug you solved?"
-
-"Have you optimized any slow API?"
-
-"Have you handled N+1 queries?"
-
-"How did you handle errors?"
+16: How did you handle errors?
 
 "How did you write tests?"
 
@@ -1163,7 +1190,42 @@ JWT / OAuth2.
 Pundit.
 Sidekiq + Redis.
 Docker.
+
+
 AWS architecture and deployment.
+
+                    Users
+                      │
+                      ▼
+                Route 53
+              (Domain/DNS)
+                      │
+                      ▼
+              Load Balancer
+                 (ALB)
+                      │
+             ┌────────┴────────┐
+             ▼                 ▼
+          EC2 #1            EC2 #2
+       Django/Rails       Django/Rails
+             │                 │
+             └────────┬────────┘
+                      │
+              ┌───────┴────────┐
+              ▼                ▼
+             RDS             Redis
+        PostgreSQL/MySQL   Cache/Sidekiq
+              │
+              │
+              ▼
+             S3
+      Images / Documents
+      
+      
+      
+      
+      
+      
 
 Aur ek important cheez: 3 years experience ke interview mein interviewer sirf "definition kya hai?" nahi poochega. Wo aksar poochega:
 
