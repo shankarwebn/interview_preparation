@@ -3,6 +3,19 @@
 	SELECT * from ( SELECT salary , DENSE_RANK() OVER (ORDER BY salary DESC)
 	as emm_rank from emp)t  WHERE emm_rank = 2;
 
+	
+emm_rank
++--------+---+
+| salary | p |
++--------+---+
+| 100    | 1 |
+| 90     | 2 |
+| 90     | 2 |
+| 80     | 3 |
+| 70     | 4 |
++--------+---+
+
+
 2: Max salary for each Department;
 
 
