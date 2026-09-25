@@ -1,0 +1,287 @@
+1: Salary above average
+
+SELECT *
+FROM employees
+WHERE salary > (SELECT AVG(salary) FROM employees);
+
+
+
+avg_salary = Employee.average(:salary)
+
+Employee.where("salary > ?", avg_salary)
+
+2: Customers having more than 1 order
+
+SELECT customer_id
+FROM orders
+GROUP BY customer_id
+HAVING COUNT(*) > 1;
+
+
+
+Customer.joins(:orders)
+        .group("customers.id")
+        .having("COUNT(orders.id) > 1")
+        
+3. Department wise employee count
+
+SELECT department,
+       COUNT(*) AS total_emp
+FROM employees
+GROUP BY department
+ORDER BY total_emp ASC;
+
+Employee
+  .group(:department)
+  .order(("COUNT(*) ASC"))
+  .count
+
+Or
+
+Employee
+  .select("department, COUNT(*) AS total_emp")
+  .group(:department)
+  .order("total_emp ASC")
+  
+4. Duplicate salaries
+
+SELECT salary
+FROM employees
+GROUP BY salary
+HAVING COUNT(*) > 1;
+
+
+Employee
+  .group(:salary)
+  .having("COUNT(*) > 1")
+  .count
+
+Or
+
+Employee
+  .select("salary")
+  .group(:salary)
+  .having("COUNT(*) > 1")
+
+5: Employees without manager.
+
+SELECT *
+FROM employees
+WHERE manager_id IS NULL;
+
+
+
+Employee.where(manager_id: nil)
+
+6: Employees hired in last 3 months.
+
+SELECT *
+FROM employees
+WHERE hire_date >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH);
+
+Rails
+Employee.where("hire_date >= ?", 3.months.ago)
+
+7: Name contains "Shankar".
+
+SELECT *
+FROM employees
+WHERE name LIKE '%Shankar%';
+
+
+
+Employee.where("name LIKE ?", "%Shankar%")
+
+Case insensitive (PostgreSQL)
+Employee.where("name ILIKE ?", "%Shankar%")
+
+
+8: Customers having more than one order.
+
+SELECT c.*,
+COUNT(o.id) AS total_orders
+FROM customers c
+LEFT JOIN orders o
+ON c.id = o.customer_id
+GROUP BY c.id
+HAVING COUNT(o.id) > 1;
+
+
+
+Customer.left_joins(:orders)
+        .group("customers.id")
+        .having("COUNT(orders.id) > 1")
+        .select("customers.*, COUNT(orders.id) AS total_orders")
+
+
+9: Products in Order ID = 1.
+
+
+SELECT
+p.product_name,
+oi.quantity
+FROM order_items oi
+JOIN products p
+ON oi.product_id=p.id
+WHERE oi.order_id=1;
+
+
+OrderItem
+  .joins(:product)
+  .where(order_id: 1)
+  .select("products.product_name, order_items.quantity")
+
+
+10: Customers who have not placed any order.
+
+
+
+Customer.left_joins(:orders)
+        .where(orders: { id: nil })
+
+
+SELECT *
+FROM customers
+WHERE id NOT IN (
+    SELECT customer_id FROM orders
+);
+
+LEFT JOIN
+
+A LEFT JOIN returns:
+
+All rows from the left table (customers)
+Matching rows from the right table (orders)
+If there is no match, the order columns become NULL.
+
+After the join, the temporary result looks like this:
+
+c.id	c.name	o.id	o.customer_id
+1	Shankar	101	1
+2	Rahul	NULL	NULL
+3	Amit	102	3
+3	Amit	103	3
+4	Neha	NULL	NULL
+5	Priya	104	5
+
+
+
+
+
+11: Top 10 users by orders.
+
+SELECT users.name,
+COUNT(orders.id) total_orders
+FROM users
+LEFT JOIN orders
+ON users.id=orders.user_id
+GROUP BY users.id, users.name
+ORDER BY total_orders DESC
+LIMIT 10;
+
+
+
+User.left_joins(:orders)
+    .select("users.name, COUNT(orders.id) AS total_orders")
+    .group("users.id")
+    .order("total_orders DESC")
+    .limit(10)
+    
+    
+12: Products and quantity for Order ID 1.
+
+SELECT
+    p.name AS product_name,
+    oi.quantity
+FROM order_items oi
+JOIN products p
+ON oi.product_id = p.id
+WHERE oi.order_id = 1;
+
+
+items = OrderItem.includes(:product).where(order_id: 1)
+
+items.each do |item|
+  puts "#{item.product.name} #{item.quantity}"
+end
+
+
+13. Nth highest salary (2nd Highest)
+
+SELECT *
+FROM (
+SELECT salary,
+DENSE_RANK() OVER(ORDER BY salary DESC) rank
+FROM employees
+)t
+WHERE rank=2;
+
+
+second_highest_salary = Employee
+  .select(:salary)
+  .distinct
+  .order(salary: :desc)
+  .offset(1)
+  .limit(1)
+
+Employee.where(salary: second_highest_salary)
+
+
+14: Maximum salary in each department.
+
+
+SELECT department,
+MAX(salary)
+FROM employees
+GROUP BY department;
+
+
+
+Employee.group(:department).maximum(:salary)
+
+15: Employees having managerial position.
+
+select e.name from emplo as e join emplo as p ON e.employee_id = p.manager_id;
+
+
+
+Employee.joins(:subordinates).distinct
+
+16: Delete duplicate records.
+
+
+DELETE FROM Employee
+WHERE id NOT IN (
+SELECT MIN(id)
+FROM Employee
+GROUP BY name, department
+);
+
+
+
+duplicates = Employee
+               .select("MIN(id) AS id")
+               .group(:name, :department)
+
+Employee.where.not(id: duplicates).delete_all
+
+Or
+
+Employee
+  .group(:name, :department)
+  .pluck(Arel.sql("MIN(id)"))
+Employee.where.not(
+  id: Employee.group(:name, :department)
+              .minimum(:id)
+              .values
+).delete_all
+
+
+
+SELECT customers.*
+FROM customers
+LEFT OUTER JOIN orders
+ON customers.id = orders.customer_id
+WHERE orders.id IS NULL;
+
+Customer.where.not(id: Order.select(:customer_id))

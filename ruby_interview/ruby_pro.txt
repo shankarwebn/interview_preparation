@@ -1,0 +1,57 @@
+module A
+  def self.m1
+    puts "Hello M1"
+  end
+
+  def m1
+    puts "duplicate"
+  end
+
+  def self.included(base)
+    base.define_singleton_method(:m1) do
+      A.m1
+    end
+  end
+end
+
+class B
+  include A
+end
+
+B.new.m1
+B.m1
+
+
+
+2: Include and Extend.
+ans: include adds module methods as instance methods, while extend adds module methods to the receiving object itself, commonly making them class methods when used with a class.
+
+
+module A
+  def hello
+    puts "Hello"
+  end
+end
+
+class B
+  include A
+end
+
+Now instances of B get hello:
+
+B.new.hello   # ✅
+B.hello   
+
+
+module A
+  def hello
+    puts "Hello"
+  end
+end
+
+class B
+end
+
+B.extend(A) 
+
+B.hello()

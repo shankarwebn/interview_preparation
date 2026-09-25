@@ -1,0 +1,367 @@
+1: in = i love india i love india
+   if words are repeated say yes if no say no
+   
+op = gets
+words = op.split()
+if words.uniq.length!= words.length
+    puts "yes"
+end    
+
+Reverse string
+
+str = "hello"
+reversed = ""
+
+(str.length - 1).downto(0) do |i|
+  reversed += str[i]
+end
+
+puts reversed  # "olleh"
+
+
+
+str = "hello"
+reversed = ""
+
+str.each_char do |char|
+  reversed = char + reversed  # prepend each character
+end
+
+puts reversed
+# Output: "olleh"
+
+
+
+
+2: Longest Common prefix.
+
+a = ["flight", "flew", "flow"]
+
+prefix = a[0]
+
+a.each do |i|   
+    while !i.start_with?(prefix)
+        prefix = prefix[0...-1]
+        break if prefix.empty?    
+    end    
+end    
+
+puts prefix
+
+
+3: Check string is palindrome.
+a = "aba"
+
+if a.reverse == a
+    puts "s"
+end    
+
+
+4: Count number of vowels and consonants.
+
+vowel_chars = "aeiouAEIOU"
+v = 0
+c = 0
+
+"Hello worlds".each_char do |i|
+    if vowel_chars.include?(i)
+        v+=1
+    else
+        c+=1
+    end
+end      
+
+puts "vovel #{v}"
+puts "consonant #{c}"
+
+
+5: Find first non-repeating character.
+
+a = "shankar"
+a.each_char do |i|
+    if a.count(i)==1
+        puts i
+        break
+    end
+end         
+
+
+6: Permutations of string (all permutations).
+
+
+
+
+
+
+
+
+
+
+7: Two string anagrams.
+
+s1 = "listen"
+s2 = "silent"
+puts s1.chars.sort.join
+if s1.chars.sort.join == s2.chars.sort.join
+    puts "yes"
+else
+    puts "no"
+end        
+
+
+
+
+8: Find longest substring without repeating.
+
+
+
+
+
+
+
+
+
+
+9: Convert a string case to title case.
+
+str = "hello world from ruby"
+
+# Title case
+title_case = str.split.map(&:capitalize).join(' ')
+
+puts title_case
+# Output: "Hello World From Ruby"
+
+
+str = "hello world from ruby"
+
+# Title case
+title_case = str.split.map{|n| n.capitalize}.join(' ')
+
+puts title_case
+# Output: "Hello World From Ruby"
+
+	
+
+10: One String is rotation of another
+s1 = "abcd"
+s2 = "cdab"
+s = s1+s1
+
+if s.include?(s2)
+    print("Yes")
+else
+    print("Not")
+end
+
+
+11: Count occurrence of each character.
+
+str = "hello world"
+char_count = str.chars.tally
+
+puts char_count
+# Output: {"h"=>1, "e"=>1, "l"=>3, "o"=>2, " "=>1, "w"=>1, "r"=>1, "d"=>1}
+
+
+12: Remove duplicate from string.
+
+a = "gtrewwggttt"
+
+s = ""
+
+for i in a.chars do
+    if !s.include?(i)
+        s+=i
+    end    
+end
+
+puts s
+
+
+13: Check if string contains all unique characters.
+
+a = "studio"
+
+un = true
+for i in a.chars do
+    if a.count(i)>1
+        un = false
+    end    
+end
+puts un
+
+
+14: Find frequency of all characters.
+str = "hello world"
+char_count = str.chars.tally
+
+puts char_count
+# Output: {"h"=>1, "e"=>1, "l"=>3, "o"=>2, " "=>1, "w"=>1, "r"=>1, "d"=>1}
+
+
+
+15: Reverse words.
+
+str = "shankar is champion"
+
+s = str.split().reverse
+puts s
+
+
+16: valid paranthesis.
+a = "((()))"
+
+stack  = []
+
+for i in a.chars do
+    if "({[".include?(i)
+        stack << i
+    elsif i ==')' && stack.last == '('  
+        stack.pop()
+    elsif i =='}' && stack.last == '}'
+        stack.pop()
+    elsif i ==']' && stack.last == '['
+        stack.pop()        
+    end     
+end
+
+if stack.empty?
+    puts "Valid"
+else
+    puts "Invalid"
+end         
+
+
+
+17: Check substring is present in given string.
+
+
+
+
+18: Words frequency in string.	
+
+text = "python is great and python is easy"
+h = Hash.new(0)
+text.split().each do |i|
+    h[i] += 1 
+end    
+puts h
+
+
+
+19: ways to delete specific character.
+
+20: Convert snake to Pascal case.
+
+text = "hello_world_example"
+pascal = text.gsub("_", " ")
+
+puts pascal.split().map{|word| word.capitalize }.join(" ")
+
+21: Find least character:
+str = "banana"
+
+char_count = str.chars.tally
+
+least_chars = char_count.select { |key, value| value == 1 }
+
+puts least_chars.inspect
+# Output: ["b"]
+
+
+22: How to coping string:
+
+
+
+
+23: Replace all occurrences of substring.
+
+
+
+
+24: String rotation.
+
+
+
+
+25: Replace multiple words with key.
+
+
+
+
+
+26: Remove ith character in string.
+
+str = "hello"
+i = 2  # 0-based index (0=h,1=e,2=l,3=l,4=o)
+
+str[i] = ""   # 2nd index वाला character remove
+puts str
+# Output: "helo"
+
+
+27: Longest substring without repeating char.
+
+
+
+
+
+
+
+28: Convert string to integer.
+
+s = "12345"
+num = s.to_i
+puts num.class       # Output: 12345
+# print(type(num)) # Output: <class 'int'>
+
+
+29: most frequent character:
+
+s = "hello world"
+
+hash = s.chars.tally
+
+max = 0
+char = ''
+hash.each do |key, value|
+    if max < value
+        max = value
+        char = key
+    end    
+end    
+
+puts max
+puts char
+
+
+yyyy-mm-dd
+year = /\A\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\z/
+
+dd-mm-yyyy
+/\A(0[1-9]|[12]\d|3[01])-(0[1-9]|1[0-2])-\d{4}\z/
+
+
+p = gets.chomp
+puts year.match?(p)
+
+
+# format = /^(0[1-9]|1[0,2]|3[0,1])/
+
+/\A(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(19|20)\d{2}\z/
+
+
+year =  /\A[\w.+-]+@[a-z\d.-]+\.[a-z]{2,10}\z/i
+
+
+pattern = /\A[6-9]\d{9}\z/
+
+puts "9876543210".match?(pattern)  # ✅ true
+puts "1234567890".match?(pattern)  # ❌ false
+
+students = { b: 80, a: 90, c: 70 }
+
+sorted_by_value = students.sort_by { |key, value| key }.to_h
+puts sorted_by_value
+

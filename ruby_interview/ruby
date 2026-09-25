@@ -1,0 +1,885 @@
+https://chatgpt.com/share/6a9918b9-3130-83ee-a0a0-8641ca945a7d
+
+1: block.
+
+def geet
+   yeild 
+end
+
+geet {puts "shankar"}
+
+2: Proc.
+
+p = Proc.new { |a, b| puts "#{a} #{b}" }
+
+p.call(10)
+
+3: Lambda.
+
+l = lambda { |a, b| puts "#{a} #{b}" }
+
+l.call(10, 20)
+
+square = ->(x) { x * x }
+
+puts square.call(5)
+
+4: Module:
+
+module Test
+  def show
+    puts "Module"
+  end
+end
+include and instance metho bna deta h object bnake call hota hai.
+class User
+  include Test
+end
+
+
+class Admin
+  extend Test
+end
+
+extend instance method ko class method bna deta hai
+
+class Manager
+  prepend Test
+
+  def show
+    puts "Class"
+  end
+end
+
+Module ko first priority deta hai include jesa hi hai.
+
+6: Mixin.
+
+Mixin is a way to share reusable behavior among multiple classes using modules without inheritance.
+
+module Flyable
+  def fly
+    puts "I can fly"
+  end
+end
+
+class Bird
+  include Flyable
+end
+
+class Plane
+  include Flyable
+end
+
+
+
+7: Exception Handling.
+
+begin
+  10/0
+rescue ZeroDivisionError
+  puts "Error"
+end
+
+8: Monkey Patching kya hai?
+
+Monkey Patching ka matlab hai kisi existing class ya method ko runtime par modify karna ya override karna, bina original source code ko change kiye.
+
+class String
+  def greeting
+    "Hello #{self}"
+  end
+end
+
+puts "Shankar".greeting
+# Hello Shankar
+
+
+class String
+  def upcase
+    "Monkey Patched!"
+  end
+end
+
+puts "hello".upcase
+
+9: setter and getter.
+class User
+  def name
+    @name
+  end
+
+  def name=(value)
+    @name = value
+  end
+end
+
+user = User.new
+user.name = "Shankar"
+puts user.name
+
+class User
+  attr_reader :name
+
+  def initialize
+    @name = "Shankar"
+  end
+end
+
+user = User.new
+puts user.name
+
+
+Setter only
+
+class User
+  attr_writer :name
+end
+
+user = User.new
+user.name = "Shankar"
+
+
+both setter and getter
+
+class User
+  attr_accessor :name
+end
+
+user = User.new
+user.name = "Shankar"
+
+
+10: String and Symbol. 
+
+name = "Shankar"
+Mutable (change ho sakti hai)
+Har baar naya object banta hai
+
+puts "ruby".object_id
+puts "ruby".object_id
+
+Different object IDs mil sakte hain.
+
+Symbol
+
+name = :shankar
+
+Immutable (change nahi ho sakta)
+Same symbol ka ek hi object memory me rehta hai
+
+puts :ruby.object_id
+puts :ruby.object_id
+
+Dono same object_id denge.
+
+user = {
+  name: "Shankar",
+  age: 25
+}
+
+11: Load and Require.
+
+
+1. require
+
+File ko sirf ek baar load karta hai.
+
+require './test'User.left_joins(:orders)
+    .where(orders: { id: nil })
+require './test'
+
+File ko har baar reload karta hai.
+
+load './test.rb'
+load './test.rb'
+
+
+
+12: Closure kya hota hai Ruby me?
+
+Closure ek aisa block/proc/lambda hota hai jo apne surrounding scope ke variables ko yaad rakhta hai, even jab original method execute ho chuki ho.
+
+
+x = 10
+
+p = Proc.new { puts x }
+
+x = 20
+
+p.call
+
+
+
+
+
+
+
+
+
+
+User.left_joins(:orders)
+    .where(orders: { id: nil })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+how to create job in sidekiq
+
+User.left_joins(:orders)
+    .where(orders: { id: nil })
+    
+    
+ordered_user_ids = Order.pluck(:user_id)
+
+User.where.not(id: ordered_user_ids)    
+
+puts user.name
+Interview me important topicsUser.left_joins(:orders)
+    .where(orders: { id: nil })
+Duck typing
+send
+public_send
+define_method
+method_missing
+respond_to?
+class_eval
+instance_eval
+singleton methods
+included, extended
+Dynamic method creation
+select, reject, and grep
+numbers.map { |num| num * 2 }
+How do you remove nil values in array using ruby?
+# Names all uppercase
+names.collect { |name| name.upcase }
+
+# Split numbers based on even or odd
+numbers.partition { |num| num.even? }
+Agar Ruby/Rails interview ki preparation kar rahe ho, to send, define_method, method_missing, class_eval, include/extend/prepend sabse zyada puchhe jate hain.
+
+
+What is the difference between the Object methods clone and dup?
+
+
+Datadog
+
+Datadog sirf Rails nahi, pura infrastructure monitor karta hai.
+
+Monitor:
+
+Rails App
+Puma
+Nginx
+Redis
+Postgres
+Docker
+AWS
+
+
+
+
+
+
+
+1. New Relic
+
+New Relic ek APM (Application Performance Monitoring) tool hai.
+
+Ye batata hai:
+
+Kaunsa API slow hai
+Kaunsi SQL query slow hai
+Memory usage kitni hai
+Error kaha aa rahi hai
+Throughput (requests/minute)
+
+gem 'newrelic_rpm'
+
+
+
+SELECT *
+FROM customer
+LEFT JOIN orders
+ON customer.customer_id = orders.customer_id;
+
+
+
+
+
+. Bullet
+
+Rails interviews me bahut important.
+
+Bullet detect karta hai:
+
+N+1 Queries
+
+Example:
+
+@users = User.all
+
+@users.each do |user|
+  puts user.posts.count
+end
+
+gem 'bullet'
+
+
+callback
+
+Callbacks are methods that get executed automatically at specific stages of an ActiveRecord object's lifecycle, such as before validation, before save, after create, or before destroy. They are used to perform tasks like data normalization, token generation, sending emails, and maintaining related records.
+
+
+
+What are the disadvantages of polymorphic associations?
+
+* Why is a foreign key difficult to implement with a polymorphic association?
+
+* How can authentication be implemented between a React frontend and a Rails backend?
+
+* How does JWT authentication flow work with React and Rails?
+
+* Which credentials are used in the JWT authentication flow?
+
+* If the user sends something else in the authentication header, what happens?
+
+* How do we implement logout when using JWT authentication?
+
+* Where is the access token removed during logout?
+
+ans - In a typical stateless JWT implementation, the access token is removed from the client side during logout—for example, from localStorage, sessionStorage, or application memory. Rails does not normally remove the token because it doesn't maintain a server-side session for that JWT. If the JWT is stored in an HttpOnly cookie, the Rails backend clears or expires the cookie. For immediate token invalidation, we can additionally implement token revocation or a denylist.
+
+* If we remove the access token from React but the JWT is still valid on Rails, how do we actually log out the user?
+
+
+"Removing the JWT from React logs the user out from that client, but it does not invalidate the JWT on the server because JWTs are stateless. If we need immediate server-side logout, we implement token revocation or a denylist. During logout, Rails marks the token's unique identifier as revoked, and every subsequent request checks whether the token has been revoked. If it has, Rails returns 401 Unauthorized."
+
+
+* What is database connection pooling?
+
+ans - Database connection pooling is a technique where an application maintains a pool of reusable database connections instead of creating a new database connection for every request.
+
+production:
+  adapter: postgresql
+  database: myapp
+  pool: 5
+  
+pool: 5 means Rails can maintain up to 5 database connections for that pool.  
+
+* If we have 20 connections in the connection pool, what does that mean?
+ans - If the connection pool is 20, it means a Rails process can maintain up to 20 database connections in its pool. The pool size is generally decided based on the number of application threads, number of processes, and the database's maximum connection limit. We need to make sure the total connections from all Rails processes and other services don't exceed the database capacity.
+
+PostgreSQL max_connections = 100
+
+Puma processes = 4
+Threads per process = 5
+Pool per process = 5
+
+
+
+* How do we decide the number of database connections?
+ans - We decide the database connection pool size mainly based on application concurrency and the database's capacity.
+
+1. Start with Rails/Puma threads
+
+Suppose Puma is configured:
+
+threads 5, 5
+
+That means one Rails process can handle up to 5 threads.
+
+A common starting point is:
+
+pool: 5
+
+So:
+
+1 Rails process
+× 5 threads
+= 5 DB connections
+
+We decide the database connection pool size mainly based on application concurrency and the database's capacity.
+
+1. Start with Rails/Puma threads
+
+Suppose Puma is configured:
+
+threads 5, 5
+
+That means one Rails process can handle up to 5 threads.
+
+A common starting point is:
+
+pool: 5
+
+So:
+
+1 Rails process
+× 5 threads
+= 5 DB connections
+
+* Why don't we use 5,000 database connections?
+ans - Because database connections are expensive resources, and a database cannot efficiently handle thousands of active connections.
+
+For example, if we configure:
+
+pool: 5000
+
+that does not mean our application becomes 1000× faster.
+
+Why not 5,000?
+
+1. Each connection consumes resources
+
+A PostgreSQL connection uses memory and CPU on the database server.
+
+5000 connections
+      ↓
+High memory usage
+      ↓
+More CPU/context switching
+      ↓
+Database becomes slower
+
+2. PostgreSQL has a connection limit
+
+For example:
+
+max_connections = 200
+
+If Rails tries to use 5,000 connections, the database cannot accept them.
+
+3. Most connections would be idle
+
+Suppose your application has only 20 concurrent database operations:
+
+5000 connections
+├── 20 being used
+└── 4980 mostly idle
+
+You're consuming resources without getting useful performance.
+
+4. More connections ≠ more concurrency
+
+The database itself has limited CPU, memory, disk I/O, locks, etc.
+
+If 5,000 queries hit the database simultaneously, they can actually compete for resources and make everything slower.
+
+Better approach
+
+Instead of creating thousands of database connections, we use a reasonable connection pool:
+
+Rails
+
+
+
+* How do we handle 1 lakh database connections?
+ans - If we literally have 100,000 database connections, we don't allow all of them to connect directly to PostgreSQL. We use connection pooling and a pooler such as PgBouncer to multiplex a large number of client connections over a much smaller number of actual database connections. If database capacity is still insufficient, we scale using read replica	s, caching, and database sharding or other distributed database architecture.
+
+* What is a load balancer, and how does increasing the number of load balancers help?
+“A load balancer distributes incoming requests across multiple application servers. It improves availability and scalability by preventing a single server from handling all the traffic. When traffic increases, we usually add more application instances behind the load balancer. We don't simply add more load balancers; instead, the load-balancing layer itself is made highly available, while the application layer is horizontally scaled.”
+
+
+* If the problem is specifically handling 1 lakh database connections, how should we solve it?
+ans - If the problem is literally 100,000 database connections, I would not try to maintain 100,000 direct PostgreSQL connections. I would use connection pooling and a pooler such as PgBouncer to multiplex client connections over a much smaller number of database connections. If the database workload itself is too high, I would use caching, read replicas, and potentially sharding.”
+
+And if interviewer asks “Why not just increase PostgreSQL max_connections to 100,000?”, answer:
+
+“Increasing max_connections doesn't solve the underlying resource problem. Each connection has overhead, so allowing 100,000 direct connections can exhaust memory and increase contention. We need to control concurrency rather than simply increasing the connection limit.”
+
+* What is database replication?
+
+ans - Database replication is the process of maintaining copies of database data on multiple database servers. Typically, the primary database handles writes and replicas handle read traffic. Replication helps improve read scalability and availability. If the primary fails, a replica can potentially be promoted to become the new primary.
+
+What is Database Replication?
+
+Database replication means maintaining copies of the same database data on multiple database servers.
+
+The main purpose is to improve availability, scalability, and read performance.
+
+Simple example
+
+Suppose we have one PostgreSQL database:
+
+              PostgreSQL
+                 ↓
+             Database
+
+With replication:
+
+                 Primary
+                   ↓
+          ┌────────┴────────┐
+          ↓                 ↓
+     Replica 1          Replica 2
+
+The Primary handles writes:
+
+INSERT
+UPDATE
+DELETE
+
+The replicas receive changes from the primary and can usually handle read queries:
+
+SELECT
+Example with Rails
+
+Suppose 10,000 users are using your application.
+
+Without replicas:
+
+              Rails
+                ↓
+           PostgreSQL
+          ↑    ↑    ↑
+        Reads + Writes
+
+The database has to handle everything.
+
+With replication:
+
+                 Rails
+                   ↓
+              PostgreSQL
+              Primary
+             /        \
+            ↓          ↓
+        Replica 1   Replica 2
+          Reads       Reads
+
+Rails can route:
+
+INSERT / UPDATE / DELETE → Primary
+
+SELECT → Replicas
+
+This reduces the read workload on the primary.
+
+What happens when Primary fails?
+
+Depending on the architecture, a replica can be promoted to become the new primary:
+
+Before:
+
+Primary
+   ↓
+Replica
+
+
+Primary fails
+   ↓
+
+Replica → New Primary
+
+This improves high availability.
+
+Types of replication
+
+Two common concepts are:
+
+Synchronous replication
+
+Primary → Replica
+        ↓
+   confirmation
+        ↓
+    Write succeeds
+
+The primary waits for the replica to acknowledge the change.
+
+Asynchronous replication
+
+Primary → Write succeeds
+     ↓
+Replica receives change shortly afterward
+
+There can be a small replication delay.
+
+
+* If a Sidekiq job fails, what happens to it?
+ans - In Sidekiq, if a job fails because an exception is raised, Sidekiq normally does not immediately delete the job. It retries the job according to its retry configuration.
+
+* If Sidekiq is down and then comes back up, what happens to the job?
+ans - If Sidekiq goes down, the important thing is that Sidekiq normally gets jobs from Redis. So the job is not automatically lost just because the Sidekiq process is down.
+
+Sidekiq uses Redis-backed job state/queue mechanisms, and the exact recovery behavior depends on how the job was fetched and the Sidekiq version/configuration. In a properly configured deployment, an interrupted job can become available for processing again rather than simply disappearing.
+
+
+Sidekiq uses Redis as the backing store for its queues. If Sidekiq is down while jobs are waiting in Redis, those jobs remain there and are processed when Sidekiq comes back up. If Sidekiq crashes while processing a job, recovery depends on the fetch/reliability mechanism and configuration, and a job may be processed again. Therefore, Sidekiq jobs should ideally be idempotent so retries or reprocessing don't cause incorrect duplicate effects.
+
+* What happens if the job was already inside a Sidekiq worker and not in Redis?
+ans - “If a Sidekiq worker crashes while a job is being processed, the job can be processed again depending on the fetching and reliability configuration. Therefore, Sidekiq jobs should be designed to be idempotent, because we should not assume that a job will execute exactly once. For critical operations such as payments or balance updates, we use an idempotency key or a database record to prevent duplicate processing.”
+
+
+* How do we safely remove a column from a database table containing 5 million records?
+ans - For a table with 5 million records, we should avoid simply doing a production migration like:
+
+remove_column :users, :old_column
+
+without considering application usage and database locking.
+
+The safest approach is usually an expand → migrate → contract approach.
+
+Step 1: Stop using the column in application code
+
+Suppose we have:
+
+users
+├── id
+├── name
+└── old_column   ← want to remove
+
+First, make sure Rails code no longer reads or writes old_column.
+
+Deploy that change first.
+
+Application
+    ↓
+No longer uses old_column
+Step 2: Remove the column
+
+Then, in a later deployment, remove the database column.
+
+For PostgreSQL, dropping a column is generally much cheaper than rewriting all 5 million rows, because you are removing the column definition rather than updating every record.
+
+But DDL can still acquire locks, so on a busy production table you need to consider the database version, workload, lock duration, and whether the migration might block concurrent queries.
+
+In Rails:
+
+class RemoveOldColumnFromUsers < ActiveRecord::Migration[7.1]
+  def change
+    remove_column :users, :old_column
+  end
+end
+Why not worry about 5 million UPDATEs?
+
+Because you're not deleting 5 million rows.
+
+You're dropping one column from the table:
+
+Before:
+
+5,000,000 rows
++ old_column
+
+After:
+
+5,000,000 rows
+- old_column
+
+The number of rows doesn't mean Rails has to execute:
+
+UPDATE users ...
+
+five million times.
+
+But there's an important production concern
+
+Before removing it, check:
+
+Rails models/scopes
+Controllers/services
+Background jobs
+Reports
+Raw SQL queries
+Other applications/services
+Database views/functions/triggers
+Analytics/ETL processes
+
+Otherwise you could deploy the migration and another part of the system could start failing.
+
+Interview answer
+
+“For a large production table, I would use an expand-and-contract approach. First, I would deploy the application without any dependency on the column. After confirming that nothing uses it, I would remove the column in a separate migration. I would also check dependencies and consider locking and migration behavior because the table is large and heavily used. The important point is not to make an application code change and destructive schema change at the same time.”
+
+One important correction: 5 million rows by itself doesn't make DROP COLUMN equivalent to updating 5 million rows. The bigger production concern is locking and dependencies, not simply the row count.
+
+
+* How do we make sure the column is no longer being used before removing it?
+Production mein sirf ek place check karke sure nahi ho sakte. Humein application code + database + other services sab check karne chahiye.
+
+1. Search the Rails codebase
+
+Suppose column is:
+
+old_column
+
+Search:
+
+rg "old_column" app/ config/ lib/
+
+Or:
+
+grep -R "old_column" app/
+
+Check whether it's used in:
+
+Models
+Controllers
+Services
+Jobs
+Serializers
+Scopes
+Queries
+2. Check raw SQL
+
+Kabhi-kabhi column ActiveRecord ke through nahi, raw SQL se use hota hai:
+
+User.find_by_sql("SELECT id, old_column FROM users")
+
+So search for:
+
+old_column
+users.old_column
+SELECT ... old_column
+3. Check background jobs
+
+Ye particularly important hai.
+
+Suppose Rails code mein column use nahi ho raha, but Sidekiq job mein hai:
+
+class ExportUsersJob
+  def perform
+    User.pluck(:old_column)
+  end
+end
+
+Toh column abhi bhi being used hai.
+
+4. Check other applications/services
+
+Agar multiple services same database use karte hain:
+
+Rails API
+   ↓
+PostgreSQL
+   ↑
+Admin service
+   ↑
+Reporting service
+   ↑
+Data pipeline
+
+Sirf Rails repository search karna enough nahi hai.
+
+5. Use database monitoring/logging
+
+Production mein database query logs/monitoring se dekh sakte hain ki old_column reference karne wali queries abhi aa rahi hain ya nahi.
+
+For PostgreSQL, tools such as pg_stat_statements can help identify frequently executed queries, although it isn't a perfect proof that a column is never used.
+
+6. Best practice: deploy first, remove later
+
+Ye safest approach hai:
+
+Deployment 1
+     ↓
+Application stops using old_column
+     ↓
+Monitor production
+     ↓
+Confirm no usage
+     ↓
+Deployment 2
+     ↓
+Remove old_column
+
+This is called the expand-and-contract / phased migration approach.
+
+Interview answer
+
+“Before removing a column, I would search the entire codebase for references, including models, controllers, services, serializers, background jobs, scopes and raw SQL. I would also check other services that access the same database and use production query monitoring where available. Then I would first deploy a version that no longer uses the column, monitor it for a period, and only in a later deployment remove the column.
+
+
+
+
+
+* What is GIL in Ruby?
+
+* When can another Ruby thread execute if one thread is holding the GIL?
+
+* Does a database query lock the GIL?
+
+* What are the disadvantages of GIL?
+
+* Design an API that needs to return 1 million records. How would you handle it?
+
+* What is cursor pagination?
+
+* What ID is used behind the scenes in cursor pagination?
+
+* Given n and k, how do you find the kth permutation without using predefined permutation methods?
+
+* Provide the full Ruby code with input for the kth permutation problem.
+
+* Provide the code using the given example inputs.
+
+* Provide the kth permutation code without using downto.
+
+* Explain the kth permutation code.
+
+* What is the idea behind the kth permutation algorithm?
+
+* What is k in the kth permutation problem?
+
+* Explain the kth permutation code as an interview answer.
+
+* Explain the whole kth permutation concept.
+
+* Explain the while loop logic in the kth permutation code.
+
+* Explain the while loop in a paragraph that can be read directly in an interview.
+
+* Why do we use remaining - 1 in the kth permutation algorithm?
+
+* What is the time and space complexity of the kth permutation code?
+
+Ruby — Must Prepare
+Ruby kya hai? Ruby ki key features kya hain?
+String, Array, Hash, Symbol mein difference?
+Mutable aur immutable objects kya hote hain?
+Frozen string literal kya hai?
+==, equal?, eql?, === mein difference?
+nil?, empty?, blank?, present? mein difference?
+include? vs member?
+map, each, select, filter, reduce difference?
+each aur map mein difference?
+Proc vs Lambda?
+Block kya hota hai?
+yield kya karta hai?
+public, private, protected methods?
+Class method vs instance method?
+self kya hota hai?
+attr_reader, attr_writer, attr_accessor?
+Module kya hai?
+Module aur class mein difference?
+Mixins kya hote hain?
+include vs extend?
+Method overriding kya hai?
+Method overloading Ruby mein kaise handle hoti hai?
+Duck typing kya hai?
+Monkey patching kya hai?
+Garbage collection Ruby mein kaise kaam karta hai?
+
+
+

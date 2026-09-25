@@ -1,0 +1,16 @@
+The project I worked on is called **Captivated**. It is a **multi-tenant SaaS customer communication platform**.
+
+The main purpose of the platform is to help businesses communicate with their customers from a single application. It provides a unified inbox where agents can manage customer conversations across different communication channels such as **SMS, calls, chat, email, Facebook Messenger, and RCS**.
+
+For example, suppose a customer sends an SMS to a business. The message comes through a communication provider such as Twilio or another provider and reaches our **Ruby on Rails API**.
+
+Our Rails application identifies the organization and the customer, finds or creates the appropriate conversation, processes the message, and stores it in **PostgreSQL**.
+
+We also have a separate **Node.js and Socket.IO service** for real-time communication. Once a new message or conversation update is available, Socket.IO pushes that event to the connected agent's browser, so the agent can see the message immediately without refreshing the page.
+
+The platform is multi-tenant, so multiple businesses can use the same application while their users, contacts, conversations, and messages remain isolated from each other.
+
+From the backend side, I worked mainly with **Ruby on Rails, REST APIs, PostgreSQL, Redis, Sidekiq, Docker, Doorkeeper, Sorcery, Pundit, and Active Storage**.
+
+In short, Captivated helps businesses **manage customer communication and conversations from one centralized platform**, while our Rails API handles the core business logic and our Node.js Socket.IO service handles real-time updates.
+

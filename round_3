@@ -1,0 +1,403 @@
+1: decorator for add 2 number and retun sum of 2 number.
+def sum_decorator(func):
+    def wrapper(a, b):
+        print("Adding numbers...")
+        result = func(a, b)
+        print("Result is:", result)
+        return result
+    return wrapper
+
+
+@sum_decorator
+def add(a, b):
+    return a + b
+
+
+add(10, 20)
+
+2: How does Python handle exceptions?
+try:
+ 
+    print(10 / 0)
+ 
+except ZeroDivisionError:
+ 
+    print("Cannot divide by zero!")
+
+
+3: shallow copy and deep_copy.
+
+import copy
+
+# Original nested list
+a = [[1, 2], [3, 4]]
+
+# -----------------------
+# SHALLOW COPY
+# -----------------------
+b = copy.copy(a)
+
+# -----------------------
+# DEEP COPY
+# -----------------------
+c = copy.deepcopy(a)
+
+# Modify shallow copy
+b[0][0] = 99
+
+# Modify deep copy
+c[0][0] = 77
+
+print(a)
+# Print results
+print("Original a:", a)
+print("Shallow copy b:", b)
+print("Deep copy c:", c)
+
+
+4: Generator
+
+def gen_numbers():
+ 
+    for i in range(5):
+ 
+        yield i
+ 
+gen = gen_numbers()
+ 
+print(next(gen))  # 0
+ 
+print(next(gen))  # 1
+
+
+generator 
+
+def infinite_numbers():
+    num = 1
+    while True:
+        yield num
+        num += 1   
+
+
+a = infinite()
+print(next(a))
+
+5: List comprension.
+
+[i for i in range(10) if i% 2==0]
+
+
+6: How do you manage dependencies in Python projects?
+pip install -r requirements.txt listed package dusre environemt me install krne ke liye hota hais
+
+pip freeze > requirements.txt kya karta hai?
+
+Ye command tumhare current environment ki saari installed libraries ko list me convert karke file
+
+6: Explain Python’s enumerate() function.
+
+fruits = ['apple', 'banana', 'cherry']
+ 
+for index, fruit in enumerate(fruits):
+ 
+    print(index, fruit)
+
+7: What is monkey patching in Python?
+Already existing code ko modify/override karna without changing original source code 
+
+
+def new_greet(self):
+    return "Hi Shankar"
+
+A.greet = new_greet
+
+obj = A()
+print(obj.greet())
+
+
+8: __slots__ is used to optimize memory usage in Python classes by preventing creation of __dict__ and allowing only predefined attributes.
+
+mtlab ki tum defined access kr skte hai.
+
+class MyClass:
+ 
+    __slots__ = ['x', 'y']
+ 
+obj = MyClass()
+ 
+obj.x = 10  # Allowed
+ 
+obj.z = 20  # not allowed
+
+
+9: model mangaer.
+
+from django.db import models
+
+class StudentManager(models.Manager):
+
+    def adults(self):
+        return self.filter(age__gte=18)
+
+    def teenagers(self):
+        return self.filter(age__lt=18)
+
+
+class Student(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+
+    obj = StudentManager()
+    
+    
+
+
+Student.obs.adults()
+    
+10: otp kese send krte hai.
+import requests
+
+def send_sms(phone, otp):
+    url = "https://api.example.com/send"
+
+    payload = {
+        "phone": phone,
+        "message": f"Your OTP is {otp}"
+    }
+
+    requests.post(url, data=payload)
+
+types of relatioship.
+
+ORM
+
+11: what caching.
+
+Caching is a technique to store frequently used data in a fast storage (temporary memory) so that future requests can be served quickly without recalculating or re-fetching from database
+ 
+12: what is session and cockies.
+
+Session stores user-specific temporary data on the server, while caching stores frequently accessed data to improve application performance and reduce database load.
+
+
+how to setup postgresl
+
+EOF error
+git and repository
+git lab and git
+
+git interview quesitions
+ raise exception
+how cekery works
+
+get filter and all
+13: SORT the employye salary using django query set
+
+Employee.objects.all().order_by('salary')
+
+LARGEST slaary quey set
+from django.db.models import Max
+
+Employee.objects.aggregate(Max('salary'))
+
+14: 
+
+aggregate() kya karta hai?
+
+👉 Whole data ka single final result deta hai
+
+annotate() kya karta hai?
+
+👉 Har group/row ke saath extra calculation add karta hai
+
+
+annotate() → multiple rows (group-wise result)
+👉 aggregate() → single final value
+
+Employee.objects.values('department').annotate(avg_salary=Avg('salary'))
+
+Employee.objects.aggregate(Max('salary'))
+
+
+from django.db.models import Sum
+
+Employee.objects.aggregate(total_salary=Sum('salary'))
+
+why python dynmic type programming language
+
+why interpreted python
+
+how mutithreading in python why does not support multithreading GIL
+
+code for multitask and multi processing have you ever used and why
+
+15: create dic using list compresion.
+nums = [1, 2, 3, 4]
+
+result = {x: x*2 for x in nums}
+print(result)
+
+16: what is code to merge dic
+
+dict1 = {"a": 1, "b": 2}
+dict2 = {"c": 3, "d": 4}
+
+dict1.update(dict2)
+
+print(dict1)
+
+
+17: fetch n element.
+Employee.objects.all()[:5]
+
+
+how to ad pagination
+
+17: what is filter and map and create example.
+nums = [1, 2, 3, 4, 5, 6]
+
+result = list(filter(lambda x: x % 2 == 0, nums))
+
+print(result)
+
+nums = [1, 2, 3, 4]
+
+result = list(map(lambda x: x * x, nums))
+
+
+print(result)
+
+18: select_related and prefetched_related.
+
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+
+
+books = Book.objects.select_related('author').all()
+
+
+select_related() executes a SQL JOIN query to fetch related objects in a single database hit, mainly used for ForeignKey and OneToOne relationships.
+
+
+prefetch_related() performs separate database queries for related objects and combines them in Python, making it efficient for ManyToMany and reverse ForeignKey relationships using IN queries.
+
+
+
+19: even and odd using list comprehension.
+
+nums = [1, 2, 3, 4, 5, 6, 7, 8]
+
+even = [x for x in nums if x % 2 == 0]
+
+print(even)
+
+
+nums = [1, 2, 3, 4, 5, 6, 7, 8]
+
+odd = [x for x in nums if x % 2 != 0]
+
+print(odd)
+
+
+20: Multiplication
+a = [4,5,6]
+b = [6,3,7]
+
+result = [[x * y for y in b] for x in a]
+
+
+21:how to alternate elements without for loop in list
+nums = [1, 2, 3, 4, 5, 6]
+
+result = nums[::2]
+
+print(result)
+
+normalixation sql
+
+Normalization is the process of organizing a database into multiple related tables to reduce redundancy and improve data integrity.
+
+tyoes of join
+
+third party integration in python
+
+
+
+sort dic without sord
+
+keys = list(my_dict.keys())
+
+n = len(keys)
+
+for i in range(n):
+    for j in range(n - i - 1):
+        if keys[j] > keys[j + 1]:
+            keys[j], keys[j + 1] = keys[j + 1], keys[j]
+
+sorted_dict = {}
+for k in keys:
+    sorted_dict[k] = my_dict[k]
+
+print(sorted_dict)
+
+do python support overloading and overriding.
+
+Usermanage kya hai
+
+how decode and incode token
+
+prefetched and select_related
+
+what is Q objects
+
+diff and flask and django
+valus and value list
+json.loads and load and dunmp
+
+lazy evalution kya hai
+
+
+how to check using high memory.
+
+operator overloading	
+
+git interview.
+Docker interviews questions.
+
+what CI/CD pipline.
+
+from rest_framework.test import APITestCase
+from django.urls import reverse
+from rest_framework import status
+
+class LoginTestCase(APITestCase):
+
+    def test_valid_login(self):
+        data = {
+            "email": "test@gmail.com",
+            "password": "123456"
+        }
+        response = self.client.post("/login/", data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_invalid_login(self):
+        data = {
+            "email": "test@gmail.com",
+            "password": "wrong"
+        }
+        response = self.client.post("/login/", data)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        
+        
+how to creaet docker image.
+
+What is pickling and unpickling? what is this
+🔹 1. Data ko fast store & load karne ke liye
+
+Machine Learning models save karne ke liye
+
+      

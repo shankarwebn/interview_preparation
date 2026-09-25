@@ -1,0 +1,436 @@
+1: What is the difference between is and == in Python?
+
+in python == check bothe value are same or not
+in the other side is is checking both object refercing to the same memory location.s
+a = [1, 2, 3]
+b = [1, 2, 3]
+
+print(a == b)  # True  (values are equal)
+print(a is b)  # False (different objects in memory)
+
+
+x = [1, 2, 3]
+y = x      # y points to same object as x
+
+print(x == y)  # True (values same)
+print(x is y)  # True (same object in memory)
+
+
+2: What is the difference between / and // in Python?
+Division  = /
+Floor division = //
+a = 7
+b = 2
+
+print(a / b)  # 3.5
+
+a = 7
+b = 2
+
+print(a // b)  # 3
+
+3: What is pass in Python?
+
+The pass statement is a placeholder that does nothing.
+
+4: Decorator
+
+Decorators let you add extra behavior to a function, without changing the function's code. A decorator
+
+def login_required(func):
+    def wrapper(user):
+        if not user.get("logged_in"):
+            print("Access Denied ❌")
+            return
+        return func(user)
+    return wrapper
+
+
+@login_required
+def dashboard(user):
+    print("Welcome to dashboard")
+
+
+user1 = {"logged_in": True}
+user2 = {"logged_in": False}
+
+dashboard(user1)
+dashboard(user2)
+
+def add():
+    print("this is the add funtion")
+
+def test(func):
+    def test2():
+        print("Before Function")
+        func()
+        print("After function")
+    return test2 
+
+
+demo = test(add)    
+demo()    
+
+
+
+
+def my_decorator(func):
+    def wrapper():
+        print("Before function call")
+        func()
+        print("After function call")
+    return wrapper
+
+@my_decorator 
+def greet():
+    print("Hello, Shankar!")
+
+greet()  # wrapper() execute hota hai
+
+
+def add(func):
+    def test2(a, b):
+        s = func(a, b)
+        return s + 1
+    return test2
+
+
+def test(a, b):
+    return a + b
+
+
+wa = add(test)      # Pass the function, don't call it
+print(wa(2, 3))
+
+def add(func):
+    def test2(a, b):
+        s = func(a, b)
+        return s + 1
+    return test2
+
+
+@add
+def test(a, b):
+    return a + b
+
+print(test(2, 3))
+
+5: Explain the concept of Python closures.
+
+A closure is a function inside another function that remembers the variables from the outer function — even after the outer function has finished executing.
+
+def outer_function(msg):
+    def inner_function():
+        print("Message:", msg)
+    return inner_function
+
+my_func = outer_function("Hello Shankar!")
+my_func()
+
+
+
+
+
+6: What is docstring in Python?
+A docstring in Python is a special string literal used to document a module, class, function, or method.
+
+def greet(name):
+    """This function greets the person passed as an argument."""
+    return f"Hello, {name}!"
+
+print(greet("Gukesh"))
+
+# Accessing the docstring
+print(greet.__doc__)
+
+
+
+7: Difference between function and method.
+
+Function — Definition
+
+A function is a block of reusable code that performs a specific task.
+It is not tied to any object or class and can be called directly by its name.
+
+Method — Definition
+
+A method is a function that belongs to a class.
+It always takes self as the first argument and works on the object’s data.
+
+
+
+
+8: What are Iterators in Python?
+
+An iterator is an object that allows you to traverse through all elements of a collection one by one using the next() function.
+
+
+nums = [10, 20, 30]
+
+it = iter(nums)
+
+print(next(it))
+print(next(it))
+print(next(it))
+
+
+9: What are Generators in Python?
+
+exam: A generator is a function that returns an iterator and generates values one by one using the yield keyword.
+
+use of generatot
+
+def numbers():
+    yield 1
+    yield 2
+    yield 3
+
+gen = numbers()
+
+print(next(gen))
+print(next(gen))
+print(next(gen))
+
+
+def numbers():
+    yield 1
+    yield 2
+    yield 3
+
+for i in numbers():
+    print(i)
+
+
+
+10: What is a zip function?
+
+
+
+11: What are Pickling and Unpickling?
+
+Pickling is the process of converting a Python object into a byte stream so it can be stored in a file or transmitted over a network.
+
+Unpickling is the process of converting a byte stream back into the original Python object.
+
+12: What are unit tests in Python?
+
+
+13: Python Global Interpreter Lock (GIL)?
+
+
+14: What are Function Annotations in Python?
+
+ans: Ye type checking automatically nahi karte, sirf batate hain ki kis type ka data expected hai. Tools (VS Code, PyCharm, mypy) aur developers ke liye helpful hote hain.
+
+def add(a: int, b: int) -> int:
+    return a + b
+
+print(add(10, 20))
+
+15: What are Exception Groups in Python?
+
+ans: Exception Groups Python 3.11 me introduce hue. Inka use ek saath multiple exceptions ko raise aur handle karne ke liye hota hai.
+
+Pehle Python me ek time par sirf ek exception handle hoti thi. Agar multiple errors aaye, to pehli exception hi dikhti thi.
+
+
+try:
+    raise ExceptionGroup(
+        "Multiple Errors",
+        [
+            ValueError("Invalid Value"),
+            TypeError("Wrong Type")
+        ]
+    )
+except* ValueError as e:
+    print("ValueError:", e)
+
+except* TypeError as e:
+    print("TypeError:", e)
+    
+    
+16: What is Walrus Operator?
+
+ans: Walrus Operator (:=) Python 3.8 me introduce hua tha.
+Iska use ek hi expression me variable ko assign karne aur usi waqt use karne ke liye hota hai.
+
+without walrus
+
+name = input("Enter your name: ")
+if name:
+    print("Hello", name)
+
+
+if (name := input("Enter your name: ")):
+    print("Hello", name)    
+
+    
+17: What is Object-Oriented Programming (OOP) in Python?
+
+
+18: What is the __init__ method in Python?
+
+
+19: What are the key features of OOP?
+
+20: What is the difference between instance variables and class variables?
+
+21: What is inheritance in Python?
+
+
+22: What is method overloading in Python?
+ans: Method Overloading ka matlab hai same method name ke saath different number ya different types of parameters wale multiple methods banana.
+
+
+Python directly method overloading support nahi karta.
+Agar same class me same naam ke do methods banaoge, to last wala method pehle wale ko overwrite kar dega.
+
+23: What is method overriding in Python?
+ans: Method Overriding tab hoti hai jab child class parent class ke method ko same name aur same parameters ke saath dubara define karti hai.
+
+Jab child object se method call hota hai, to child class ka method execute hota hai.
+
+class Animal:
+    def sound(self):
+        print("Animal makes sound")
+
+class Dog(Animal):
+    def sound(self):
+        print("Dog barks")
+
+obj = Dog()
+obj.sound()
+
+
+class Animal:
+    def sound(self):
+        print("Animal makes sound")
+
+class Dog(Animal):
+    def sound(self):
+        super().sound()
+        print("Dog barks")
+
+obj = Dog()
+obj.sound()
+
+
+24: how memory managed in python.
+
+
+25: What is polymorphism in Python?
+
+class Animal:
+    def sound(self):
+        print("Animal makes sound")
+
+
+class Dog(Animal):
+    def sound(self):
+        print("Dog barks")
+
+
+class Cat(Animal):
+    def sound(self):
+        print("Cat meows")
+
+
+dog = Dog()
+cat = Cat()
+
+dog.sound()
+cat.sound()
+
+
+26: What is encapsulation, and how does Python achieve it?
+
+
+27: What are unit tests in Python?
+
+28: what is pickling and unpicling.
+
+
+
+29: help and dir
+
+help = docstring jesa hai.
+dir = ye sabhi methods ko show krta hai.
+
+lst = [1, 2, 3]
+print(dir(lst))
+
+
+30: what is exception handling.
+
+
+31: setter and getter use to access and update private attrinute of class.
+
+class Student:
+    def __init__(self, name):
+        self.student_name = name
+
+    @property
+    def test(self):
+        return self.student_name
+
+    @test.setter
+    def test(self, value):
+        self.student_name = value
+
+	
+obj = Student("Shankar")
+print(obj.test)
+
+
+
+class Student:
+    def __init__(self,name):
+        self.__name = name
+        
+    def setter(self,name):
+        self.__name = name
+        
+    def getter(self):
+        return self.__name
+        
+
+p = Student("shankar")
+print(p.getter())
+p.setter("shakassds")
+print(p.getter())
+
+
+
+32: what is list and dic comprehension.
+
+List comprehension is a short and clean way to create a list using a single line of code.
+
+
+33: What are Python namespaces? Why are they used?
+
+A namespace is a container that holds names (variables, functions, objects) and maps them to their values.
+
+x = 10
+
+34: what is static and class method
+
+
+35: map filter and reduce
+map: 
+nums = [1, 2, 3, 4]
+
+result = list(map(lambda x: x * 2, nums))
+print(result)
+
+filter() selects elements from an iterable for which a given function returns True.
+nums = [1, 2, 3, 4, 5, 6]
+
+result = list(filter(lambda x: x % 2 == 0, nums))
+print(result)
+
+36: Can you concate a tuple how and why.
+Yes, tuples can be concatenated using the + operator, which creates a new tuple since tuples are immutable."
+
+37:What is Duck Typing.
+
+38: what is monkey patching.

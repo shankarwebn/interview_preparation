@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Realtime Posts</title>
+</head>
+
+<body>
+
+<h1>Posts</h1>
+
+<div id="posts">
+
+    {% for post in posts %}
+
+        <p>{{ post.title }}</p>
+
+    {% endfor %}
+
+</div>
+
+<script>
+
+const socket = new WebSocket(
+    'ws://127.0.0.1:8000/ws/posts/'
+)
+
+socket.onmessage = function(e){
+
+    const data = JSON.parse(e.data)
+
+    const div = document.getElementById("posts")
+
+    div.innerHTML += `<p>${data.title}</p>`
+}
+
+</script>
+
+</body>
+</html>
