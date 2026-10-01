@@ -1,0 +1,83 @@
+So phone number was not used as a primary identifier. But if someone wants to log in using phone number, you write that option or it was not supported.
+
+
+Okay, and in device gem however like managing the email confirmation part. Like if I have entered the email, right? And my username
+
+
+how front will manage by you on production
+
+why we use javascript we have typscripted
+
+Putting authorization code like if I have many APIs, many controllers. Yes, yes. So where I can write the authorization\
+
+You talking about right the authorization layer. So I'm just talking about in the code in code terms, like in which file I can put that authorization layer so it is available
+
+diff between multi therad and concurrency
+
+
+If I have to perform this particular task for each controller, right? Yes So how can I make sure that I can implement the same logic for each controller, right? Yes But the code is not redundant
+
+Use the logic in orders controller, right? But now can I make sure that orders controller needs to have this logic in place?
+
+what is before save and before commit
+
+
+Hello, can you explain it like this is just a basic introduction? Like what we actually did, how we implemented it, what was the like security or let's say if I want to deploy payload, or if I got your API endpoint, right? So how we were making sure the security is handled? Like if any user who has the just endpoint and monitors your payload, he could not be able to call the service and make sure that any unauthorized calls are made, like just before even it touches the application code. So how do we make sure that these things?
+
+
+Repeat like in parallel processing system. What was a non-sensitive information?
+
+
+how did you will find n+1 
+
+
+do you have appication dvelopment from scratch
+
+how to use authentication and autherization in rails 
+
+what are the standards for the application how to set that
+
+what kind of support you use for login
+
+how application will indentify user login via phone or email
+
+
+what you use for autherization and how you done?where can i write the code for that
+
+
+flow for payment for your application
+
+
+diff include and eager load and preload
+
+transaction we are doing created and debit so and we have api for fetch data so what woul happend if transaction got failed 
+
+
+what is singleton methoda and how to use that and have you use this in you project
+
+any case you have deal with coucurrency
+
+
+we have 5 product and 1000 user requested same time how  do you handle that 
+
+what is socket,io and its use case.
+
+
+what is action cable and how you implement and used in captivated 
+
+what is promise and asyna and wait in jo script and what await do
+
+
+how build was woking in your application for fron end
+
+what is indexing and why we use that type of indexing
+
+websocket and action cable works
+
+how you will handle database migration running in production
+
+how many ways we have to use redis in rails 
+
+what is doll catching
+
+what is concurrency and paralerism 
